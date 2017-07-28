@@ -1,0 +1,132 @@
+
+
+@mixin prefix($prop, $val) {
+	@each $prefix in '-webkit-', '-moz-', '-ms-', '-o-' {
+		#{$prefix}#{$prop}: $val;
+	}
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    height: 100%;
+    margin: 0;
+    body {
+        height: 100%;
+        margin: 0;
+        line-height: 1.5;
+        display: flex;
+        position: relative;
+        @include prefix(align-items, center);
+        @include prefix(flex-align, center);
+        @include prefix(display, flex);
+        .navbar{
+            background-image: linear-gradient(to bottom,#98DBC6 0,#98DBC6 100%);
+            li:hover{
+                background-image: linear-gradient(to bottom,#F18D9E 0,#F18D9E 100%);
+            }//
+        }
+
+        .container-fluid{
+            width: 100%;
+
+        }
+        .hero {
+            background-image: url("../../images/cover.jpg");
+            background-attachment: fixed;
+            background-repeat: inherit;
+            background-size: inherit;
+            .inner {
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.2) url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAYAAACddGYaAAAAD0lEQVQIW2NkQABjRmQOAAM+AGkQsDBSAAAAAElFTkSuQmCC) repeat;
+                h1 {
+                    color: #E6D72A;
+                    margin: 0 !important;
+                }
+            }
+
+        }
+        .hero, .content {
+            z-index: 1;
+            text-align: center;
+            position: relative;
+            width: 100%;
+            height: auto;
+            @media screen and (max-height:735px ){
+                top:300px
+            }
+            .inner {
+                position: relative;
+                min-height: 200px;
+                .copy {
+                    position: absolute;
+                    height: auto;
+                    width: 100%;
+                    top: 60%;
+
+                    h1 {
+                        margin: 0;
+                        font-family: 'Roboto Slab', serif;
+                        font-weight: 400;
+                        font-size: 32px;
+                        padding: 0 20px;
+                    }
+                }
+                .copy.row {
+                    position: relative;
+                    height: auto;
+
+                }
+            }
+            .column {
+                position: relative;
+                margin: 7px 0;
+                min-height: 200px;
+                img {
+                    border-radius: 50%;
+                    @include prefix(box-shadow, rgba(0, 0, 0, 0.2) 10px 10px 10px);
+                    @include prefix(transition, all 0.35s ease-in-out);
+                }
+            }
+
+            .manual {
+                padding:100px;
+                position: relative !important;
+                min-height: 400px;
+                text-align: center;
+                margin: 3px;
+                background-color: #5BC8AC;
+            }
+            .contact{
+                .well{
+                    @media screen and (min-width: 750px) {
+                    margin: 5px 25%;
+                    }
+                }
+            }
+        }
+
+    }
+}
+#signup, #login {
+    z-index: 5;
+    position: absolute;
+    //display: none;
+    top:100px;
+    height: auto;
+    min-width: 200px;
+    width: 45%;
+    max-width: 550px;
+    margin: 0 auto;
+    left: 30%;
+    right: 30%;
+    background-color: white;
+    border-radius: 5px;
+    @include prefix(box-shadow, rgba(0, 0, 0, 0.2) 10px 10px 10px);
+    .well{
+        margin: 0;
+    }
+}

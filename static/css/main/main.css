@@ -1,0 +1,116 @@
+
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+html {
+  box-sizing: border-box;
+  height: 100%;
+  margin: 0; }
+  html body {
+    height: 100%;
+    margin: 0;
+    line-height: 1.5;
+    display: flex;
+    position: relative;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+    -webkit-flex-align: center;
+    -moz-flex-align: center;
+    -ms-flex-align: center;
+    -o-flex-align: center;
+    -webkit-display: flex;
+    -moz-display: flex;
+    -ms-display: flex;
+    -o-display: flex; }
+    html body .navbar {
+      background-image: linear-gradient(to bottom, #98DBC6 0, #98DBC6 100%); }
+      html body .navbar li:hover {
+        background-image: linear-gradient(to bottom, #F18D9E 0, #F18D9E 100%); }
+    html body .container-fluid {
+      width: 100%; }
+    html body .hero {
+      background-image: url("../../images/cover.jpg");
+      background-attachment: fixed;
+      background-repeat: inherit;
+      background-size: inherit; }
+      html body .hero .inner {
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.2) url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAYAAACddGYaAAAAD0lEQVQIW2NkQABjRmQOAAM+AGkQsDBSAAAAAElFTkSuQmCC) repeat; }
+        html body .hero .inner h1 {
+          color: #E6D72A;
+          margin: 0 !important; }
+    html body .hero, html body .content {
+      z-index: 1;
+      text-align: center;
+      position: relative;
+      width: 100%;
+      height: auto; }
+      @media screen and (max-height: 735px) {
+        html body .hero, html body .content {
+          top: 300px; } }
+      html body .hero .inner, html body .content .inner {
+        position: relative;
+        min-height: 200px; }
+        html body .hero .inner .copy, html body .content .inner .copy {
+          position: absolute;
+          height: auto;
+          width: 100%;
+          top: 60%; }
+          html body .hero .inner .copy h1, html body .content .inner .copy h1 {
+            margin: 0;
+            font-family: 'Roboto Slab', serif;
+            font-weight: 400;
+            font-size: 32px;
+            padding: 0 20px; }
+        html body .hero .inner .copy.row, html body .content .inner .copy.row {
+          position: relative;
+          height: auto; }
+      html body .hero .column, html body .content .column {
+        position: relative;
+        margin: 7px 0;
+        min-height: 200px; }
+        html body .hero .column img, html body .content .column img {
+          border-radius: 50%;
+          -webkit-box-shadow: rgba(0, 0, 0, 0.2) 10px 10px 10px;
+          -moz-box-shadow: rgba(0, 0, 0, 0.2) 10px 10px 10px;
+          -ms-box-shadow: rgba(0, 0, 0, 0.2) 10px 10px 10px;
+          -o-box-shadow: rgba(0, 0, 0, 0.2) 10px 10px 10px;
+          -webkit-transition: all 0.35s ease-in-out;
+          -moz-transition: all 0.35s ease-in-out;
+          -ms-transition: all 0.35s ease-in-out;
+          -o-transition: all 0.35s ease-in-out; }
+      html body .hero .manual, html body .content .manual {
+        padding: 100px;
+        position: relative !important;
+        min-height: 400px;
+        text-align: center;
+        margin: 3px;
+        background-color: #5BC8AC; }
+      @media screen and (min-width: 750px) {
+        html body .hero .contact .well, html body .content .contact .well {
+          margin: 5px 25%; } }
+
+#signup, #login {
+  z-index: 5;
+  position: absolute;
+  top: 100px;
+  height: auto;
+  min-width: 200px;
+  width: 45%;
+  max-width: 550px;
+  margin: 0 auto;
+  left: 30%;
+  right: 30%;
+  background-color: white;
+  border-radius: 5px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 10px 10px 10px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.2) 10px 10px 10px;
+  -ms-box-shadow: rgba(0, 0, 0, 0.2) 10px 10px 10px;
+  -o-box-shadow: rgba(0, 0, 0, 0.2) 10px 10px 10px; }
+  #signup .well, #login .well {
+    margin: 0; }
+
+/*# sourceMappingURL=main.css.map */
