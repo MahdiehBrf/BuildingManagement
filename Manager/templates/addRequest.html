@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ثبت درخواست</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/addReqStyle.css"/>
+</head>
+<body>
+<div class="container">
+
+    <img class="cover" src = "../../static/images/cover.jpg">
+    <div class="topright"> <img class="img-circle" src="../../static/images/user_profile_female.jpg">  <p>زهرا بابایی</p></div>
+    <div class="topleft">
+      <a href="javascript:void(0)" >خروج</a><p>96/5/5</p>
+
+    </div>
+    <div class="center"><p style="font-size: 150%; padding: 5px; font-weight: bold;">سامانه مدیریت ساختمان آس </p>
+    </div>
+
+</div>
+<div class="menu">
+    <ul>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">ویرایش اطلاعات</a>
+            <div class="dropdown-content">
+                <a href="#">اطلاعات مجتمع</a>
+                <a href="editNeighbours.html">اطلاعات ساکنین</a>
+                <a href="#">اطلاعات واحدها</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">اطلاعیه ها</a>
+            <div class="dropdown-content">
+                <a href="board.html">بورد</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">گزارشات</a>
+            <div class="dropdown-content">
+                <a href="payingReports.html">پرداخت های همسایه ها</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">رزرو</a>
+            <div class="dropdown-content">
+                <a href="reservesCheck.html">درخواست های رزرو</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">امور مالی</a>
+            <div class="dropdown-content">
+                <a href="#">افزایش اعتبار</a>
+            </div>
+        </li>
+        <a href="requests.html" class="notDropdown">درخواست پشتیبانی</a>
+
+    </ul>
+</div>
+
+<div class="main">
+    <h5>درخواست پشتیبانی</h5>
+    <form action="Welcome.html" method="post">
+    <table class="tbl" border="0" align="center">
+        <tbody>
+
+        <tr>
+
+            <td><input id="title" maxlength="100" name="title" type="text"/></td>
+            <td><label for="title">عنوان </label></td>
+        </tr>
+
+        <tr>
+
+            <td><select id="subject" name="subject">
+                    <option value="خطا در سامانه">خطا در سامانه</option>
+                    <option value="امکانات جدید یا تغییر">پیشنهاد امکانات جدید یا تغییر</option>
+                    <option value="سوال و راهنمایی">سوال و راهنمایی</option>
+                    <option value="شکایات">شکایات</option>
+                    <option value="سایر">سایر</option>
+                </select></td>
+             <td><label for="subject">موضوع </label></td>
+        </tr>
+
+        <tr>
+
+            <td><textarea class="txt" id="txt" name="txt" cols="100" rows="20"></textarea></td>
+            <td><label for="txt">متن </label></td>
+        </tr>
+
+
+        </tbody>
+    </table>
+</form>
+
+    <button type="button" class="btn" onclick="window.location.href='requests.html'">ثبت</button>
+
+</div>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ویرایش اطلاعات همسایه ها</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/reqStyles.css"/>
+</head>
+<body>
+<div class="container">
+
+    <img class="cover" src="../../static/images/cover.jpg">
+    <div class="topright"><img class="img-circle" src="../../static/images/user_profile_female.jpg">
+        <p>زهرا بابایی</p></div>
+    <div class="topleft">
+        <a href="javascript:void(0)">خروج</a>
+        <p>96/5/5</p>
+
+    </div>
+    <div class="center"><p style="font-size: 150%; padding: 5px; font-weight: bold;">سامانه مدیریت ساختمان آس </p>
+    </div>
+
+</div>
+<div class="menu">
+    <ul>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">ویرایش اطلاعات</a>
+            <div class="dropdown-content">
+                <a href="#">اطلاعات مجتمع</a>
+                <a href="editNeighbours.html">اطلاعات ساکنین</a>
+                <a href="#">اطلاعات واحدها</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">اطلاعیه ها</a>
+            <div class="dropdown-content">
+                <a href="board.html">بورد</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">گزارشات</a>
+            <div class="dropdown-content">
+                <a href="payingReports.html">پرداخت های همسایه ها</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">رزرو</a>
+            <div class="dropdown-content">
+                <a href="reservesCheck.html">درخواست های رزرو</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">امور مالی</a>
+            <div class="dropdown-content">
+                <a href="#">افزایش اعتبار</a>
+            </div>
+        </li>
+        <a href="requests.html" class="notDropdown">درخواست پشتیبانی</a>
+
+    </ul>
+</div>
+
+<div class="main">
+    <h5>ساکنین</h5>
+
+   <select class="from" name="choose"  placeholder="به ترتیب">
+                    <option value="جدیدترین">جدیدترین</option>
+                    <option value="قدیمی ترین">قدیمی ترین</option>
+                </select></td>
+
+    <table>
+        <tr>
+
+            <th>حذف</th>
+            <th>ویرایش</th>
+            <th>تعداد اتومبیل</th>
+            <th>تعداد اعضای خانواده</th>
+            <th>نام سرپرست</th>
+            <th> شماره واحد</th>
+        </tr>
+        <tr>
+            <td><a href="javascript:void(0)"><img src="../../static/images/delete.png" class="linkImg"></a></td>
+            <td><a href="editN.html"><img src="../../static/images/edit.jpg" class="linkImg"></a></td>
+            <td>2</td>
+            <td>5</td>
+            <td>هاشم بابایی</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td><a href="javascript:void(0)"><img src="../../static/images/delete.png" class="linkImg"></a></td>
+            <td><a href="editN.html"><img src="../../static/images/edit.jpg" class="linkImg"></a></td>
+            <td>1</td>
+            <td>4</td>
+            <td>مسعود حیدری</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td><a href="javascript:void(0)"><img src="../../static/images/delete.png" class="linkImg"></a></td>
+            <td><a href="editN.html"><img src="../../static/images/edit.jpg" class="linkImg"></a></td>
+            <td>0</td>
+            <td>3</td>
+            <td>علی علوی</td>
+            <td>3</td>
+        </tr>
+
+    </table>
+
+    <button type="button" class="btn" onclick="window.location.href='addNeighbour.html'">اضافه کردن همسایه جدید</button>
+
+</div>
+
+
+</body>
+</html>

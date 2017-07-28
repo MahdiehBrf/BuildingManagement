@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>مشاهده درخواست های پشتیبانی</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/reqStyles.css"/>
+</head>
+<body>
+<div class="container">
+
+    <img class="cover" src = "../../static/images/cover.jpg">
+    <div class="topright"> <img class="img-circle" src="../../static/images/user_profile_female.jpg">  <p>زهرا بابایی</p></div>
+    <div class="topleft">
+      <a href="javascript:void(0)" >خروج</a><p>96/5/5</p>
+
+    </div>
+    <div class="center"><p style="font-size: 150%; padding: 5px; font-weight: bold;">سامانه مدیریت ساختمان آس </p>
+    </div>
+
+</div>
+<div class="menu">
+    <ul>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">ویرایش اطلاعات</a>
+            <div class="dropdown-content">
+                <a href="#">اطلاعات مجتمع</a>
+                <a href="editNeighbours.html">اطلاعات ساکنین</a>
+                <a href="#">اطلاعات واحدها</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">اطلاعیه ها</a>
+            <div class="dropdown-content">
+                <a href="board.html">بورد</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">گزارشات</a>
+            <div class="dropdown-content">
+                <a href="payingReports.html">پرداخت های همسایه ها</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">رزرو</a>
+            <div class="dropdown-content">
+                <a href="reservesCheck.html">درخواست های رزرو</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">امور مالی</a>
+            <div class="dropdown-content">
+                <a href="#">افزایش اعتبار</a>
+            </div>
+        </li>
+        <a href="requests.html" class="notDropdown">درخواست پشتیبانی</a>
+
+    </ul>
+</div></div>
+
+<div class="main">
+    <h5>درخواست های پشتیبانی</h5>
+
+    <select class="from" name="choose"  placeholder="به ترتیب">
+                    <option value="جدیدترین">جدیدترین</option>
+                    <option value="قدیمی ترین">قدیمی ترین</option>
+                </select></td>
+
+    <table>
+  <tr>
+
+      <th>حذف</th>
+      <th>مشاهده</th>
+      <th>وضعیت</th>
+      <th>موضوع</th>
+      <th>عنوان</th>
+      <th>شماره</th>
+  </tr>
+  <tr>
+      <td><a href="javascript:void(0)"><img src="../../static/images/delete.png" class="linkImg"></a> </td>
+      <td><a href="javascript:void(0)"><img src="../../static/images/view.png" class="linkImg"></a> </td>
+      <td>بررسی شده</td>
+    <td>فنی</td>
+    <td>عدم نمایش گزارشات پرداخت</td>
+    <td>2057</td>
+  </tr>
+  <tr>
+    <td><a href="javascript:void(0)"><img src="../../static/images/delete.png" class="linkImg"></a> </td>
+      <td><a href="javascript:void(0)"><img src="../../static/images/view.png" class="linkImg"></a> </td>
+      <td>در صف انتطار</td>
+    <td>فنی</td>
+    <td>افزایش اعتبار ناموفق</td>
+    <td>2120</td>
+  </tr>
+  <tr>
+    <td><a href="javascript:void(0)"><img src="../../static/images/delete.png" class="linkImg"></a> </td>
+      <td><a href="javascript:void(0)"><img src="../../static/images/view.png" class="linkImg"></a> </td>
+      <td>در صف انتظار</td>
+    <td>فنی</td>
+    <td>عدم امکان افزودن همسایه جدید</td>
+    <td>2174</td>
+  </tr>
+
+</table>
+
+    <button type="button" class="btn" onclick="window.location.href='addRequest.html'">اضافه کردن درخواست</button>
+
+</div>
+
+
+
+
+</body>
+</html>

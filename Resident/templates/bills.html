@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>قبوض</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/viewBillStyles.css"/>
+</head>
+<body>
+<div class="container">
+
+    <img class="cover" src="../../static/images/cover.jpg">
+    <div class="topright"><img class="img-circle" src="../../static/images/user_profile_female.jpg">
+        <p>زهرا بابایی</p></div>
+    <div class="topleft">
+        <a href="javascript:void(0)">خروج</a>
+        <p>96/5/5</p>
+
+    </div>
+    <div class="center"><p style="font-size: 150%; padding: 5px; font-weight: bold;">سامانه مدیریت ساختمان آس </p>
+    </div>
+
+</div>
+<div class="menu">
+    <ul>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">اطلاعیه ها</a>
+            <div class="dropdown-content">
+                <a href="board.html">بورد</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">گزارشات</a>
+            <div class="dropdown-content">
+                <a href="payingReports_user.html">پرداخت ها</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">رزرو</a>
+            <div class="dropdown-content">
+                <a href="reserve.html">ثبت رزرو</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">امور مالی</a>
+            <div class="dropdown-content">
+                <a href="#">افزایش اعتبار</a>
+                <a href=>پرداخت قبض</a>
+            </div>
+        </li>
+
+    </ul>
+</div>
+
+<div class="main">
+    <h5>قبوض</h5>
+
+
+<select class="from" name="choose"  placeholder="به ترتیب">
+                    <option value="جدیدترین">جدیدترین</option>
+                    <option value="قدیمی ترین">قدیمی ترین</option>
+                </select></td>
+      <input type="date" name="time" class="from">
+از تاریخ
+        <input type="date" name="time" class="from">
+  تا تاریخ
+
+
+    <table>
+        <tr>
+            <th>پرداخت</th>
+            <th>مشاهده</th>
+            <th>مبلغ</th>
+            <th>زمان و تاریخ</th>
+            <th>شماره قبض</th>
+            <th>شماره</th>
+        </tr>
+        <tr>
+            <td><a href="javascript:void(0)"><img src="../../static/images/pay.png" class="linkImg1"></a> </td>
+            <td><a href="viewBill.html"><img src="../../static/images/view.png" class="linkImg1"></a> </td>
+            <td>450000ریال</td>
+            <td>96/5/1</td>
+            <td>23117</td>
+            <td>1</td>
+        </tr>
+
+
+        <tr>
+            <td>  </td>
+            <td> </td>
+            <td>450000ریال</td>
+            <td>مجموع</td>
+            <td> </td>
+            <td> </td>
+        </tr>
+
+    </table>
+
+    <a href="javascript:void(0)" class="btn"><img src="../../static/images/printer.png" class="linkImg1"></a>
+    <a href="javascript:void(0)" class="btn"><img src="../../static/images/save.png" class="linkImg2"></a>
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ثبت درخواست</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/addReqStyle.css"/>
+    <script>function f(){alert("درخواست رزرو با موفقیت ثیت گردید")}</script>
+</head>
+<body>
+<div class="container">
+
+    <img class="cover" src="../../static/images/cover.jpg">
+    <div class="topright"><img class="img-circle" src="../../static/images/user_profile_female.jpg">
+        <p>زهرا بابایی</p></div>
+    <div class="topleft">
+        <a href="javascript:void(0)">خروج</a>
+        <p>96/5/5</p>
+
+    </div>
+    <div class="center"><p style="font-size: 150%; padding: 5px; font-weight: bold;">سامانه مدیریت ساختمان آس </p>
+    </div>
+
+</div>
+<div class="menu">
+    <ul>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">اطلاعیه ها</a>
+            <div class="dropdown-content">
+                <a href="board.html">بورد</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">گزارشات</a>
+            <div class="dropdown-content">
+                <a href="payingReports_user.html">پرداخت ها</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">رزرو</a>
+            <div class="dropdown-content">
+                <a href="reserve.html">ثبت رزرو</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">امور مالی</a>
+            <div class="dropdown-content">
+                <a href="#">افزایش اعتبار</a>
+                <a href=>پرداخت قبض</a>
+            </div>
+        </li>
+
+    </ul>
+</div>
+
+<div class="main">
+    <h5>رزرو امکانات</h5>
+    <form action="Welcome.html" method="post">
+        <table class="tbl" border="0" align="center">
+            <tbody>
+
+            <tr>
+
+               <td><select id="facility" name="facility">
+                    <option value="استخر">استخر</option>
+                    <option value="آمفی تئاتر">آمفی تئاتر</option>
+                    <option value="سالن ورزشی"></option>
+                    <option value="آلاچیق">آلاچیق</option>
+                </select></td>
+                <td><label for="facility">امکان </label></td>
+            </tr>
+
+            <tr>
+
+                <td><input type="datetime-local" name="time" id="time"></td>
+                <td><label for="time">زمان و تاریخ استفاده</label></td>
+            </tr>
+
+            <tr>
+
+                <td><input type="time" name="dur" id="dur"></td>
+                <td><label for="dur">مدت استفاده </label></td>
+            </tr>
+
+
+            </tbody>
+        </table>
+    </form>
+
+    <button type="button" class="btn" onclick="f()">ثبت</button>
+
+</div>
+
+
+</body>
+</html>
+
+
