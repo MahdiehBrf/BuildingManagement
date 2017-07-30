@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ویرایش اطلاعات حساب</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/viewBillStyles.css"/>
+</head>
+<body>
+<div class="container">
+
+    <img class="cover" src="../../static/images/cover.jpg">
+    <div class="topright"><img class="img-circle" src="../../static/images/user_profile_female.jpg">
+        <p>زهرا بابایی</p></div>
+    <div class="topleft" style="display:grid; z-index:5" >             <a href="select_contact.html"><img src="../../static/images/message.svg" style="height:50px;width:50px;"/></a>
+        <a href="../../MySite/templates/index.html">خروج</a>
+        <p>96/5/5</p>
+
+    </div>
+    <div class="center"><p style="font-size: 150%; padding: 5px; font-weight: bold;">سامانه مدیریت ساختمان آس </p>
+    </div>
+
+</div>
+<div class="menu">
+        <ul>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">ویرایش اطلاعات</a>
+                <div class="dropdown-content">
+                    <a href="edit_profile.html">اطلاعات حساب</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">اطلاعیه ها</a>
+                <div class="dropdown-content">
+                    <a href="board.html">بورد</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">گزارشات</a>
+                <div class="dropdown-content">
+                    <a href="payingReports_user.html">پرداخت ها</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">رزرو</a>
+                <div class="dropdown-content">
+                    <a href="reserve.html">ثبت رزرو</a>
+                    <a href="myReserves.html">وضعیت رزرو ها</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">امور مالی</a>
+                <div class="dropdown-content">
+                    <a href="#">افزایش اعتبار</a>
+                    <a href="bills.html">پرداخت قبض</a>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+
+<div class="main">
+    <h5> ویرایش اطلاعات ساکن</h5>
+   <form action="Welcome.html" method="post">
+        <table class="tbl" border="0" align="center">
+            <tbody>
+
+			<tr>
+               <td><input type="text" name="first_name" id="first_name" value="نام قبلی "></td>
+                <td><label for="first_name">نام حقوقی </label></td>
+            </tr>
+			<tr>
+               <td><input type="text" name="last_name" id="last_name"  value="نام خانوادگی قبلی "></td>
+                <td><label for="last_name">نام خانوادگی </label></td>
+            </tr>
+			<tr>
+               <td><input type="text" name="email" id="email" value="ایمیل " ></td>
+                <td><label for="email">ایمیل </label></td>
+            </tr>
+			<tr>
+               <td><input type="text" name="username" id="username" value="نام کاربری قبلی "></td>
+                <td><label for="username">نام کاربری </label></td>
+            </tr>
+            <tr>
+               <td><input type="password" name="password" id="password" value="رمز قبلی "></td>
+                <td><label for="password">رمز </label></td>
+            </tr>
+			<tr>
+               <td><input type="password" name="password" id="password" value="رمز قبلی "></td>
+                <td><label for="password">تایید رمز </label></td>
+            </tr>
+          
+            </tbody>
+        </table>
+    </form>
+
+    <button type="button" class="btn" onclick="f()">ثبت</button>
+
+</div>
+
+
+</body>
+</html>
+
+

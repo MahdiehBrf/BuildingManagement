@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>اضافه کردن همسایه</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/addReqStyle.css"/>
+	<script>function f(){alert("همسایه با موفقیت اضافه شد"); window.location.href="editNeighbours.html";}</script>
+
+</head>
+<body>
+<div class="container">
+
+    <img class="cover" src="../../static/images/cover.jpg">
+    <div class="topright"><img class="img-circle" src="../../static/images/user_profile_female.jpg">
+        <p>زهرا بابایی</p></div>
+    <div class="topleft" style="display:grid; z-index:5" >             <a href="select_contact.html"><img src="../../static/images/message.svg" style="height:50px;width:50px;"/></a>
+        <a href="../../MySite/templates/index.html">خروج</a>
+        <p>96/5/5</p>
+
+    </div>
+    <div class="center"><p style="font-size: 150%; padding: 5px; font-weight: bold;">سامانه مدیریت ساختمان آس </p>
+    </div>
+
+</div>
+<div class="menu">
+        <ul>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">ویرایش اطلاعات</a>
+                <div class="dropdown-content">
+                    <a href="edit_profile.html">اطلاعات حساب</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">اطلاعیه ها</a>
+                <div class="dropdown-content">
+                    <a href="board.html">بورد</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">گزارشات</a>
+                <div class="dropdown-content">
+                    <a href="payingReports_user.html">پرداخت ها</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">رزرو</a>
+                <div class="dropdown-content">
+                    <a href="reserve.html">ثبت رزرو</a>
+                    <a href="myReserves.html">وضعیت رزرو ها</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">امور مالی</a>
+                <div class="dropdown-content">
+                    <a href="#">افزایش اعتبار</a>
+                    <a href="bills.html">پرداخت قبض</a>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+
+<div class="main">
+    <h5>وارد کردن پیام</h5>
+    <div style="height:300px;width:300px;background-color:gray;"></div>
+	<img class="img-circle" style="float:right;top: -250px;margin: 2px;" src="../../static/images/user_profile_female.jpg">
+	<select class="from" style="float:right;top: -250px;" name="choose"  placeholder="انتخاب قاب">
+                    <option value="بدون قاب">بدون قاب</option>
+                    <option value="قاب_1">قاب 1</option>
+                </select></td>
+	<div style="margin-top:10px;width:300px;height:60px;border-width:3px;border-color:black;border-style:solid">
+    <button type="button" class="btn" onclick="f()" style="text-algin:center;width:70px;height:50px;margin:3px;">ارسال </button>
+	<input type="text" style="width:200px;height:50px;margin:3px;">
+	</div>
+	
+</div>
+
+
+</body>
+</html>
+
+

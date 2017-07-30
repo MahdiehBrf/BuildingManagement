@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ویرایش کردن همسایه</title>
+    <title>اضافه کردن همسایه</title>
     <link rel="stylesheet" type="text/css" href="../../static/css/addReqStyle.css"/>
-    <script>function f(){alert("اطلاعات همسایه با موفقیت به روز شد"); window.location.href="editNeighbours.html";}</script>
+	<script>function f(){alert("همسایه با موفقیت اضافه شد"); window.location.href="editNeighbours.html";}</script>
+
 </head>
 <body>
 <div class="container">
@@ -61,42 +62,21 @@
     </ul>
 </div>
 
-<div class="main">
-    <h5>ویرایش کردن اطلاعات همسایه</h5>
-    <form action="Welcome.html" method="post">
-        <table class="tbl" border="0" align="center">
-            <tbody>
-
-            <tr>
-
-               <td><input type="number" name="unit" id="unit" min="1" max="100" value="1"></td>
-                <td><label for="unit">شماره واحد </label></td>
-            </tr>
-
-            <tr>
-
-                <td><input type="text" name="username" id="username" value="hashem.b"></td>
-                <td><label for="username"> نام کاربری سرپرست</label></td>
-            </tr>
-
-            <tr>
-
-               <td><input type="number" name="count" id="count" min="1" max="10" value="5"></td>
-                <td><label for="count">تعداد اعضای خانواده </label></td>
-            </tr>
-
-            <tr>
-
-               <td><input type="number" name="car" id="car" min="1" max="5" value="2"></td>
-                <td><label for="car">تعداد اتومبیل </label></td>
-            </tr>
-
-
-            </tbody>
-        </table>
-    </form>
-
-    <button type="button" class="btn" onclick="f()">ثبت</button>
+<div class="main" style="display:-webkit-box;">
+  <div style="height:100%;width:50%">
+    <div style="height:400px;width:400px;background-color:gray;"></div>
+    <div style="margin-top:10px;width:400px;height:60px;border-width:3px;border-color:black;border-style:solid">
+      <button type="button" class="btn" onclick="f()" style="text-align:center;width:70px;height:50px;margin:3px;">ارسال </button>
+      <input type="text" style="width:300px;height:50px;margin:3px;">
+    </div>
+  </div>
+  <div style="display:block;height:200px;width:200px;top:-350px;text-align:center">
+    <img class="img-circle" style="margin: 2px;height:60%;width:100%" src="../../static/images/user_profile_female.jpg">
+    <select class="from" style="float:right;top: -250px;height:40%;width:100%" name="choose"  placeholder="انتخاب قاب">
+                    <option value="بدون قاب">بدون قاب</option>
+                    <option value="قاب_1">قاب 1</option>
+        </select></td>
+  </div>
 
 </div>
 

@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ویرایش کردن همسایه</title>
+    <title>اضافه کردن واحد</title>
     <link rel="stylesheet" type="text/css" href="../../static/css/addReqStyle.css"/>
-    <script>function f(){alert("اطلاعات همسایه با موفقیت به روز شد"); window.location.href="editNeighbours.html";}</script>
+    <script>function f(){alert("واحد با موفقیت اضافه شد"); window.location.href="editUnit.html";}</script>
 </head>
 <body>
 <div class="container">
@@ -12,7 +12,8 @@
     <img class="cover" src="../../static/images/cover.jpg">
     <div class="topright"><img class="img-circle" src="../../static/images/user_profile_female.jpg">
         <p>زهرا بابایی</p></div>
-    <div class="topleft" style="display:grid; z-index:5" >             <a href="select_contact.html"><img src="../../static/images/message.svg" style="height:50px;width:50px;"/></a>
+    <div class="topleft" style="display:grid; z-index:5" >
+            <a href="select_contact.html"><img src="../../static/images/message.svg" style="height:50px;width:50px;"/></a>
         <a href="../../MySite/templates/index.html">خروج</a>
         <p>96/5/5</p>
 
@@ -20,6 +21,7 @@
     <div class="center"><p style="font-size: 150%; padding: 5px; font-weight: bold;">سامانه مدیریت ساختمان آس </p>
     </div>
 
+</div>
 </div>
 <div class="menu">
     <ul>
@@ -62,33 +64,27 @@
 </div>
 
 <div class="main">
-    <h5>ویرایش کردن اطلاعات همسایه</h5>
+    <h5>وارد کردن اطلاعات واحد جدید</h5>
     <form action="Welcome.html" method="post">
         <table class="tbl" border="0" align="center">
             <tbody>
 
             <tr>
 
-               <td><input type="number" name="unit" id="unit" min="1" max="100" value="1"></td>
+               <td><input type="number" name="unit" id="unit" min="1" max="100"></td>
                 <td><label for="unit">شماره واحد </label></td>
             </tr>
 
             <tr>
 
-                <td><input type="text" name="username" id="username" value="hashem.b"></td>
-                <td><label for="username"> نام کاربری سرپرست</label></td>
+               <td><input type="number" name="block" id="block" min="1" max="100"></td>
+                <td><label for="block">شماره بلوک </label></td>
             </tr>
 
             <tr>
 
-               <td><input type="number" name="count" id="count" min="1" max="10" value="5"></td>
-                <td><label for="count">تعداد اعضای خانواده </label></td>
-            </tr>
-
-            <tr>
-
-               <td><input type="number" name="car" id="car" min="1" max="5" value="2"></td>
-                <td><label for="car">تعداد اتومبیل </label></td>
+               <td><input type="number" name="area" id="area" min="1" max="500"></td>
+                <td><label for="area">متراژ</label></td>
             </tr>
 
 

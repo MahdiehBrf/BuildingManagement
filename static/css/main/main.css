@@ -34,7 +34,7 @@ html {
     html body .hero {
       background-image: url("../../images/cover.jpg");
       background-attachment: fixed;
-      background-repeat: inherit;
+      background-repeat: round;
       background-size: inherit; }
       html body .hero .inner {
         height: 100vh;

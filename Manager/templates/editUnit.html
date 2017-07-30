@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ویرایش کردن همسایه</title>
-    <link rel="stylesheet" type="text/css" href="../../static/css/addReqStyle.css"/>
-    <script>function f(){alert("اطلاعات همسایه با موفقیت به روز شد"); window.location.href="editNeighbours.html";}</script>
+    <title>ویرایش اطلاعات واحدها</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/reqStyles.css"/>
 </head>
 <body>
 <div class="container">
@@ -20,6 +19,7 @@
     <div class="center"><p style="font-size: 150%; padding: 5px; font-weight: bold;">سامانه مدیریت ساختمان آس </p>
     </div>
 
+</div>
 </div>
 <div class="menu">
     <ul>
@@ -62,46 +62,45 @@
 </div>
 
 <div class="main">
-    <h5>ویرایش کردن اطلاعات همسایه</h5>
-    <form action="Welcome.html" method="post">
-        <table class="tbl" border="0" align="center">
-            <tbody>
+    <h5>واحدها</h5>
 
-            <tr>
+   <select class="from" name="choose"  placeholder="به ترتیب">
+                    <option value="جدیدترین">شماره واحد صعودی</option>
+                    <option value="قدیمی ترین">شماره واحد نزولی</option>
+                </select></td>
 
-               <td><input type="number" name="unit" id="unit" min="1" max="100" value="1"></td>
-                <td><label for="unit">شماره واحد </label></td>
-            </tr>
+    <table>
+        <tr>
+            <th>حذف</th>
+            <th>مساحت</th>
+            <th>شماره بلوک</th>
+            <th> شماره واحد</th>
+        </tr>
+        <tr>
+            <td><a href="javascript:void(0)"><img src="../../static/images/delete.png" class="linkImg"></a></td>
+            <td>180 مترمربع</td>
+            <td>2</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td><a href="javascript:void(0)"><img src="../../static/images/delete.png" class="linkImg"></a></td>
+            <td>100 متر مربع</td>
+            <td>3</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td><a href="javascript:void(0)"><img src="../../static/images/delete.png" class="linkImg"></a></td>
+            <td>100 متر مربع</td>
+            <td>1</td>
+            <td>13</td>
+        </tr>
 
-            <tr>
+    </table>
 
-                <td><input type="text" name="username" id="username" value="hashem.b"></td>
-                <td><label for="username"> نام کاربری سرپرست</label></td>
-            </tr>
-
-            <tr>
-
-               <td><input type="number" name="count" id="count" min="1" max="10" value="5"></td>
-                <td><label for="count">تعداد اعضای خانواده </label></td>
-            </tr>
-
-            <tr>
-
-               <td><input type="number" name="car" id="car" min="1" max="5" value="2"></td>
-                <td><label for="car">تعداد اتومبیل </label></td>
-            </tr>
-
-
-            </tbody>
-        </table>
-    </form>
-
-    <button type="button" class="btn" onclick="f()">ثبت</button>
+    <button type="button" class="btn" onclick="window.location.href='addUnit.html'">اضافه کردن واحد جدید</button>
 
 </div>
 
 
 </body>
 </html>
-
-

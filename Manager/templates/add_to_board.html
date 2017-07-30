@@ -2,9 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ویرایش کردن همسایه</title>
-    <link rel="stylesheet" type="text/css" href="../../static/css/addReqStyle.css"/>
-    <script>function f(){alert("اطلاعات همسایه با موفقیت به روز شد"); window.location.href="editNeighbours.html";}</script>
+    <title>اضافه کردن به بورد</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/viewBillStyles.css"/>
+    <script>
+        function f(){alert("درخواست با موفقیت ثبت شد."); window.location.href="editNeighbours.html";}
+        function g(){
+    var e = document.getElementById("from");
+    var strUser = e.options[e.selectedIndex].value;
+    var f = document.getElementById("cost_tag");
+    if (strUser == "event")
+      f.style.display='block';
+    else
+      f.style.display='none';
+    }</script>
 </head>
 <body>
 <div class="container">
@@ -12,7 +22,8 @@
     <img class="cover" src="../../static/images/cover.jpg">
     <div class="topright"><img class="img-circle" src="../../static/images/user_profile_female.jpg">
         <p>زهرا بابایی</p></div>
-    <div class="topleft" style="display:grid; z-index:5" >             <a href="select_contact.html"><img src="../../static/images/message.svg" style="height:50px;width:50px;"/></a>
+    <div class="topleft" style="display:grid; z-index:5" >
+            <a href="select_contact.html"><img src="../../static/images/message.svg" style="height:50px;width:50px;"/></a>
         <a href="../../MySite/templates/index.html">خروج</a>
         <p>96/5/5</p>
 
@@ -62,33 +73,38 @@
 </div>
 
 <div class="main">
-    <h5>ویرایش کردن اطلاعات همسایه</h5>
+    <h5>افزودن رویداد/خبر به برد</h5>
     <form action="Welcome.html" method="post">
         <table class="tbl" border="0" align="center">
             <tbody>
 
             <tr>
 
-               <td><input type="number" name="unit" id="unit" min="1" max="100" value="1"></td>
-                <td><label for="unit">شماره واحد </label></td>
+               <td>
+         <select class="from" name="choose"  id ="from" placeholder="" onchange="g()">
+                    <option value="event">رویداد</option>
+                    <option value="news">خبر</option>
+                </select>
+        </td>
+                <td><label for="unit">نوع </label></td>
             </tr>
 
             <tr>
 
-                <td><input type="text" name="username" id="username" value="hashem.b"></td>
-                <td><label for="username"> نام کاربری سرپرست</label></td>
+                <td><input type="text" name="username" id="username"></td>
+                <td><label for="username"> عنوان</label></td>
             </tr>
 
             <tr>
 
-               <td><input type="number" name="count" id="count" min="1" max="10" value="5"></td>
-                <td><label for="count">تعداد اعضای خانواده </label></td>
+               <td><input type="text" name="description" id="description"></td>
+                <td><label for="description">توضیحات </label></td>
             </tr>
 
-            <tr>
+            <tr id="cost_tag"  >
 
-               <td><input type="number" name="car" id="car" min="1" max="5" value="2"></td>
-                <td><label for="car">تعداد اتومبیل </label></td>
+               <td><input type="text" name="cost" id="cost"></td>
+                <td><label for="cost">مبلغ </label></td>
             </tr>
 
 

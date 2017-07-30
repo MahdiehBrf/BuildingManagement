@@ -11,8 +11,8 @@
     <img class="cover" src="../../static/images/cover.jpg">
     <div class="topright"><img class="img-circle" src="../../static/images/user_profile_female.jpg">
         <p>زهرا بابایی</p></div>
-    <div class="topleft">
-        <a href="javascript:void(0)">خروج</a>
+    <div class="topleft" style="display:grid; z-index:5" >             <a href="select_contact.html"><img src="../../static/images/message.svg" style="height:50px;width:50px;"/></a>
+        <a href="../../MySite/templates/index.html">خروج</a>
         <p>96/5/5</p>
 
     </div>
@@ -22,6 +22,12 @@
 </div>
 <div class="menu">
     <ul>
+        <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">ویرایش اطلاعات</a>
+                <div class="dropdown-content">
+                    <a href="edit_profile.html">اطلاعات حساب</a>
+                </div>
+            </li>
         <li class="dropdown">
             <a href="javascript:void(0)" class="dropbtn">اطلاعیه ها</a>
             <div class="dropdown-content">
@@ -38,13 +44,14 @@
             <a href="javascript:void(0)" class="dropbtn">رزرو</a>
             <div class="dropdown-content">
                 <a href="reserve.html">ثبت رزرو</a>
+                <a href="myReserves.html">وضعیت رزرو ها</a>
             </div>
         </li>
         <li class="dropdown">
             <a href="javascript:void(0)" class="dropbtn">امور مالی</a>
             <div class="dropdown-content">
                 <a href="#">افزایش اعتبار</a>
-                <a href=>پرداخت قبض</a>
+                <a href="bills.html">پرداخت قبض</a>
             </div>
         </li>
 

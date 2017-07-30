@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ویرایش کردن همسایه</title>
-    <link rel="stylesheet" type="text/css" href="../../static/css/addReqStyle.css"/>
-    <script>function f(){alert("اطلاعات همسایه با موفقیت به روز شد"); window.location.href="editNeighbours.html";}</script>
+    <title>اطلاعات مجتمع</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/viewBillStyles.css"/>
 </head>
 <body>
 <div class="container">
@@ -62,35 +61,53 @@
 </div>
 
 <div class="main">
-    <h5>ویرایش کردن اطلاعات همسایه</h5>
-    <form action="Welcome.html" method="post">
+    <h5>ویرایش اطلاعات همسایه</h5>
+   <form action="Welcome.html" method="post">
         <table class="tbl" border="0" align="center">
             <tbody>
 
             <tr>
 
-               <td><input type="number" name="unit" id="unit" min="1" max="100" value="1"></td>
-                <td><label for="unit">شماره واحد </label></td>
+               <td><select class="from" name="choose"  placeholder="">
+                    <option>ساختمان مسکونی</option>
+                    <option value>ساختمان اداری</option>
+                </select></td></td>
+                <td><label for="type">نوع ساختمان </label></td>
             </tr>
 
             <tr>
 
-                <td><input type="text" name="username" id="username" value="hashem.b"></td>
-                <td><label for="username"> نام کاربری سرپرست</label></td>
+                <td><input type="number" name="telephone" id="telephone"></td>
+                <td><label for="telephone"> شماره تلفن</label></td>
             </tr>
 
             <tr>
 
-               <td><input type="number" name="count" id="count" min="1" max="10" value="5"></td>
-                <td><label for="count">تعداد اعضای خانواده </label></td>
+               <td><input type="text" name="address" id="address" ></td>
+                <td><label for="address">آدرس </label></td>
             </tr>
 
-            <tr>
+             <tr>
 
-               <td><input type="number" name="car" id="car" min="1" max="5" value="2"></td>
-                <td><label for="car">تعداد اتومبیل </label></td>
+               <td><select class="from" name="choose"  placeholder="">
+                    <option>تهران</option>
+                    <option value>پردیس</option>
+                </select></td></td>
+                <td><label for="city">شهر </label></td>
             </tr>
+			 <tr>
 
+               <td><select class="from" name="choose"  placeholder="">
+                    <option>تهران</option>
+                    <option >آذربایجان شرقی</option>
+                </select></td></td>
+                <td><label for="type">استان</label></td>
+            </tr>
+			<tr>
+
+                <td><input type="number" name="zip_code" id="zip_code"></td>
+                <td><label for="zip_code"> کد پستی</label></td>
+            </tr>
 
             </tbody>
         </table>
