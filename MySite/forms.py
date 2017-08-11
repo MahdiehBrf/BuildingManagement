@@ -1,7 +1,7 @@
 from django import forms
 import django
 
-from MySite.models import Reserve, Complex, News, Event, Receipt
+from MySite.models import Complex, News, Event
 
 
 class ComplexForm(django.forms.ModelForm):
@@ -10,25 +10,25 @@ class ComplexForm(django.forms.ModelForm):
         fields = '__all__'
 
 
-class ReserveForm(django.forms.ModelForm):
-    class Meta:
-        model = Reserve
-        exclude = ['reserve_date']
+# class ReserveForm(django.forms.ModelForm):
+#     class Meta:
+#         model = Reserve
+#         exclude = ['reserve_date']
 
 
 class NewsForm(django.forms.ModelForm):
     class Meta:
         model = News
-        fields = '__all__'
+        fields = ['board', 'date_time']
 
 
 class EventForm(django.forms.ModelForm):
     class Meta:
         model = Event
-        fields = '__all__'
+        exclude = ['board', 'date_time']
 
 
-class ReceiptForm(django.forms.ModelForm):
-    class Meta:
-        model = Receipt
-        fields = '__all__'
+# class ReceiptForm(django.forms.ModelForm):
+#     class Meta:
+#         model = Receipt
+#         fields = '__all__'

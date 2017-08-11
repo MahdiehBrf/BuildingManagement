@@ -74,7 +74,8 @@
 
 <div class="main">
     <h5>افزودن رویداد/خبر به برد</h5>
-    <form action="Welcome.html" method="post">
+    <form action="{% url 'site:manager:board'%}" method="post">
+        {% csrf_token %}
         <table class="tbl" border="0" align="center">
             <tbody>
 
@@ -91,28 +92,29 @@
 
             <tr>
 
-                <td><input type="text" name="username" id="username"></td>
-                <td><label for="username"> عنوان</label></td>
+                <td><input type="text" name="title" id="id_title"></td>
+                <td><label for="id_title"> عنوان</label></td>
             </tr>
 
             <tr>
 
-               <td><input type="text" name="description" id="description"></td>
-                <td><label for="description">توضیحات </label></td>
+               <td><input type="text" name="description" id="id_description"></td>
+                <td><label for="id_description">توضیحات </label></td>
             </tr>
 
             <tr id="cost_tag"  >
 
-               <td><input type="text" name="cost" id="cost"></td>
-                <td><label for="cost">مبلغ </label></td>
+               <td><input type="text" name="cost" id="id_cost"></td>
+                <td><label for="id_cost">مبلغ </label></td>
             </tr>
 
 
             </tbody>
         </table>
+        <input type="submit" class="btn"  value="ثبت">
     </form>
 
-    <button type="button" class="btn" onclick="f()">ثبت</button>
+{#    <button type="button" class="btn" onclick="f()">ثبت</button>#}
 
 </div>
 
