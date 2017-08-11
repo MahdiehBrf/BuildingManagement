@@ -28,4 +28,4 @@ class Message(models.Model):
     receiver = models.ForeignKey(Member, related_name='receiver')
 
     def __str__(self):
-        return 'sender: ' + self.sender + ' receiver: ' + self.receiver
+        return 'sender: ' + str(self.sender) + ' receiver: ' + str(self.receiver)

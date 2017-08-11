@@ -23,7 +23,7 @@ class Resident(models.Model):
     unit = models.OneToOneField(Unit)
 
     def __str__(self):
-        return self.member
+        return str(self.member)
 
     # don't forget to write save
 
@@ -38,7 +38,7 @@ class Reserve(models.Model):
     facility = models.OneToOneField(Facility)
 
     def __str__(self):
-        return 'resident: ' + self.resident + ' facility: ' + self.facility + ' reserve date:' + str(self.reserve_date)
+        return 'resident: ' + str(self.resident) + ' facility: ' + str(self.facility) + ' reserve date:' + str(self.reserve_date)
 
 
 class Receipt(models.Model):
@@ -57,7 +57,7 @@ class Account(models.Model):
     resident = models.OneToOneField(Resident)
 
     def __str__(self):
-        return 'resident: ' + self.resident
+        return 'resident: ' + str(self.resident)
 
 
 class PayByBank(models.Model):
@@ -67,7 +67,7 @@ class PayByBank(models.Model):
     receipt = models.OneToOneField(Receipt)
 
     def __str__(self):
-        return 'resident: ' + self.resident + ' date: ' + str(self.date)
+        return 'resident: ' + str(self.resident) + ' date: ' + str(self.date)
 
 
 class PayByAccount(models.Model):
@@ -77,4 +77,4 @@ class PayByAccount(models.Model):
     receipt = models.OneToOneField(Receipt)
 
     def __str__(self):
-        return self.account + ' date: ' + str(self.date)
+        return str(self.account) + ' date: ' + str(self.date)

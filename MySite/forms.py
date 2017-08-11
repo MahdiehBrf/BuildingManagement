@@ -19,16 +19,22 @@ class ComplexForm(django.forms.ModelForm):
 class NewsForm(django.forms.ModelForm):
     class Meta:
         model = News
-        fields = ['board', 'date_time']
+        exclude = ['date']
 
 
 class EventForm(django.forms.ModelForm):
+
     class Meta:
         model = Event
-        exclude = ['board', 'date_time']
+        exclude = ['date']
 
 
 # class ReceiptForm(django.forms.ModelForm):
 #     class Meta:
 #         model = Receipt
 #         fields = '__all__'
+
+
+class DisplayForm(django.forms.Form):
+    startDate = django.forms.DateField()
+    finishDate = django.forms.DateField()

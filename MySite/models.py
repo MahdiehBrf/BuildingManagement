@@ -17,7 +17,7 @@ class Block(models.Model):
     complex = models.ForeignKey(Manager)
 
     def __str__(self):
-        return 'complex: ' + self.complex + ' block: ' + str(self.id)
+        return 'complex: ' + str(self.complex) + ' block: ' + str(self.id)
 
 
 class Complex(models.Model):
@@ -26,7 +26,7 @@ class Complex(models.Model):
     manager = models.OneToOneField(Manager)
 
     def __str__(self):
-        return 'name: ' + self.name + ' manager: ' + self.manager
+        return 'name: ' + self.name + ' manager: ' + str(self.manager)
 
 
 class Facility(models.Model):
@@ -40,24 +40,24 @@ class Board(models.Model):
     block = models.OneToOneField(Block)
 
     def __str__(self):
-        return self.block + ' board: ' + str(self.id)
+        return str(self.block) + ' board: ' + str(self.id)
 
 
 class News(models.Model):
     board = models.ForeignKey(Board)
-    date_time = models.DateTimeField()
+    date = models.DateField()
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=1000)
 
     def __str__(self):
-        return self.board + ' title: ' + self.title
+        return str(self.board) + ' title: ' + str(self.title)
 
 
 class Event(models.Model):
     board = models.ForeignKey(Board)
-    date_time = models.DateTimeField()
+    date = models.DateField()
     cost = models.IntegerField()
     description = models.CharField(max_length=1000)
 
     def __str__(self):
-        return self.board + ' description: ' + self.description
+        return str(self.board) + ' description: ' + self.description

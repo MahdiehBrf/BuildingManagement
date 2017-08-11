@@ -10,6 +10,6 @@ class Manager(models.Model):
     bank_account_num = models.IntegerField()
 
     def __str__(self):
-        return self.member
+        return str(self.member)
 
     # don't forget to write save

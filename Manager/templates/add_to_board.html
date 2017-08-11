@@ -74,7 +74,7 @@
 
 <div class="main">
     <h5>افزودن رویداد/خبر به برد</h5>
-    <form action="{% url 'site:manager:board'%}" method="post">
+    <form action="" method="post">
         {% csrf_token %}
         <table class="tbl" border="0" align="center">
             <tbody>
@@ -88,6 +88,11 @@
                 </select>
         </td>
                 <td><label for="unit">نوع </label></td>
+            </tr>
+            <tr>
+
+                <td><input type="text" name="board" id="id_board"></td>
+                <td><label for="id_board">شماره بلوک</label></td>
             </tr>
 
             <tr>
