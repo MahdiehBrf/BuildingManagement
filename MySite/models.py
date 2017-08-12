@@ -14,7 +14,7 @@ FACILITY_TYPE = (
 
 class Block(models.Model):
     bill_num = models.IntegerField()
-    complex = models.ForeignKey(Complex)
+    complex = models.ForeignKey('Complex')
 
     def __str__(self):
         return 'complex: ' + str(self.complex) + ' block: ' + str(self.id)

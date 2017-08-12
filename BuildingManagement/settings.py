@@ -133,3 +133,5 @@ EMAIL_HOST_USER = 'fg75527@gmail.com'
 EMAIL_HOST_PASSWORD = 'fg75527_fg75527'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+ADMINS = [('FG', 'f.gorbanpor@yahoo.com')]

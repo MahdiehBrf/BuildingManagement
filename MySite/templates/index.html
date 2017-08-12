@@ -98,7 +98,7 @@
         <section class="content">
             <div class="inner">
                 <div class="copy row contact" id="contact">
-                    <form class="well form-horizontal col-xs-12 col-sm-6 " action="/send_feedback/" method="post"  id="contact_form">
+                    <form class="well form-horizontal col-xs-12 col-sm-6 " action="/send_feedback/" method="post"  id="contact_form">{% csrf_token %}
                         <fieldset>
 <div class="form-group">
   <div class="col-md-8 inputGroupContainer">
