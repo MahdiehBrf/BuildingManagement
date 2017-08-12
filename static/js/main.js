@@ -252,11 +252,12 @@
             }, 'json');
         });
 */
-     if (type === 'signup')
-         $("#signup").removeClass('hide').addClass('show');
-     if (type === 'login')
-         $("#login").removeClass('hide').addClass('show');
-
+     if (type) {
+         if (type === 'signup')
+             $("#signup").removeClass('hide').addClass('show');
+         if (type === 'login')
+             $("#login").removeClass('hide').addClass('show');
+     }
 
      var signup_action = true;
     $("#signup_bottum").on("click", function (event) {
