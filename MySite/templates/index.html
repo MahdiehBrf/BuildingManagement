@@ -170,59 +170,95 @@
     </div>
   </div>
 </div>
+    {% if form.firstname.errors and type == 'signup' %}
+        <span class="text-danger" style="text-align:center;">
+        {% for error in form.firstname.errors %}{{ error }}{% endfor %}
+    </span>
+    {% endif %}
 
-<div class="form-group">
+    <div class="form-group  {% if form.lastname.errors and type == 'signup' %}has-error{% endif %}">
     <div class="col-md-12 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input name="last_name" placeholder="نام خانوادگی" class="form-control"  type="text">
+        <input name="lastname" placeholder="نام خانوادگی" class="form-control" type="text"
+               value="{% if type == 'signup' %} {{ form.lastname.value }} {% endif %}">
     </div>
   </div>
 </div>
+    {% if form.lastname.errors and type == 'signup' %}
+        <span class="text-danger" style="text-align:center;">
+        {% for error in form.lastname.errors %}{{ error }}{% endfor %}
+    </span>
+    {% endif %}
 
-<div class="form-group">
+    <div class="form-group  {% if form.username.errors and type == 'signup' %}has-error{% endif %}">
   <div class="col-md-12 inputGroupContainer">
   <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input  name="user_name" placeholder="نام کاربری" class="form-control"  type="text">
+      <input name="user_name" placeholder="نام کاربری" class="form-control" type="text"
+             value="{% if type == 'signup' %} {{ form.username.value }} {% endif %}">
     </div>
   </div>
 </div>
 
-         <div class="form-group">
+    {% if form.username.errors and type == 'signup' %}
+        <span class="text-danger" style="text-align:center;">
+        {% for error in form.username.errors %}{{ error }}{% endfor %}
+    </span>
+    {% endif %}
+
+    <div class="form-group {% if form.email.errors and type == 'signup' %}has-error{% endif %}">
     <div class="col-md-12 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-  <input name="email" placeholder="آدرس ایمیل" class="form-control"  type="text">
+        <input name="email" placeholder="آدرس ایمیل" class="form-control" type="text"
+               value="{% if type == 'signup' %} {{ form.email.value }} {% endif %}">
     </div>
   </div>
 </div>
+    {% if form.email.errors and type == 'signup' %}
+        <span class="text-danger" style="text-align:center;">
+        {% for error in form.email.errors %}{{ error }}{% endfor %}
+    </span>
+    {% endif %}
 
-
-<div class="form-group">
+    <div class="form-group  {% if form.password1.errors and type == 'signup' %}has-error{% endif %}">
     <div class="col-md-12 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input name="user_password" placeholder="رمز" class="form-control"  type="password">
+        <input name="password1" placeholder="رمز" class="form-control" type="password">
     </div>
   </div>
 </div>
-
-<div class="form-group">
+    {% if form.password1.errors and type == 'signup' %}
+        <span class="text-danger" style="text-align:center;">
+        {% for error in form.password1.errors %}{{ error }}{% endfor %}
+    </span>
+    {% endif %}
+    <div class="form-group {% if form.password2.errors and type == 'signup' %}has-error{% endif %}">
     <div class="col-md-12 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input name="confirm_password" placeholder="رمز را دوباره وارد کنید." class="form-control"  type="password">
+        <input name="password2" placeholder="رمز را دوباره وارد کنید." class="form-control" type="password">
     </div>
   </div>
 </div>
 
+    {% if form.password2.errors and type == 'signup' %}
+        <span class="text-danger" style="text-align:center;">
+        <p>{% for error in form.password2.errors %}{{ error }}{% endfor %}</p>
+    </span>
+    {% endif %}
 
 </div>
 <div class="form-group">
-  <div class="col-md-12"><br>
-    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button type="submit" class="form-control btn"  >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspارسال&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
-  </div>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <input type="submit" name="submit" id="register-submit"
+                   tabindex="4" class="form-control btn btn-register" value="ثبت نام"
+                   placeholder="ثبت نام">
+        </div>
+    </div>
 </div>
 
 
