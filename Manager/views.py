@@ -51,3 +51,59 @@ def view_board(request):
         news_set = News.objects.all()
         events = Event.objects.all()
     return render(request, 'board.html', {'events': events, 'newsSet': news_set})
+
+
+def edit_profile(request):
+    return render(request, 'edit_profile.html')
+
+
+def edit_complex_information(request):
+    return render(request, 'edit_complex_information.html')
+
+
+def edit_neighbours(request):
+    return render(request, 'editNeighbours.html')
+
+
+def edit_unit(request):
+    return render(request, 'editUnit.html')
+
+
+def paying_reports(request):
+    return render(request, 'payingReports.html')
+
+
+def reserves_check(request):
+    return render(request, 'reservesCheck.html')
+
+
+def requests(request):
+    return render(request, 'requests.html')
+
+
+def add_neighbour(request):
+    return render(request, 'addNeighbour.html')
+
+
+def add_request(request):
+    return render(request, 'addRequest.html')
+
+
+def add_unit(request):
+    return render(request, 'addUnit.html')
+
+
+def edit_n(request):
+    return render(request, 'editN.html')
+
+
+def message(request):
+    return render(request, 'message.html')
+
+
+def select_contact(request):
+    return render(request, 'select_contact.html')
+
+
+def view_request(request):
+    return render(request, 'viewRequest.html')

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% block css %}{% endblock %}
+    <script>{% block script %}{% endblock %}</script>
+</head>
+<body>
+    <div class="container">
+
+        <img class="cover" src="../../static/images/cover.jpg">
+        <div class="topright"><img class="img-circle" src="../../static/images/user_profile_female.jpg">
+            <p>زهرا بابایی</p></div>
+        <div class="topleft" style="display:grid; z-index:5" >
+            <a href="select_contact.html"><img src="../../static/images/message.svg" style="height:50px;width:50px;"/></a>
+            <a href="../../MySite/templates/index.html">خروج</a>
+            <p>96/5/5</p>
+
+        </div>
+        <div class="center"><p style="font-size: 150%; padding: 5px; font-weight: bold;">سامانه مدیریت ساختمان آس </p>
+        </div>
+
+    </div>
+    <div class="menu">
+        <ul>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">ویرایش اطلاعات</a>
+                <div class="dropdown-content">
+                    <a href="{% url 'site:resident:edit_profile'%}">اطلاعات حساب</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">اطلاعیه ها</a>
+                <div class="dropdown-content">
+                    <a href="{% url 'site:resident:board'%}">بورد</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">گزارشات</a>
+                <div class="dropdown-content">
+                    <a href="{% url 'site:resident:payingReports_user'%}">پرداخت ها</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">رزرو</a>
+                <div class="dropdown-content">
+                    <a href="{% url 'site:resident:reserve'%}">ثبت رزرو</a>
+                    <a href="{% url 'site:resident:myReserves'%}">وضعیت رزرو ها</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">امور مالی</a>
+                <div class="dropdown-content">
+                    <a href="#">افزایش اعتبار</a>
+                    <a href="{% url 'site:resident:bills'%}">پرداخت قبض</a>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>
