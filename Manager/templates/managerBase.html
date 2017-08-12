@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% block css %}{% endblock %}
+    <script>{% block script %}{% endblock %}</script>
+</head>
+<body>
+<div class="container">
+
+    <img class="cover" src="../../static/images/cover.jpg">
+    <div class="topright"><img class="img-circle" src="../../static/images/user_profile_female.jpg">
+        <p>زهرا بابایی</p></div>
+    <div class="topleft" style="display:grid; z-index:5" >
+        <a href="{% url 'site:manager:select_contact'%}"><img src="../../static/images/message.svg" style="height:50px;width:50px;"/></a>
+        <a href="{% url 'MySite:site'%}">خروج</a>
+        <p>96/5/5</p>
+
+    </div>
+    <div class="center"><p style="font-size: 150%; padding: 5px; font-weight: bold;">سامانه مدیریت ساختمان آس </p>
+    </div>
+
+</div>
+<div class="menu">
+    <ul>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">ویرایش اطلاعات</a>
+            <div class="dropdown-content">
+                <a href="{% url 'site:manager:edit_profile'%}">اطلاعات حساب</a>
+                <a href="{% url 'site:manager:edit_complex_information'%}">اطلاعات مجتمع</a>
+                <a href="{% url 'site:manager:editNeighbours'%}">اطلاعات ساکنین</a>
+                <a href="{% url 'site:manager:editUnit'%}">اطلاعات واحدها</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">اطلاعیه ها</a>
+            <div class="dropdown-content">
+                <a href="{% url 'site:manager:board'%}">بورد</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">گزارشات</a>
+            <div class="dropdown-content">
+                <a href="{% url 'site:manager:payingReports'%}">پرداخت های همسایه ها</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">رزرو</a>
+            <div class="dropdown-content">
+                <a href="{% url 'site:manager:reservesCheck'%}">درخواست های رزرو</a>
+            </div>
+        </li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">امور مالی</a>
+            <div class="dropdown-content">
+                <a href="#">افزایش اعتبار</a>
+            </div>
+        </li>
+        <a href="{% url 'site:manager:requests'%}" class="notDropdown">درخواست پشتیبانی</a>
+
+    </ul>
+</div>
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>
