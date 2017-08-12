@@ -7,6 +7,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        {% load i18n %}
         {% load static %}
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
@@ -144,7 +145,7 @@
 
 <div class="form-group">
   <div class="col-md-12">
-    <button type="submit" class="btn btn-warning" >ارسال <span class="glyphicon glyphicon-send"></span></button>
+    <button type="submit" class="form-control btn" >ارسال <span class="glyphicon glyphicon-send"></span></button>
   </div>
 </div>
 </fieldset>
@@ -161,11 +162,11 @@
 
 <legend><center><h2><b>ثبت نام در سایت</b></h2></center></legend><br>
 
-<div class="form-group">
+<div class="form-group  {% if form.firstname.errors and type == 'signup' %}has-error{% endif %}">
   <div class="col-md-12 inputGroupContainer">
   <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input  name="first_name" placeholder="نام" class="form-control"  type="text">
+  <input  name="firstname" placeholder="نام" class="form-control"  type="text" value="{% if type == 'signup' %} {{ form.firstname.value }} {% endif %}">
     </div>
   </div>
 </div>
@@ -179,18 +180,6 @@
   </div>
 </div>
 
-  <div class="form-group">
-    <div class="col-md-12 selectContainer">
-    <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-    <select name="department" class="form-control selectpicker">
-      <option value="">نوع ساختمان را وارد کنید.</option>
-      <option>ساختمان مسکونی</option>
-    </select>
-  </div>
-</div>
-</div>
-
 <div class="form-group">
   <div class="col-md-12 inputGroupContainer">
   <div class="input-group">
@@ -199,6 +188,16 @@
     </div>
   </div>
 </div>
+
+         <div class="form-group">
+    <div class="col-md-12 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+  <input name="email" placeholder="آدرس ایمیل" class="form-control"  type="text">
+    </div>
+  </div>
+</div>
+
 
 <div class="form-group">
     <div class="col-md-12 inputGroupContainer">
@@ -218,71 +217,11 @@
   </div>
 </div>
 
-       <div class="form-group">
-    <div class="col-md-12 inputGroupContainer">
-    <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-  <input name="email" placeholder="آدرس ایمیل" class="form-control"  type="text">
-    </div>
-  </div>
-</div>
 
-<div class="form-group">
-    <div class="col-md-12 inputGroupContainer">
-    <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-  <input name="contact_no" placeholder="شماره تلفن" class="form-control" type="text">
-    </div>
-  </div>
-</div>
-
-
-<div class="form-group">
-    <div class="col-md-12 inputGroupContainer">
-    <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-  <input name="address" placeholder="آدرس" class="form-control" type="text">
-    </div>
-  </div>
-</div>
-
-
-<div class="form-group">
-    <div class="col-md-12 inputGroupContainer">
-    <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-  <input name="city" placeholder="شهر" class="form-control"  type="text">
-    </div>
-  </div>
-</div>
-
-<!-- Select Basic -->
-
-<div class="form-group">
-    <div class="col-md-12 selectContainer">
-    <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-    <select name="state" class="form-control selectpicker" >
-      <option value=" " >استان خود را وارد کنید.</option>
-      <option>آذربایجان شرقی</option>
-      <option>آذربایجان غربی</option>
-      <option >تهران</option>
-    </select>
-  </div>
-</div>
-</div>
-
-<div class="form-group">
-    <div class="col-md-12 inputGroupContainer">
-    <div class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-  <input name="zip" placeholder="کد پستی" class="form-control"  type="text">
-    </div>
-</div>
 </div>
 <div class="form-group">
   <div class="col-md-12"><br>
-    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button type="submit" class="btn btn-warning"  >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspارسال<span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button type="submit" class="form-control btn"  >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspارسال&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
   </div>
 </div>
 
@@ -295,7 +234,7 @@
     <fieldset>
 <legend><center><h2><b>ورود به سایت</b></h2></center></legend><br>
         {% if type == 'login' and message %}
-            <div class="text-danger"> {{ form.errors }} {{ message }} </div>
+            <div class="text-danger" style="text-align: center;line-height: 30px"> {{ form.errors }} {{ message }} </div>
         {% endif %}
         <div class="form-group {% if form.username.errors and type == 'login' %}has-error{% endif %}">
             <div class="col-md-12 inputGroupContainer">
@@ -338,4 +277,9 @@
     </form>
 </section>
     </body>
+  <div id="footer">
+    <div class="container">
+      <p class="footer-block">طراحی و اجرا شرکت نرم افزاری آسا</p>
+    </div>
+  </div>
 </html>

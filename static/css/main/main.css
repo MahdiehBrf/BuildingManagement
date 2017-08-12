@@ -90,6 +90,20 @@ html {
       @media screen and (min-width: 800px) {
         html body .hero .contact .well, html body .content .contact .well {
           margin: 5px 25%; } }
+  html fieldset {
+    text-align: center; }
+    html fieldset input.form-control {
+      text-align: right; }
+  html #footer {
+    bottom: 0;
+    top: 97%;
+    margin-top: 58%;
+    width: 100%;
+    position: absolute;
+    height: 60px;
+    background-color: #98DBC6; }
+    html #footer .footer-block {
+      margin: 20px 0; }
 
 #signup, #login {
   z-index: 5;

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
@@ -8,11 +9,11 @@ from django.utils.datetime_safe import datetime
 from MySite.forms import EventForm, NewsForm, DisplayForm
 from MySite.models import Event, News
 
-
+@login_required
 def account(request):
     return render(request, 'account.html')
 
-
+@login_required
 def add_to_board(request):
     if request.method == 'POST':
         if request.POST['choose'] == 'event':
@@ -32,7 +33,7 @@ def add_to_board(request):
         form = EventForm()
     return render(request, 'add_to_board.html', {'form': form})
 
-
+@login_required
 def view_board(request):
     events = None
     news_set = None
@@ -52,58 +53,58 @@ def view_board(request):
         events = Event.objects.all()
     return render(request, 'board.html', {'events': events, 'newsSet': news_set})
 
-
+@login_required
 def edit_profile(request):
     return render(request, 'edit_profile.html')
 
-
+@login_required
 def edit_complex_information(request):
     return render(request, 'edit_complex_information.html')
 
-
+@login_required
 def edit_neighbours(request):
     return render(request, 'editNeighbours.html')
 
-
+@login_required
 def edit_unit(request):
     return render(request, 'editUnit.html')
 
-
+@login_required
 def paying_reports(request):
     return render(request, 'payingReports.html')
 
-
+@login_required
 def reserves_check(request):
     return render(request, 'reservesCheck.html')
 
-
+@login_required
 def requests(request):
     return render(request, 'requests.html')
 
-
+@login_required
 def add_neighbour(request):
     return render(request, 'addNeighbour.html')
 
-
+@login_required
 def add_request(request):
     return render(request, 'addRequest.html')
 
-
+@login_required
 def add_unit(request):
     return render(request, 'addUnit.html')
 
-
+@login_required
 def edit_n(request):
     return render(request, 'editN.html')
 
-
+@login_required
 def message(request):
     return render(request, 'message.html')
 
-
+@login_required
 def select_contact(request):
     return render(request, 'select_contact.html')
 
-
+@login_required
 def view_request(request):
     return render(request, 'viewRequest.html')

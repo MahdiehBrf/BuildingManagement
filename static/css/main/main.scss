@@ -110,6 +110,26 @@ html {
         }
 
     }
+    fieldset {
+        text-align: center;
+
+        input.form-control {
+            text-align: right;
+        }
+    }
+     #footer {
+         bottom: 0;
+         top: 97%;
+         margin-top: 58%;
+         width: 100%;
+         position: absolute;
+         height: 60px;
+         background-color:  #98DBC6;
+         .footer-block {
+             margin: 20px 0;
+         }
+     }
+
 }
 #signup, #login {
     z-index: 5;
