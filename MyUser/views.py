@@ -1,9 +1,8 @@
-from django.shortcuts import render
 from django.contrib.auth import authenticate, login as auth_login
 from django.shortcuts import render
 
 # Create your views here.
-from MyUser.forms import LoginForm
+from MyUser.forms import LoginForm, SignupForm1
 
 
 def login(request):
@@ -23,5 +22,17 @@ def login(request):
     return render(request, 'index.html', context)
 
 
-def signup(reqest):
-    pass
+def signup(request):
+    form = SignupForm1(request.POST)
+    context = {}
+    if form.is_valid():
+        form.save()
+        username = form.cleaned_data.get('username')
+        raw_password = form.cleaned_data.get('password1')
+        user = authenticate(username=username, password=raw_password)
+        auth_login(request, user)
+        return render(request, "addNeighbour.html")
+    else:
+        context['form'] = form
+        context['type'] = "signup"
+        return render(request, 'index.html', context)

@@ -12,9 +12,14 @@ FACILITY_TYPE = (
 )
 
 
+
+class Unit(models.Model):
+    area = models.IntegerField()
+    block = models.ForeignKey('Block')
+
 class Block(models.Model):
     bill_num = models.IntegerField()
-    complex = models.ForeignKey(Manager)
+    complex = models.ForeignKey('Complex')
 
     def __str__(self):
         return 'complex: ' + str(self.complex) + ' block: ' + str(self.id)
@@ -31,6 +36,8 @@ class Complex(models.Model):
 
 class Facility(models.Model):
     type = models.CharField(max_length=1, choices=FACILITY_TYPE)
+    block = models.ForeignKey('Block')
+
 
     def __str__(self):
         return self.type

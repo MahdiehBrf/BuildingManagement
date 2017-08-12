@@ -110,6 +110,34 @@ html {
         }
 
     }
+    fieldset {
+        direction: rtl;
+        text-align: center;
+        .form-group {
+            margin-top: 8px;
+            margin-bottom: 0;
+        }
+        .inputGroupContainer input.form-control {
+            text-align: right;
+        }
+        .text-danger {
+            text-align: center;
+            line-height: 30px;
+        }
+    }
+     #footer {
+         bottom: 0;
+         top: 97%;
+         margin-top: 58%;
+         width: 100%;
+         position: absolute;
+         height: 60px;
+         background-color:  #98DBC6;
+         .footer-block {
+             margin: 20px 0;
+         }
+     }
+
 }
 #signup, #login {
     z-index: 5;

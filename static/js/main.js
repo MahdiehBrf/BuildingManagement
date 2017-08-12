@@ -252,6 +252,11 @@
             }, 'json');
         });
 */
+     if (type === 'signup')
+         $("#signup_bottum").click();
+     if (type === 'login')
+         $("#login_bottum").click();
+
      var signup_action = true;
     $("#signup_bottum").on("click", function (event) {
         event.preventDefault();
@@ -268,7 +273,6 @@
     });
      var login_action = true;
     $("#login_bottum").on("click", function (event) {
-        console.log('hello login');
         event.preventDefault();
         console.log('bye login!')
         if (login_action) {

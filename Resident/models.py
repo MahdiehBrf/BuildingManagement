@@ -2,7 +2,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-from MySite.models import Facility
+from MySite.models import Facility, Unit
 from MyUser.models import Member
 
 RESERVE_STATE = {
@@ -11,9 +11,6 @@ RESERVE_STATE = {
     ('A', 'تایید شده')
 }
 
-
-class Unit(models.Model):
-    area = models.IntegerField()
 
 
 class Resident(models.Model):
