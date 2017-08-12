@@ -21,7 +21,7 @@ class SignupForm1(forms.ModelForm):
 
 
 class SignupForm2(forms.ModelForm):
-
+    pass
 
 class MessageForm(forms.ModelForm):
     class Meta:
