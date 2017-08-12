@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="{% static "css/main/main.css" %}">
+        <script>var type ={{ type }}</script>
         <script src="{% static "js/vendor/jquery-1.12.0.min.js" %}"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="{% static "js/vendor/modernizr-2.8.3.min.js" %}"></script>
@@ -195,7 +196,7 @@
   <div class="col-md-12 inputGroupContainer">
   <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-      <input name="user_name" placeholder="نام کاربری" class="form-control" type="text"
+      <input name="username" placeholder="نام کاربری" class="form-control" type="text"
              value="{% if type == 'signup' %} {{ form.username.value }} {% endif %}">
     </div>
   </div>
@@ -245,7 +246,7 @@
 </div>
 
     {% if form.password2.errors and type == 'signup' %}
-        <span class="text-danger" style="text-align:center;">
+        <span class="text-danger">
         <p>{% for error in form.password2.errors %}{{ error }}{% endfor %}</p>
     </span>
     {% endif %}
@@ -270,7 +271,7 @@
     <fieldset>
 <legend><center><h2><b>ورود به سایت</b></h2></center></legend><br>
         {% if type == 'login' and message %}
-            <div class="text-danger" style="text-align: center;line-height: 30px"> {{ form.errors }} {{ message }} </div>
+            <div class="text-danger"> {{ form.errors.value }} {{ message }} </div>
         {% endif %}
         <div class="form-group {% if form.username.errors and type == 'login' %}has-error{% endif %}">
             <div class="col-md-12 inputGroupContainer">

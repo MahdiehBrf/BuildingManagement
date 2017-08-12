@@ -111,10 +111,18 @@ html {
 
     }
     fieldset {
+        direction: rtl;
         text-align: center;
-
-        input.form-control {
+        .form-group {
+            margin-top: 8px;
+            margin-bottom: 0;
+        }
+        .inputGroupContainer input.form-control {
             text-align: right;
+        }
+        .text-danger {
+            text-align: center;
+            line-height: 30px;
         }
     }
      #footer {
