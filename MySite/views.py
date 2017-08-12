@@ -1,16 +1,16 @@
 # from django.shortcuts import render
 #
 # # Create your views here.
-from django.core.mail import send_mail, mail_admins
-from django.http import HttpResponse, HttpResponseRedirect
+from django.core.mail import  mail_admins
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.template.defaulttags import csrf_token
 
 from MyUser.views import login,signup
 
 
 def index(request):
     if request.method == 'POST':
+        print("post : ")
         print(request.POST)
         if request.POST.get('submit') == 'ورود':
             return login(request)

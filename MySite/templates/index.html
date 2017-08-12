@@ -156,7 +156,7 @@
 </div>
 
 <section id="signup" class="hide">
-    <form class="well form-horizontal" action=" " method="post"  id="signup_form">
+    <form class="well form-horizontal" action="" method="post"  id="signup_form">{% csrf_token %}
 <fieldset>
 
 <legend><center><h2><b>ثبت نام در سایت</b></h2></center></legend><br>
@@ -291,7 +291,7 @@
 </form>
 </section>
 <section id="login" class="hide">
-    <form class="well form-horizontal" action="../../Resident/templates/account.html" method="post"  id="login_form">
+    <form class="well form-horizontal" action="" method="post"  id="login_form">{% csrf_token %}
     <fieldset>
 <legend><center><h2><b>ورود به سایت</b></h2></center></legend><br>
         {% if type == 'login' and message %}
@@ -334,7 +334,6 @@
                 </div>
             </div>
         </div>
-    <a href="../../Manager/templates/account.html">ورود- مدیر</a>
     </fieldset>
     </form>
 </section>
