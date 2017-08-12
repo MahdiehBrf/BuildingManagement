@@ -21,3 +21,7 @@ def login(request):
         message = 'نام کاربری شناخته شده نیست. لطفا ابتدا عضو شوید.'
     context = {'type': 'login', 'form': form, 'message': message}
     return render(request, 'index.html', context)
+
+
+def signup(reqest):
+    pass

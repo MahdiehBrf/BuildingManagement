@@ -1,5 +1,5 @@
-  $(document).ready(function() {
-    $('#contact_form').bootstrapValidator({
+ $(document).ready(function() {
+  /*   $('#contact_form').bootstrapValidator({
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
             invalid: 'glyphicon glyphicon-remove',
@@ -251,7 +251,7 @@
                 console.log(result);
             }, 'json');
         });
-
+*/
      var signup_action = true;
     $("#signup_bottum").on("click", function (event) {
         event.preventDefault();
