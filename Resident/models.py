@@ -30,7 +30,7 @@ class Reserve(models.Model):
     duration = models.IntegerField()  # hours
     use_date = models.DateTimeField()
     cost = models.IntegerField()
-    state = models.CharField(max_length=1, choices=RESERVE_STATE)
+    state = models.CharField(max_length=2, choices=RESERVE_STATE)
     resident = models.OneToOneField(Resident)
     facility = models.OneToOneField(Facility)
 

@@ -197,3 +197,22 @@ th {
     float: left;
     margin: 35px;
 }
+
+form{
+    direction: rtl;
+}
+
+.btn[type=submit] {
+    background-color: #98DBC6;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    float: left;
+    margin: 35px;
+}
+.btn{
+    color: white;
+}

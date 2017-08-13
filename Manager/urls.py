@@ -3,7 +3,9 @@ from django.conf.urls import url, include
 from . import views
 
 urlpatterns = [
-    url(r'^view_request/$', views.view_request, name='viewRequest'),
+    url(r'^(?P<reserve_id>\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\W\d{2}:\d{2})/$', views.accept_reserve, name='accept_reserve'),
+    url(r'^(?P<request_id>[0-9]+)/view_request/$', views.view_request, name='viewRequest'),
+    url(r'^(?P<request_id>[0-9]+)/delete_request/$', views.delete_request, name='delete_request'),
     url(r'^select_contact/$', views.select_contact, name='select_contact'),
     url(r'^message/$', views.message, name='message'),
     url(r'^edit_n/$', views.edit_n, name='editN'),

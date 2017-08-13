@@ -12,41 +12,51 @@
 <div class="main">
     <h5>درخواست های رزرو</h5>
 
-<select class="from" name="choose"  placeholder="به ترتیب">
-                    <option value="جدیدترین">جدیدترین</option>
-                    <option value="قدیمی ترین">قدیمی ترین</option>
-                </select></td>
-      <input type="date" name="time" class="from">
-از تاریخ
-    <input type="date" name="time" class="from">
-  تا تاریخ
+<form action="" method="post">
+    {% csrf_token %}
+    <select class="from" name="choose"  placeholder="به ترتیب">
+        <option value="قدیمی ترین">قدیمی ترین</option>
+        <option value="جدیدترین">جدیدترین</option>
+    </select>
+    <label for="id_startDate">از تاریخ</label>
+    <input type="date" name="startDate" id="id_startDate" class="from">
+    <label for="id_finishDate">تا تاریخ</label>
+    <input type="date" name="finishDate" id="id_finishDate" class="from">
+    <input type="submit" class="btn"  value="نمایش">
+</form>
 
 
     <table>
         <tr>
-            <th> </th>
-            <th>مبلغ</th>
-            <th>وضعیت</th>
-            <th>مدت</th>
-            <th>زمان و تاریخ ایجاد</th>
-            <th>زمان و تاریخ استفاده</th>
-            <th>امکان</th>
-            <th>شماره واحد</th>
-            <th>شماره بلوک</th>
-            <th>ردیف</th>
+            <th style="width: 5%"> </th>
+            <th style="width: 10%">)مبلغ(ریال</th>
+            <th style="width: 10%">وضعیت</th>
+            <th style="width: 5%">مدت</th>
+            <th style="width: 15%">زمان و تاریخ ایجاد</th>
+            <th style="width: 15%">زمان و تاریخ استفاده</th>
+            <th style="width: 10%">امکان</th>
+            <th style="width: 10%">شماره واحد</th>
+            <th style="width: 10%">شماره بلوک</th>
+            <th style="width: 10%">ردیف</th>
         </tr>
-        <tr>
-            <td><a href="#" onclick="f()">تایید</a></td>
-            <td>1000000ریال</td>
-            <td>درانتطار بررسی </td>
-            <td>1:30 </td>
-            <td>96/4/19 _ 20:23 </td>
-            <td>96/4/25 _ 16:00 </td>
-            <td>استخر</td>
-            <td>25 </td>
-            <td>2 </td>
-            <td>1 </td>
-        </tr>
+
+
+        {% for reserve in reserves %}
+            <tr>
+                <td><a href="{% url 'site:manager:accept_reserve' reserve.reserve_date %}" onclick="f()">تایید</a></td>
+                <td>{{ reserve.cost }}</td>
+                <td>{{ reserve.get_state_display }}</td>
+                <td>{{ reserve.duration }}</td>
+                <td>{{ reserve.reserve_date|date:"Y / m / d" }}</td>
+                <td>{{ reserve.use_date|date:"Y / m / d" }}</td>
+                <td>{{ reserve.facility.get_type_display }}</td>
+                <td>{{ reserve.resident.unit.block_id }}</td>
+                <td>{{ reserve.resident.unit_id }}</td>
+                <td>
+                    {{ forloop.counter }}
+                </td>
+            </tr>
+        {% endfor %}
 
     </table>
 

@@ -1,25 +1,25 @@
 {% extends 'managerBase.html' %}
 
 {% block title %}مشاهده درخواست{% endblock %}
-
-{% block css %}<link rel="stylesheet" type="text/css" href="../../static/css/viewBillStyles.css"/>{% endblock %}
+{% load static %}
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'css/viewBillStyles.css' %}"/>{% endblock %}
 
 {% block script %}
 {% endblock %}
 
 {% block content %}
 <div class="main">
-    <h5>درخواست شماره2057</h5>
+    <h5>درخواست شماره{{ request.id }}</h5>
 
-    <h4>عنوان: عدم نمایش گزارشات پرداخت</h4>
-    <h4>موضوع: فنی</h4>
+    <h4>عنوان: {{ request.title }}</h4>
+    <h4>موضوع: {{ request.get_subject_display }}</h4>
 
     <p style="text-align: right" >
-        وقتی روی نمایش گزارشات پرداخت کلیک میکنم پیغام "شما تاکنون پرداختی انجام نداده اید" ظاهر می شود، در حالی که دیشب پرداخت داشتم.
+{{ request.text }}
     </p>
 
-    <a href="javascript:void(0)" class="btn"><img src="../../static/images/printer.png" class="linkImg1"></a>
-    <a href="javascript:void(0)" class="btn"><img src="../../static/images/save.png" class="linkImg2"></a>
+    <a href="javascript:void(0)" class="btn"><img src="{% static 'images/printer.png'%}" class="linkImg1"></a>
+    <a href="javascript:void(0)" class="btn"><img src="{% static 'images/save.png'%}" class="linkImg2"></a>
 
 </div>
 {% endblock %}
