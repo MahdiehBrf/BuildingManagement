@@ -3,7 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
+     <style >
+         body{
+             margin: 0;
+         }
+        .container{
+            margin: 0;
+            padding:0;
+            width:100%;
+        }
+        #footer {
+            text-align: center;
+            width: 100%;
+            position: absolute;
+            height: 45px;
+            background-color: #98DBC6;
+        }
+         .text-danger{
+             color: red;
+             direction: rtl;
+
+         }
+
+    </style>
     {% block css %}{% endblock %}
+
     <script>{% block script %}{% endblock %}</script>
 </head>
 <body>
@@ -64,6 +88,8 @@
 
 {% block content %}
 {% endblock %}
-
+ <div id="footer">
+      <p class="footer-block">طراحی و اجرا شرکت نرم افزاری آسا</p>
+  </div>
 </body>
 </html>

@@ -1,6 +1,8 @@
 # Create your models here.
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 from MySite.models import Facility, Unit
 from MyUser.models import Member
@@ -18,11 +20,20 @@ class Resident(models.Model):
     member_count = models.IntegerField()
     car_count = models.IntegerField()
     unit = models.OneToOneField(Unit)
+    #email = models.EmailField()
 
     def __str__(self):
         return str(self.member)
 
-    # don't forget to write save
+#     # don't forget to write save
+# @receiver(post_save, sender=User)
+# def create_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         Resident.objects.create(user=instance)
+#
+# @receiver(post_save, sender=User)
+# def save_user_profile(sender, instance, **kwargs):
+#     instance.resident.save()
 
 
 class Reserve(models.Model):

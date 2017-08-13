@@ -56,7 +56,13 @@
                 <td><label for="username">نام کاربری </label></td>
             </tr>
             <tr>
-               <td><input type="password" name="password1" id="password"></td>
+               <td><input type="password" name="password1" id="password" class=" {% if form.password2.errors %}has-error{% endif %}">
+                {% if form.password2.errors %}
+        <span class="text-danger">
+        <p>{% for error in form.password2.errors %}{{ error }}{% endfor %}</p>
+    </span>
+    {% endif %}
+               </td>
                 <td><label for="password">رمز </label></td>
             </tr>
 			<tr>
