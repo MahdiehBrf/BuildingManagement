@@ -3,19 +3,23 @@
 {% block title %}مشاهده درخواست های پشتیبانی{% endblock %}
 
 {% block script %}
+    function f(){alert("درخواست مورد نظر حذف شد")}
 {% endblock %}
-
 {% block css %}<link rel="stylesheet" type="text/css" href="../../static/css/reqStyles.css"/>{% endblock %}
+
 
 {% block content %}
 
 <div class="main">
     <h5>درخواست های پشتیبانی</h5>
-
+<form action="" method="post">
+    {% csrf_token %}
     <select class="from" name="choose"  placeholder="به ترتیب">
-                    <option value="جدیدترین">جدیدترین</option>
-                    <option value="قدیمی ترین">قدیمی ترین</option>
+                    <option value="W">در صف انتظار</option>
+                    <option value="C">بررسی شده</option>
                 </select></td>
+    <input type="submit" class="btn"  value="نمایش">
+</form>
 
     <table>
   <tr>
@@ -26,36 +30,27 @@
       <th>موضوع</th>
       <th>عنوان</th>
       <th>شماره</th>
+      <th>ردیف</th>
   </tr>
-  <tr>
-      <td><a href="javascript:void(0)"><img src="../../static/images/delete.png" class="linkImg"></a> </td>
-      <td><a href="viewRequest.html"><img src="../../static/images/view.png" class="linkImg"></a> </td>
-      <td>بررسی شده</td>
-    <td>فنی</td>
-    <td>عدم نمایش گزارشات پرداخت</td>
-    <td>2057</td>
-  </tr>
-  <tr>
-    <td><a href="javascript:void(0)"><img src="../../static/images/delete.png" class="linkImg"></a> </td>
-      <td><a href="viewRequest.html"><img src="../../static/images/view.png" class="linkImg"></a> </td>
-      <td>در صف انتطار</td>
-    <td>فنی</td>
-    <td>افزایش اعتبار ناموفق</td>
-    <td>2120</td>
-  </tr>
-  <tr>
-    <td><a href="javascript:void(0)"><img src="../../static/images/delete.png" class="linkImg"></a> </td>
-      <td><a href="viewRequest.html"><img src="../../static/images/view.png" class="linkImg"></a> </td>
-      <td>در صف انتظار</td>
-    <td>فنی</td>
-    <td>عدم امکان افزودن همسایه جدید</td>
-    <td>2174</td>
-  </tr>
+
+        {% for request in requests %}
+            <tr>
+                <td><a href="{% url 'site:manager:delete_request' request.id %}"><img src="../../static/images/delete.png" class="linkImg" onclick="f()"></a> </td>
+                <td><a href="{% url 'site:manager:viewRequest' request.id %}"><img src="../../static/images/view.png" class="linkImg"></a> </td>
+                <td>{{ request.get_state_display }}</td>
+                <td>{{ request.get_subject_display}}</td>
+                <td>{{ request.title }}</td>
+                <td>{{ request.id }}</td>
+                <td>
+                    {{ forloop.counter }}
+                </td>
+            </tr>
+        {% endfor %}
 
 
 </table>
 
-    <button type="button" class="btn" onclick="window.location.href='addRequest.html'">اضافه کردن درخواست</button>
+    <button type="button" class="btn" onclick="window.location.href='{% url 'site:manager:addRequest' %}'">اضافه کردن درخواست</button>
 
 </div>
 

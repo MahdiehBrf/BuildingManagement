@@ -9,13 +9,13 @@
 
 {% block content %}
 <div class="main">
-    <h5>درخواست شماره2057</h5>
+    <h5>درخواست شماره{{ request.id }}</h5>
 
-    <h4>عنوان: عدم نمایش گزارشات پرداخت</h4>
-    <h4>موضوع: فنی</h4>
+    <h4>عنوان: {{ request.title }}</h4>
+    <h4>موضوع: {{ request.get_subject_display }}</h4>
 
     <p style="text-align: right" >
-        وقتی روی نمایش گزارشات پرداخت کلیک میکنم پیغام "شما تاکنون پرداختی انجام نداده اید" ظاهر می شود، در حالی که دیشب پرداخت داشتم.
+{{ request.text }}
     </p>
 
     <a href="javascript:void(0)" class="btn"><img src="../../static/images/printer.png" class="linkImg1"></a>

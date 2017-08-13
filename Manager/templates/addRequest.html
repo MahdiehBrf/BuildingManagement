@@ -11,40 +11,36 @@
 {% block content %}
 <div class="main">
     <h5>درخواست پشتیبانی</h5>
-    <form action="Welcome.html" method="post">
+    <form action="" method="post">
+        {% csrf_token %}
     <table class="tbl" border="0" align="center">
         <tbody>
 
         <tr>
 
-            <td><input id="title" maxlength="100" name="title" type="text"/></td>
+            <td>{{ form.title }}</td>
             <td><label for="title">عنوان </label></td>
         </tr>
 
         <tr>
 
-            <td><select id="subject" name="subject">
-                    <option value="خطا در سامانه">خطا در سامانه</option>
-                    <option value="امکانات جدید یا تغییر">پیشنهاد امکانات جدید یا تغییر</option>
-                    <option value="سوال و راهنمایی">سوال و راهنمایی</option>
-                    <option value="شکایات">شکایات</option>
-                    <option value="سایر">سایر</option>
-                </select></td>
+            <td>{{ form.subject }}
              <td><label for="subject">موضوع </label></td>
         </tr>
 
         <tr>
 
-            <td><textarea class="txt" id="txt" name="txt" cols="100" rows="20"></textarea></td>
+            <td>{{ form.text }}</td>
             <td><label for="txt">متن </label></td>
         </tr>
 
 
         </tbody>
     </table>
+        <input type="submit" class="btn"  value="ثبت">
 </form>
 
-    <button type="button" class="btn" onclick="window.location.href='requests.html'">ثبت</button>
+{#    <button type="button" class="btn" onclick="window.location.href='requests.html'">ثبت</button>#}
 
 </div>
 {% endblock %}
