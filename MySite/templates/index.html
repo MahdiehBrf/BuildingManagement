@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="{% static "css/main/main.css" %}">
-        <script>var type ={{ type }}</script>
+        <script>var type = "{{ type }}"</script>
         <script src="{% static "js/vendor/jquery-1.12.0.min.js" %}"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="{% static "js/vendor/modernizr-2.8.3.min.js" %}"></script>
@@ -146,7 +146,7 @@
 
 <div class="form-group">
   <div class="col-md-12">
-    <button type="submit" class="form-control btn" >ارسال <span class="glyphicon glyphicon-send"></span></button>
+      <button type="submit" class="form-control btn">ارسال</button>
   </div>
 </div>
 </fieldset>
@@ -277,9 +277,9 @@
             <div class="col-md-12 inputGroupContainer">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="text" required name="username" id="username" tabindex="1"
-                   class="form-control" placeholder="نام کاربری"
-                   value="{% if type == 'login' %} {{ form.username.value }} {% endif %}">
+                    <input type="text" name="username" id="username" tabindex="1"
+                           class="form-control" placeholder="نام کاربری"
+                           value="{% if type == 'login' %} {{ form.username.value }} {% endif %}">
                 </div>
             </div>
             {% if form.username.errors and type == 'login' %}
@@ -292,8 +292,8 @@
             <div class="col-md-12 inputGroupContainer">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="password" required name="password" id="password" tabindex="2"
-                   class="form-control" placeholder="رمز">
+                    <input type="password" name="password" id="password" tabindex="2"
+                           class="form-control" placeholder="رمز">
                 </div>
             </div>
             {% if form.password.errors and type == 'login' %}

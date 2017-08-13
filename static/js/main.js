@@ -252,10 +252,12 @@
             }, 'json');
         });
 */
-     if (type === 'signup')
-         $("#signup_bottum").click();
-     if (type === 'login')
-         $("#login_bottum").click();
+     if (type) {
+         if (type === 'signup')
+             $("#signup").removeClass('hide').addClass('show');
+         if (type === 'login')
+             $("#login").removeClass('hide').addClass('show');
+     }
 
      var signup_action = true;
     $("#signup_bottum").on("click", function (event) {
@@ -274,7 +276,6 @@
      var login_action = true;
     $("#login_bottum").on("click", function (event) {
         event.preventDefault();
-        console.log('bye login!')
         if (login_action) {
             $("#login").removeClass('hide').addClass('show');
             $("#signup").removeClass('show').addClass('hide');
