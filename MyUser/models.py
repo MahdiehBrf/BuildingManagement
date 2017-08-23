@@ -12,7 +12,7 @@ MESSAGE_THEME_TYPE = (
 class Member(models.Model):
     user = models.OneToOneField(User)
     phone_number = models.CharField(max_length=12)
-    image = models.ImageField(upload_to='static/images/profile_picture',
+    image = models.FileField(upload_to='static/images/profile_picture',
                               default='../static/images/user_profile_female.jpg')
 
     def __str__(self):

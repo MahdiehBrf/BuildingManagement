@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'brandon';
+  src:  url('../fonts/BRoya.ttf') format('truetype');
+  font-style:normal;
+  font-weight:normal;
+}
+
 *, *:before, *:after {
   box-sizing: inherit; }
 
@@ -138,3 +145,11 @@ html fieldset .text-danger {
     margin: 0; }
 
 /*# sourceMappingURL=main.css.map */
+
+
+.introduce {
+  color: black;
+  margin-top: 100px;
+  text-align: center;
+  font-family: brandon;
+}
