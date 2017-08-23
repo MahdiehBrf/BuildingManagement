@@ -1,43 +1,42 @@
 {% extends 'managerBase.html' %}
 
-{% block title %}اضافه کردن همسایه{% endblock %}
+{% block title %}دعوت نامه ها{% endblock %}
 
-{% block css %}<link rel="stylesheet" type="text/css" href="../../static/css/addReqStyle.css"/>{% endblock %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="../../static/css/viewBillStyles.css"/>{% endblock %}
 
 {% block script %}
-    function f(){ window.location.href="message.html";}
 {% endblock %}
 
 {% block content %}
 
 <div class="main">
-    <h5>وارد کردن مخاطب پیام</h5>
-    <form action="Welcome.html" method="post">
-        <table class="tbl" border="0" align="center">
-            <tbody>
+    <h5>دعوت نامه های من</h5>
 
+
+    <table>
+        <tr>
+            <th style="width:60%; text-align:center;">محتوا</th>
+            <th>دعوت شونده</th>
+            <th>دعوت کننده</th>
+        </tr>
+        {% for m in messages %}
             <tr>
-
-               <td><input type="number" name="block_number" id="block_number" min="1" max="10"></td>
-                <td><label for="block_number">شماره بلوک </label></td>
+                <td>{{ m.text }}</td>
+                <td>{{ m.receiver }}</td>
+                <td>{{ m.sender }}</td>
             </tr>
-
-            <tr>
-
-               <td><input type="number" name="unit_number" id="unit_number" min="1" max="5"></td>
-                <td><label for="unit_number">شماره واحد </label></td>
-            </tr>
+        {% endfor %}
 
 
-            </tbody>
-        </table>
-    </form>
+    </table>
 
-    <button type="button" class="btn" onclick="f()">ورود به صفحه ارسال پیام</button>
+    <button type="button" class="btn" onclick="window.location.href='{% url 'site:manager:message' %}' ">ارسال دعوت نامه
+        جدید
+    </button>
 
 </div>
 
 {% endblock %}
-
 
 

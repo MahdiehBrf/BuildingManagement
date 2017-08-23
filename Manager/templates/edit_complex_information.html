@@ -10,13 +10,13 @@
 {% block content %}
 <div class="main">
     <h5>ویرایش اطلاعات همسایه</h5>
-   <form action="Welcome.html" method="post">
+    <form action="" method="post">{% csrf_token %}
         <table class="tbl" border="0" align="center">
             <tbody>
 
             <tr>
 
-               <td><select class="from" name="choose" id="type"  placeholder="">
+                <td><select class="from" name="name" id="type" placeholder="">
                     <option>ساختمان مسکونی</option>
                     <option value>ساختمان اداری</option>
                 </select></td></td>
@@ -56,12 +56,20 @@
                 <td><input type="number" name="zip_code" id="zip_code"></td>
                 <td><label for="zip_code"> کد پستی</label></td>
             </tr>
-
+            <tr>
+                <td><input type="checkbox" name="facility1" id="f1" value="استخر">استخر
+                    <input type="checkbox" name="facility2" id="f2" value="آلاچیق">آلاچیق
+                    <input type="checkbox" name="facility3" id="f3" value="سالن ورزشی">سالن ورزشی
+                </td>
+                <td><label for="">انتخاب امکانات</label></td>
+            </tr>
             </tbody>
         </table>
+        <input type="submit" name="submit" tabindex="4"
+               class="form-control btn btn-login" value="ویرایش" placeholder="ویرایش">
+
     </form>
 
-    <button type="button" class="btn" onclick="f()">ثبت</button>
 
 </div>
 {% endblock %}

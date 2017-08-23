@@ -1,17 +1,17 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-
 # Create your views here.
 from django.urls import reverse
 from django.utils.datetime_safe import datetime
 
-from Manager.forms import RequestForm
+from Manager.forms import RequestForm, MessageForm
 from Manager.models import Request
-from MySite.forms import EventForm, NewsForm, DisplayForm
+from MySite.forms import EventForm, NewsForm, DisplayForm, ComplexForm
 from MySite.models import Event, News, Unit
 from MyUser.forms import SignupForm1
-from MyUser.models import Member
+from MyUser.models import Member, Message
 from Resident.forms import ResidentForm
 from Resident.models import Reserve, PayByBank, PayByAccount
 
@@ -83,7 +83,17 @@ def edit_profile(request):
 
 @login_required
 def edit_complex_information(request):
-    return render(request, 'edit_complex_information.html')
+    if request.method == 'POST':
+        form = ComplexForm(request.POST)
+        if form.is_valid():
+            complex = form.save(commit=False)
+            complex.manager = Member.objects.filter(user=request.user)[0].manager
+            complex.save()
+            return HttpResponseRedirect(reverse('site:manager:add_neighbour'))
+    else:
+        form = ComplexForm()
+    print(form)
+    return render(request, 'edit_complex_information.html', {'form': form})
 
 
 @login_required
@@ -214,7 +224,9 @@ def edit_n(request):
 
 @login_required
 def select_contact(request):
-    return render(request, 'select_contact.html')
+    s = Member.objects.get(user=request.user)
+    ms = Message.objects.filter(Q(sender=s) | Q(receiver=s))
+    return render(request, 'select_contact.html', {'messages': ms})
 
 
 @login_required

@@ -1,5 +1,5 @@
-from django import forms
 import django
+from django import forms
 
 from MySite.models import Complex, News, Event
 
@@ -7,7 +7,7 @@ from MySite.models import Complex, News, Event
 class ComplexForm(django.forms.ModelForm):
     class Meta:
         model = Complex
-        fields = '__all__'
+        fields = ['name', 'address']
 
 
 # class ReserveForm(django.forms.ModelForm):

@@ -25,6 +25,12 @@
 
          }
 
+         input, select {
+             width: 250px;
+             height: 25px;
+             border-radius: 3px;
+         }
+
     </style>
     {% block css %}{% endblock %}
 
@@ -75,12 +81,7 @@
                 <a href="{% url 'site:manager:reservesCheck'%}">درخواست های رزرو</a>
             </div>
         </li>
-        <li class="dropdown">
-            <a href="javascript:void(0)" class="dropbtn">امور مالی</a>
-            <div class="dropdown-content">
-                <a href="#">افزایش اعتبار</a>
-            </div>
-        </li>
+
         <a href="{% url 'site:manager:requests'%}" class="notDropdown">درخواست پشتیبانی</a>
 
     </ul>
