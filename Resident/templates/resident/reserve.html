@@ -12,39 +12,49 @@ function f(){alert("درخواست رزرو با موفقیت ثیت گردید"
 
 <div class="main">
     <h5>رزرو امکانات</h5>
-    <form action="Welcome.html" method="post">{% csrf_token %}
+    <form action="" method="post">
+        {% csrf_token %}
         <table class="tbl" border="0" align="center">
             <tbody>
 
             <tr>
 
-               <td><select id="facility" name="facility">
-                    <option value="استخر">استخر</option>
-                    <option value="آمفی تئاتر">آمفی تئاتر</option>
-                    <option value="سالن ورزشی"></option>
-                    <option value="آلاچیق">آلاچیق</option>
-                </select></td>
+               <td><select id="facility" required name="facility">
+                        {% for f in form.facility %}
+                            {{ f }}
+                        {% endfor %}
+                    </select></td>
                 <td><label for="facility">امکان </label></td>
             </tr>
 
             <tr>
 
-                <td><input type="datetime-local" name="time" id="time"></td>
-                <td><label for="time">زمان و تاریخ استفاده</label></td>
+                <td><input type="date" name="use_startDate_0" id="id_use_startDate_0">
+                <input type="time" name="use_startDate_1" id="id_use_startDate_1">
+                </td>
+                <td><label for="time">زمان و تاریخ شروع استفاده</label></td>
             </tr>
 
             <tr>
 
-                <td><input type="time" name="dur" id="dur"></td>
-                <td><label for="dur">مدت استفاده </label></td>
+                <td>
+                    <input type="date" name="use_finishDate_0" id="id_use_finishDate_0">
+                    <input type="time" name="use_finishDate_1" id="id_use_finishDate_1">
+{#                    <input class="dur" type="number" name="duration_minute" id="duration_minute">#}
+{#                    <span class="semicolon">:</span>#}
+{#                    <input class="dur" type="number" name="duration_time" id="duration_time">#}
+                </td>
+
+                <td><label for="dur">زمان پایان استفاده</label></td>
             </tr>
 
 
             </tbody>
         </table>
+    <button type="submit" class="btn" onclick="f()">ثبت</button>
     </form>
 
-    <button type="button" class="btn" onclick="f()">ثبت</button>
+
 
 </div>
 

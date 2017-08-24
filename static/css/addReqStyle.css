@@ -140,14 +140,18 @@ li.dropdown {
    text-align: right;
 }
 
-input[type=text], select {
-    padding: 12px 20px;
-    margin: 8px 0;
+input, select {
+    padding: 5px 5px;
+    margin: 5px 5px;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    text-align: right;
+    text-align: center;
+    width: 122px;
+}
+input[type=date]{
+    width: 140px;
 }
 
 .btn{
@@ -161,4 +165,12 @@ input[type=text], select {
     float: left;
     margin: 35px;
     color: white;
+}
+
+.dur{
+ width: 50px;
+}
+
+.semicolon{
+    font-size: 18px;
 }

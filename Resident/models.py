@@ -38,8 +38,9 @@ class Resident(models.Model):
 
 class Reserve(models.Model):
     reserve_date = models.DateTimeField(primary_key=True)
-    duration = models.IntegerField()  # hours
-    use_date = models.DateTimeField()
+    # duration = models.IntegerField()  # hours
+    use_finishDate = models.DateTimeField()
+    use_startDate = models.DateTimeField()
     cost = models.IntegerField()
     state = models.CharField(max_length=2, choices=RESERVE_STATE)
     resident = models.OneToOneField(Resident)
