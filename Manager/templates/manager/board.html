@@ -42,7 +42,7 @@
                 <td>{{ news.description }}</td>
                 <td>{{ news.title }}</td>
                 <td>{{ news.date|date:"Y / m / d" }}</td>
-                <td>{{ news.board_id }}</td>
+                <td>{{ news.board.block_id }}</td>
                 <td>{{ news.id }}</td>
                 <td>
                     {{ forloop.counter }}
@@ -66,7 +66,7 @@
                 <td>{{ event.cost }}</td>
                 <td>{{ event.description }}</td>
                 <td>{{ event.date|date:"Y / m / d" }}</td>
-                <td>{{ event.board_id }}</td>
+                <td>{{ event.board.block_id }}</td>
                 <td>{{ event.id }}</td>
                 <td>
                     {{ forloop.counter }}

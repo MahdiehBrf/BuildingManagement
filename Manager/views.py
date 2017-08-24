@@ -44,22 +44,23 @@ def add_to_board(request):
 
 @login_required
 def view_board(request):
+    manager = request.user.member.manager
     events = None
     news_set = None
     if request.method == 'POST':
         form = DisplayForm(request.POST)
         if form.is_valid():
-            news_set = News.objects.filter(date__gte=form.cleaned_data['startDate'], date__lte=form.cleaned_data['finishDate'])
-            events = Event.objects.filter(date__gte=form.cleaned_data['startDate'], date__lte=form.cleaned_data['finishDate'])
+            news_set = News.objects.filter(board__block__complex=manager.complex, date__gte=form.cleaned_data['startDate'], date__lte=form.cleaned_data['finishDate'])
+            events = Event.objects.filter(board__block__complex=manager.complex, date__gte=form.cleaned_data['startDate'], date__lte=form.cleaned_data['finishDate'])
         else:
-            news_set = News.objects.all()
-            events = Event.objects.all()
+            news_set = News.objects.filter(board__block__complex=manager.complex)
+            events = Event.objects.filter(board__block__complex=manager.complex)
         if request.POST['choose'] == 'جدیدترین':
             news_set = news_set.order_by('-date')
             events = events.order_by('-date')
     else:
-        news_set = News.objects.all()
-        events = Event.objects.all()
+        news_set = News.objects.filter(board__block__complex=manager.complex)
+        events = Event.objects.filter(board__block__complex=manager.complex)
     return render(request, 'manager/board.html', {'events': events, 'newsSet': news_set})
 
 
@@ -180,7 +181,7 @@ def requests(request):
     member = models.OneToOneField(User)
     member_count = models.IntegerField()
     car_count = models.IntegerField()
-    unit = models.OneToOneField(Unit)
+    unit = models.OneToOneField(Unit)p
 '''
 @login_required
 def add_neighbour(request):
