@@ -11,17 +11,18 @@ function f(){alert("درخواست رزرو با موفقیت تایید گرد�
 {% block content %}
 <div class="main">
     <h5>پرداخت ها</h5>
-
-
-<select class="from" name="choose"  placeholder="به ترتیب">
-                    <option value="جدیدترین">جدیدترین</option>
-                    <option value="قدیمی ترین">قدیمی ترین</option>
-                </select></td>
-      <input type="date" name="time" class="from">
-از تاریخ
-    <input type="date" name="time" class="from">
-  تا تاریخ
-
+<form action="" method="post">
+    {% csrf_token %}
+    <select class="from" name="choose"  placeholder="به ترتیب">
+        <option value="قدیمی ترین">قدیمی ترین</option>
+        <option value="جدیدترین">جدیدترین</option>
+    </select>
+    <label for="id_startDate">از تاریخ</label>
+    <input type="date" name="startDate" id="id_startDate" class="from">
+    <label for="id_finishDate">تا تاریخ</label>
+    <input type="date" name="finishDate" id="id_finishDate" class="from">
+    <input type="submit" class="btn"  value="نمایش">
+</form>
 
     <table>
         <tr>
@@ -30,29 +31,31 @@ function f(){alert("درخواست رزرو با موفقیت تایید گرد�
             <th>شماره قبض</th>
             <th>شماره</th>
         </tr>
-        <tr>
-            <td>1000000ریال</td>
-            <td>96/4/25 _ 16:03 </td>
-            <td>18349</td>
-            <td>1 </td>
-        </tr>
-        <tr>
-            <td>2400000ریال</td>
-            <td>96/3/22 _ 15:27 </td>
-            <td>17270</td>
-            <td>2 </td>
-        </tr>
-        <tr>
-            <td>500000ریال</td>
-            <td>96/2/01 _ 22:40 </td>
-            <td>10863</td>
-            <td>3</td>
-        </tr>
+        {% for report in bank_reports %}
+            <tr>
+                <td>{{ report.amount }}</td>
+                <td>{{ report.date|date:"Y / m / d" }}</td>
+                <td>{{ report.receipt_id }}</td>
+                <td>
+                    {{ forloop.counter }}
+                </td>
+            </tr>
+        {% endfor %}
+
+        {% for report in account_reports %}
+            <tr>
+                <td>{{ report.amount }}</td>
+                <td>{{ report.date|date:"Y / m / d" }}</td>
+                <td>{{ report.receipt_id }}</td>
+                <td>
+                    {{ forloop.counter }}
+                </td>
+            </tr>
+        {% endfor %}
 
     </table>
 
-    <a href="javascript:void(0)" class="btn"><img src="../../../static/images/printer.png" class="linkImg1"></a>
-    <a href="javascript:void(0)" class="btn"><img src="../../../static/images/save.png" class="linkImg2"></a>
-
+    <a href="javascript:void(0)" class="btn"><img src="../../static/images/printer.png" title="چاپ" class="linkImg1"></a>
+    <a href="javascript:void(0)" class="btn"><img src="../../static/images/save.png" title="ذخیره" class="linkImg2"></a>
 </div>
 {% endblock %}

@@ -6,7 +6,8 @@
       <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
     </data-source>
     <data-source name="Django default" uuid="813ffc7a-17dc-4b5e-98b8-aa9e590cd5df">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <database-info product="SQLite" version="3.16.1" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native" />
+      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
     </data-source>
   </component>
 </project>

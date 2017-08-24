@@ -108,19 +108,20 @@ def edit_unit(request):
 
 @login_required
 def paying_reports(request):
+        manager = request.user.member.manager
         bank_reports = None
         account_reports = None
         unit = None
         if request.method == 'POST':
             form = DisplayForm(request.POST)
             if form.is_valid():
-                bank_reports = PayByBank.objects.filter(date__gte=form.cleaned_data['startDate'],
+                bank_reports = PayByBank.objects.filter(resident__unit__block__complex__manager=manager, date__gte=form.cleaned_data['startDate'],
                                                date__lte=form.cleaned_data['finishDate'])
-                account_reports = PayByAccount.objects.filter(date__gte=form.cleaned_data['startDate'],
+                account_reports = PayByAccount.objects.filter(resident__unit__block__complex__manager=manager, date__gte=form.cleaned_data['startDate'],
                                               date__lte=form.cleaned_data['finishDate'])
             else:
-                bank_reports = PayByBank.objects.all()
-                account_reports = PayByAccount.objects.all()
+                bank_reports = PayByBank.objects.filter(resident__unit__block__complex__manager=manager)
+                account_reports = PayByAccount.objects.filter(account__resident__unit__block__complex__manager=manager)
             if request.POST['choose'] == 'جدیدترین':
                 bank_reports = bank_reports.order_by('-date')
                 account_reports = account_reports.order_by('-date')
@@ -133,8 +134,8 @@ def paying_reports(request):
                     bank_reports = bank_reports.filter(resident=resident)
                     account_reports = account_reports.filter(account=resident_account)
         else:
-            bank_reports = PayByBank.objects.all()
-            account_reports = PayByAccount.objects.all()
+            bank_reports = PayByBank.objects.filter(resident__unit__block__complex__manager=manager)
+            account_reports = PayByAccount.objects.filter(account__resident__unit__block__complex__manager=manager)
         return render(request, 'manager/payingReports.html', {'account_reports': account_reports, 'bank_reports': bank_reports})
 
 

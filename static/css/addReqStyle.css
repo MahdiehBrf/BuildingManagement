@@ -142,12 +142,19 @@ li.dropdown {
    text-align: right;
 }
 
-input[type=text], select {
+
+input, select {
+    padding: 5px 5px;
+    margin: 5px 5px;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    text-align: right;
+    text-align: center;
+    width: 122px;
+}
+input[type=date]{
+    width: 140px;
 }
 
 .btn{
@@ -162,6 +169,14 @@ input[type=text], select {
     margin: 35px;
     color: white;
     font-family: brandon;
+}
+
+.dur{
+ width: 50px;
+}
+
+.semicolon {
+    font-size: 18px;
 }
 .main h5 {
 font-size: 24px;

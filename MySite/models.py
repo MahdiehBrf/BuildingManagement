@@ -35,8 +35,9 @@ class Complex(models.Model):
 
 
 class Facility(models.Model):
-    type = models.CharField(max_length=1, choices=FACILITY_TYPE)
+    type = models.CharField(max_length=20)
     block = models.ForeignKey('Block')
+    cost = models.IntegerField()
 
 
     def __str__(self):
