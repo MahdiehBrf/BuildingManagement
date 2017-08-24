@@ -1,4 +1,4 @@
-{% extends 'managerBase.html' %}
+{% extends 'manager/managerBase.html' %}
 
 {% block title %}مشاهده درخواست{% endblock %}
 {% load static %}
@@ -18,8 +18,8 @@
 {{ request.text }}
     </p>
 
-    <a href="javascript:void(0)" class="btn"><img src="{% static 'images/printer.png'%}" class="linkImg1"></a>
-    <a href="javascript:void(0)" class="btn"><img src="{% static 'images/save.png'%}" class="linkImg2"></a>
+    <a href="javascript:void(0)" class="btn"><img src="{% static 'images/printer.png' %}" class="linkImg1"></a>
+    <a href="javascript:void(0)" class="btn"><img src="{% static 'images/save.png' %}" class="linkImg2"></a>
 
 </div>
 {% endblock %}

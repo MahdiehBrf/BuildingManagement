@@ -1,8 +1,8 @@
-{% extends 'residentBase.html' %}
+{% extends 'resident/residentBase.html' %}
 
 {% block title %}اضافه کردن همسایه{% endblock %}
 
-{% block css %}<link rel="stylesheet" type="text/css" href="../../static/css/addReqStyle.css"/>{% endblock %}
+{% block css %}<link rel="stylesheet" type="text/css" href="../../../static/css/addReqStyle.css"/>{% endblock %}
 
 {% block script %}
 function f(){alert("همسایه با موفقیت اضافه شد"); window.location.href="editNeighbours.html";}
@@ -13,7 +13,7 @@ function f(){alert("همسایه با موفقیت اضافه شد"); window.loc
 <div class="main">
     <h5>وارد کردن پیام</h5>
     <div style="height:300px;width:300px;background-color:gray;"></div>
-	<img class="img-circle" style="float:right;top: -250px;margin: 2px;" src="../../static/images/user_profile_female.jpg">
+	<img class="img-circle" style="float:right;top: -250px;margin: 2px;" src="../../../static/images/user_profile_female.jpg">
 	<select class="from" style="float:right;top: -250px;" name="choose"  placeholder="انتخاب قاب">
                     <option value="بدون قاب">بدون قاب</option>
                     <option value="قاب_1">قاب 1</option>
