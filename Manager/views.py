@@ -166,7 +166,8 @@ def accept_reserve(request, reserve_id):
 def requests(request):
     manager_requests = None
     if request.method == 'POST':
-        manager_requests = Request.objects.all()
+        # manager_requests = Request.objects.all()
+        manager_requests = request.user.member.manager.request_set.all()
         if request.POST['choose'] == 'W':
             manager_requests = manager_requests.filter(state='W')
         elif request.POST['choose'] == 'C':

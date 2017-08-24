@@ -35,13 +35,9 @@
 
         {% for request in requests %}
             <tr>
-<<<<<<< HEAD:Manager/templates/manager/requests.html
-                <td><a href="{% url 'site:manager:delete_request' request.id %}"><img src="../../../static/images/delete.png" class="linkImg" onclick="f()"></a> </td>
-                <td><a href="{% url 'site:manager:viewRequest' request.id %}"><img src="../../../static/images/view.png" class="linkImg"></a> </td>
-=======
                 <td><a href="{% url 'site:manager:delete_request' request.id %}"><img src="../../static/images/delete.png" title="حذف" class="linkImg" onclick="f()"></a> </td>
                 <td><a href="{% url 'site:manager:viewRequest' request.id %}"><img src="../../static/images/view.png" title="مشاهده" class="linkImg"></a> </td>
->>>>>>> 1a5cd4cb304131e78a8def8f4a842ac6e4e4958a:Manager/templates/requests.html
+
                 <td>{{ request.get_state_display }}</td>
                 <td>{{ request.get_subject_display}}</td>
                 <td>{{ request.title }}</td>
