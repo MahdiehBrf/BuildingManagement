@@ -22,7 +22,7 @@ class Member(models.Model):
 
 
 class Message(models.Model):
-    text = models.CharField(max_length=1000)
+    text = models.TextField(max_length=1000)
     theme_type = models.IntegerField(choices=MESSAGE_THEME_TYPE)
     sender = models.ForeignKey(Member, related_name='sender')
     receiver = models.ForeignKey(Member, related_name='receiver')

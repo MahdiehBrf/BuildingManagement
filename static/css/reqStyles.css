@@ -29,11 +29,12 @@
     font-family: brandon;
     text-align: left;
     font-size: 22px;
+    color: white;
 }
 
 .topleft a{
     display: inline-block;
-    color: black;
+    color: white;
     padding: 0px;
     text-decoration: none;
 }
@@ -48,7 +49,7 @@
     right: 5%;
     font-size: 22px;
     font-family: brandon;
-
+    color: white;
 }
 
 .topright p{
@@ -76,7 +77,7 @@ ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #5BC8AC;
+    background-color: #00293E;
 }
 
 li {
@@ -100,7 +101,7 @@ li a, .dropbtn {
 }
 
 li a:hover, .dropdown:hover .dropbtn {
-    background-color: #F18D9E;
+    background-color: #F62A00;
 }
 
 li.dropdown {
@@ -110,21 +111,22 @@ li.dropdown {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
+    color: #00293E;
+    background-color: #F1F3CE;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
 
 .dropdown-content a {
-    color: black;
+    color: #00293E;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
     text-align: left;
 }
 
-.dropdown-content a:hover {background-color: #98DBC6}
+.dropdown-content a:hover {background-color: #F2E2B2}
 
 .dropdown:hover .dropdown-content {
     display: block;
@@ -141,12 +143,15 @@ li.dropdown {
 }
 
 .main h5 {
+font-size: 24px;
 }
 
 table {
     margin-top: 30px;
     border-collapse: collapse;
     width: 100%;
+    border: solid 2px;
+    border-color: #F3F2F1;
 }
 
 th, td {
@@ -157,7 +162,7 @@ th, td {
 tr:nth-child(even){background-color: #f2f2f2}
 
 th {
-    background-color: #E6D72A;
+    background-color: #1E656D;
     color: white;
 }
 
@@ -166,7 +171,7 @@ th {
 }
 
 .btn{
-  background-color:#98DBC6;
+  background-color:#F62A00;
    border: none;
     padding: 15px 32px;
     text-align: center;
@@ -175,6 +180,7 @@ th {
     font-size: 16px;
     float: left;
     margin: 35px;
+    font-family: brandon;
 }
 
 #custom-search-input{
@@ -214,7 +220,7 @@ form{
 }
 
 .btn[type=submit] {
-    background-color: #98DBC6;
+    background-color: #ACA9A8;
     border: none;
     padding: 15px 32px;
     text-align: center;
@@ -223,6 +229,8 @@ form{
     font-size: 16px;
     float: left;
     margin: 35px;
+    height: 50px;
+    width: 100px;
 }
 
 .btn{
