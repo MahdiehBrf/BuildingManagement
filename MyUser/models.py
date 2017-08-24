@@ -16,7 +16,7 @@ class Member(models.Model):
                               default='../static/images/user_profile_female.jpg')
 
     def __str__(self):
-        return self.user.username
+        return self.user.first_name +" "+ self.user.last_name
 
     # don't forget to write save
 

@@ -12,7 +12,8 @@
 
     <div class="main">
         <h5>ارسال دعوت نامه</h5>
-        <form action="Welcome.html" method="post">
+        <form action="" method="post">
+            {% csrf_token %}
             <table class="tbl" border="0" align="center">
                 <tbody>
 
@@ -27,18 +28,17 @@
                 </tr>
                 <tr>
 
-                    <td><textarea class="txt" id="txt" name="text" cols="100" rows="20"></textarea></td>
+                    <td>{{ form.text }}</td>
                     <td><label for="txt">متن </label></td>
                 </tr>
 
 
                 </tbody>
             </table>
+            <input type="submit" class="btn"  value="ارسال">
         </form>
 
-        <button type="button" class="btn" onclick="window.location.href='{% url 'site:manager:select_contact' %}' ">
-            ارسال
-        </button>
+
 
 </div>
 
