@@ -1,7 +1,10 @@
 from django.contrib.auth import authenticate, login as auth_login
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
+from django.urls import reverse
+
 from MyUser.forms import LoginForm, SignupForm1
 
 
@@ -13,7 +16,8 @@ def login(request):
     if user is not None:
         if user.is_active:
             auth_login(request, user)
-            return render(request, "addNeighbour.html")
+            return HttpResponseRedirect(reverse('site:manager:account'))
+            # return HttpResponseRedirect(reverse('site:resident:account'))
         else:
             message = 'حساب شما غیر فعال شده است.'
     else:
@@ -31,7 +35,7 @@ def signup(request):
         raw_password = form.cleaned_data.get('password1')
         user = authenticate(username=username, password=raw_password)
         auth_login(request, user)
-        return render(request, "addNeighbour.html")
+        return render(request, "manager/addNeighbour.html")
     else:
         context['form'] = form
         context['type'] = "signup"

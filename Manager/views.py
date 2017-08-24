@@ -18,7 +18,7 @@ from Resident.models import Reserve, PayByBank, PayByAccount
 
 @login_required
 def account(request):
-    return render(request, 'account.html')
+    return render(request, 'manager/account.html')
 
 
 @login_required
@@ -39,7 +39,7 @@ def add_to_board(request):
         return HttpResponseRedirect(reverse('site:manager:board'))
     else:
         form = EventForm()
-    return render(request, 'add_to_board.html', {'form': form})
+    return render(request, 'manager/add_to_board.html', {'form': form})
 
 
 @login_required
@@ -60,7 +60,7 @@ def view_board(request):
     else:
         news_set = News.objects.all()
         events = Event.objects.all()
-    return render(request, 'board.html', {'events': events, 'newsSet': news_set})
+    return render(request, 'manager/board.html', {'events': events, 'newsSet': news_set})
 
 
 
@@ -78,7 +78,7 @@ def edit_profile(request):
                 member.phone_number = request.POST.get('phone_number')
                 member.save()
                 return HttpResponseRedirect(reverse('site:manager:add_neighbour'))
-    return render(request, 'edit_profile.html', {'user': user, 'form': user_form})
+    return render(request, 'manager/edit_profile.html', {'user': user, 'form': user_form})
 
 
 @login_required
@@ -93,17 +93,17 @@ def edit_complex_information(request):
     else:
         form = ComplexForm()
     print(form)
-    return render(request, 'edit_complex_information.html', {'form': form})
+    return render(request, 'manager/edit_complex_information.html', {'form': form})
 
 
 @login_required
 def edit_neighbours(request):
-    return render(request, 'editNeighbours.html')
+    return render(request, 'manager/editNeighbours.html')
 
 
 @login_required
 def edit_unit(request):
-    return render(request, 'editUnit.html')
+    return render(request, 'manager/editUnit.html')
 
 @login_required
 def paying_reports(request):
@@ -134,7 +134,7 @@ def paying_reports(request):
         else:
             bank_reports = PayByBank.objects.all()
             account_reports = PayByAccount.objects.all()
-        return render(request, 'payingReports.html', {'account_reports': account_reports, 'bank_reports': bank_reports})
+        return render(request, 'manager/payingReports.html', {'account_reports': account_reports, 'bank_reports': bank_reports})
 
 
 @login_required
@@ -151,7 +151,7 @@ def reserves_check(request):
             reserves = reserves.order_by('-reserve_date')
     else:
         reserves = Reserve.objects.all()
-    return render(request, 'reservesCheck.html', {'reserves': reserves})
+    return render(request, 'manager/reservesCheck.html', {'reserves': reserves})
 
 
 @login_required
@@ -173,7 +173,7 @@ def requests(request):
             manager_requests = manager_requests.filter(state='C')
     else:
         manager_requests = Request.objects.all()
-    return render(request, 'requests.html', {'requests': manager_requests})
+    return render(request, 'manager/requests.html', {'requests': manager_requests})
 
 '''
     member = models.OneToOneField(User)
@@ -193,7 +193,7 @@ def add_neighbour(request):
         return HttpResponseRedirect(reverse('site:manager:requests'))
     else:
         form = ResidentForm()
-    return render(request, 'addRequest.html', {'form': form})
+    return render(request, 'manager/addRequest.html', {'form': form})
     #return render(request, 'addNeighbour.html')
 
 
@@ -209,24 +209,24 @@ def add_request(request):
         return HttpResponseRedirect(reverse('site:manager:requests'))
     else:
         form = RequestForm()
-    return render(request, 'addRequest.html', {'form': form})
+    return render(request, 'manager/addRequest.html', {'form': form})
 
 
 @login_required
 def add_unit(request):
-    return render(request, 'addUnit.html')
+    return render(request, 'manager/addUnit.html')
 
 
 @login_required
 def edit_n(request):
-    return render(request, 'editN.html')
+    return render(request, 'manager/editN.html')
 
 
 @login_required
 def select_contact(request):
     s = Member.objects.get(user=request.user)
     ms = Message.objects.filter(Q(sender=s) | Q(receiver=s))
-    return render(request, 'select_contact.html', {'messages': ms})
+    return render(request, 'manager/select_contact.html', {'messages': ms})
 
 
 @login_required
@@ -241,13 +241,13 @@ def message(request):
         return HttpResponseRedirect(reverse('site:manager:select_contact'))
     else:
         form = MessageForm()
-    return render(request, 'message.html', {'form': form})
+    return render(request, 'manager/message.html', {'form': form})
 
 
 @login_required
 def view_request(request, request_id):
     manager_request = get_object_or_404(Request, pk=request_id)
-    return render(request, 'viewRequest.html', {'request': manager_request})
+    return render(request, 'manager/viewRequest.html', {'request': manager_request})
 
 @login_required
 def delete_request(request, request_id):
