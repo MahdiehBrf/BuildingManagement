@@ -11,23 +11,26 @@ FACILITY_TYPE = (
     ('B', 'آلاچیق')
 )
 
+BILL_TYPE = (
+    ('A', 'آب'),
+    ('B', 'برق'),
+    ('G', 'گاز')
+)
+
 
 
 class Unit(models.Model):
     area = models.IntegerField()
     block = models.ForeignKey('Block')
 
-    def __str__(self):
-        return self.block + ' unit:' + str(self.id)
-
 class Block(models.Model):
     complex = models.ForeignKey('Complex')
-    unit_number = models.IntegerField()
 
     def __str__(self):
         return 'complex: ' + str(self.complex) + ' block: ' + str(self.id)
 
 class Bill(models.Model):
+    type = type = models.CharField(max_length=20, choices=BILL_TYPE)
     num = models.IntegerField()
     cost = models.IntegerField()
     date = models.DateField()
