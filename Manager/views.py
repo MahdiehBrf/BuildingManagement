@@ -141,11 +141,12 @@ def paying_reports(request):
 
 @login_required
 def reserves_check(request):
+    manager = request.user.member.manager
     reserves = None
     if request.method == 'POST':
         form = DisplayForm(request.POST)
         if form.is_valid():
-            reserves = Reserve.objects.filter(reserve_date__gte=form.cleaned_data['startDate'],
+            reserves = Reserve.objects.filter(resident__unit__block__complex__manager=manager, reserve_date__gte=form.cleaned_data['startDate'],
                                               reserve_date__lte=form.cleaned_data['finishDate'])#  TODO
         else:
             reserves = Reserve.objects.all()

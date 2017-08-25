@@ -102,7 +102,20 @@ def view_bills(request):
 
 
 def view_reserves(request):
-    return render(request, 'resident/myReserves.html')
+    resident = request.user.member.resident
+    reserves = None
+    if request.method == 'POST':
+        form = DisplayForm(request.POST)
+        if form.is_valid():
+            reserves = Reserve.objects.filter(resident=resident, reserve_date__gte=form.cleaned_data['startDate'],
+                                              reserve_date__lte=form.cleaned_data['finishDate'])  # TODO
+        else:
+            reserves = Reserve.objects.filter(resident=resident)
+        if request.POST['choose'] == 'جدیدترین':
+            reserves = reserves.order_by('-reserve_date')
+    else:
+        reserves = Reserve.objects.filter(resident=resident)
+    return render(request, 'resident/myReserves.html', {'reserves': reserves})
 
 
 def view_bill(request):
