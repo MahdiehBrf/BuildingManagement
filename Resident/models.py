@@ -43,8 +43,8 @@ class Reserve(models.Model):
     use_startDate = models.DateTimeField()
     cost = models.IntegerField()
     state = models.CharField(max_length=2, choices=RESERVE_STATE)
-    resident = models.OneToOneField(Resident)
-    facility = models.OneToOneField(Facility)
+    resident = models.ForeignKey(Resident)
+    facility = models.ForeignKey(Facility)
 
     def __str__(self):
         return 'resident: ' + str(self.resident) + ' facility: ' + str(self.facility) + ' reserve date:' + str(self.reserve_date)
