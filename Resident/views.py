@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
@@ -8,10 +9,10 @@ from django.utils.datetime_safe import datetime
 
 from MySite.forms import DisplayForm
 from MySite.models import News, Event, Unit, Facility
-from Resident.forms import ReserveForm, DateForm
+from Resident.forms import ReserveForm, DateForm, MessageForm
 from Resident.models import PayByAccount, Resident, Reserve
 from Resident.models import PayByBank
-
+from MyUser.models import Member, Message
 
 def account(request):
     return render(request, 'resident/account.html')
@@ -89,12 +90,26 @@ def reserve(request):
     return render(request, 'resident/reserve.html', {'form': form})
 
 
+@login_required
 def message(request):
-    return render(request, 'resident/message.html')
+    if request.method == 'POST':
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            m = form.save(commit=False)
+            m.sender = Member.objects.get(user=request.user)
+            m.theme_type = 0
+            m.save()
+        return HttpResponseRedirect(reverse('site:resident:select_contact'))
+    else:
+        form = MessageForm()
+    return render(request, 'resident/message.html', {'form': form})
 
 
+@login_required
 def select_contact(request):
-    return render(request, 'resident/select_contact.html')
+    s = Member.objects.get(user=request.user)
+    ms = Message.objects.filter(Q(sender=s) | Q(receiver=s))
+    return render(request, 'resident/select_contact.html', {'messages': ms})
 
 
 def view_bills(request):
