@@ -10,6 +10,7 @@
     max-width: 100px;
     height: auto;
     position: relative;
+    border: solid white 2px;
 }
 
 .cover {
@@ -40,7 +41,7 @@
 }
 
 .topleft a:hover{
-    color:gray;
+    color:#F2E2B2;
 }
 
 .topright {
@@ -150,16 +151,17 @@ input, select {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    text-align: center;
-    width: 122px;
+    text-align: right;
+    width: 200px;
+    height: 40px;
 }
 input[type=date]{
     width: 140px;
 }
 
 .btn{
-  background-color:#98DBC6;
-   border: none;
+    background-color:#F62A00;
+    border: none;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -167,8 +169,10 @@ input[type=date]{
     font-size: 16px;
     float: left;
     margin: 35px;
-    color: white;
     font-family: brandon;
+    color: white;
+    height: 55px;
+    width:125px;
 }
 
 .dur{

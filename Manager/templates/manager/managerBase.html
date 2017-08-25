@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
-     <style >
+    <style>
+         @font-face {
+  font-family: 'brandon';
+  src:  url('../fonts/BRoya.ttf') format('truetype');
+  font-style:normal;
+  font-weight:normal;
+}
          body{
              margin: 0;
          }
@@ -13,12 +19,18 @@
             width:100%;
         }
         #footer {
+            font-family: brandon;
             text-align: center;
             width: 100%;
             position: absolute;
-            height: 45px;
+            height: 150px;
             background-color: #00293E;
             color: white;
+            margin-top: 50px;
+        }
+
+        .foot{
+           font-size: 16px;
         }
          .text-danger{
              color: red;
@@ -30,7 +42,40 @@
              width: 250px;
              height: 35px;
              border-radius: 3px;
+             font-family: brandon;
+             font-size: 18px;
+             text-align: right;
          }
+
+         .mytext{
+            font-family: brandon;
+            font-size: 18px;
+            text-align: right;
+         }
+
+         .address{
+         width: 250px;
+         position: absolute;
+         top: 6%;
+         right: 2%;
+         font-size: 18px;
+         font-family: brandon;
+         color: white;
+         text-align: right;
+         }
+
+         .logo{
+         position: absolute;
+         top: 20%;
+         left: 5%;
+         max-width: 100px;
+         }
+
+         .highlighted {
+    background-color: rgba(0,0,0,.4);
+    text-align: center;
+}
+
 
     </style>
     {% block css %}{% endblock %}
@@ -42,15 +87,16 @@
 
     <img class="cover" src="../../../static/images/test.jpg">
     <div class="topright"><img class="img-circle" src="../../../static/images/user_profile_female.jpg">
-        <p>زهرا بابایی</p></div>
-    <div class="topleft" style="display:grid; z-index:5" >
-        <a href="{% url 'site:manager:select_contact'%}"><img src="../../../static/images/message.svg" style="height:50px;width:50px;"/></a>
+        <p class="highlighted">زهرا بابایی</p></div>
+    <div class="topleft" style="display:grid; z-index:5">
+        <a href="{% url 'site:manager:select_contact'%}"><img src="../../../static/images/message.png"
+                                                              style="height:50px;width:50px;"/></a>
         <a href="">خروج</a>
         <p>96/5/5</p>
 
     </div>
 
-    </div>
+</div>
 
 </div>
 <div class="menu">
@@ -90,8 +136,15 @@
 
 {% block content %}
 {% endblock %}
- <div id="footer">
-      <p class="footer-block">طراحی و اجرا شرکت نرم افزاری آسا</p>
-  </div>
+<div id="footer">
+    <div class="address">
+        <p>نشانی: تهران، خیابان آزادی، دانشگاه شریف، دانشکده مهندسی کامپیوتر</p>
+        <p>تلفن تماس: 02166161234</p>
+    </div>
+
+    <p class="footer-block">طراحی و اجرا: شرکت نرم افزاری آسا</p>
+    <p class="foot">کلیه حقوق محفوظ و متعلق به آسا می باشد</p>
+    <div ><img class="logo" src="../../../static/images/LOGO.png"></div>
+</div>
 </body>
 </html>
