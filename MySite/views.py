@@ -1,11 +1,12 @@
 # from django.shortcuts import render
 #
 # # Create your views here.
-from django.core.mail import  mail_admins
+from django.contrib.auth import logout as auth_logout
+from django.core.mail import mail_admins
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
-from MyUser.views import login,signup
+from MyUser.views import login, signup, complexRegister
 
 
 def index(request):
@@ -16,6 +17,8 @@ def index(request):
             return login(request)
         elif request.POST.get('submit') == 'ثبت نام':
             return signup(request)
+        elif request.POST.get('submit') == 'ثبت نام مجتمع':
+            return complexRegister(request)
     return render(request, 'index.html')
 
 
@@ -33,3 +36,8 @@ def send_feedback(request):
             'fg75527@gmail.com',
         )
     return HttpResponseRedirect('/')
+
+
+def logout(request):
+    auth_logout(request)
+    return render(request, 'index.html')

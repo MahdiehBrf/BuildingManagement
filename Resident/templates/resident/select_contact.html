@@ -2,7 +2,8 @@
 
 {% block title %}اضافه کردن همسایه{% endblock %}
 
-{% block css %}<link rel="stylesheet" type="text/css" href="../../../static/css/viewBillStyles.css"/>{% endblock %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="../../../static/css/viewBillStyles.css"/>{% endblock %}
 
 {% block script %}
 function f(){ window.location.href="message.html";}
@@ -30,7 +31,8 @@ function f(){ window.location.href="message.html";}
 
     </table>
 
-    <button type="button" class="btn" onclick="window.location.href='{% url 'site:resident:message' %}' ">ارسال دعوت نامه
+    <button type="button" class="btn" onclick="window.location.href='{% url 'site:resident:message' %}' ">ارسال دعوت
+        نامه
         جدید
     </button>
 

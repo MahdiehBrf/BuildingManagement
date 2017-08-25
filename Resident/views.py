@@ -2,17 +2,16 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-
 # Create your views here.
 from django.urls import reverse
 from django.utils.datetime_safe import datetime
 
 from MySite.forms import DisplayForm
-from MySite.models import News, Event, Unit, Facility
-from Resident.forms import ReserveForm, DateForm, MessageForm
-from Resident.models import PayByAccount, Resident, Reserve
-from Resident.models import PayByBank
 from MyUser.models import Member, Message
+from Resident.forms import ReserveForm, DateForm, MessageForm
+from Resident.models import PayByAccount, Reserve
+from Resident.models import PayByBank
+
 
 def account(request):
     return render(request, 'resident/account.html')

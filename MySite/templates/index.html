@@ -87,15 +87,7 @@
             </div>
         </section>
         </div>
-    <!--div class="row">
-        <section class="content">
-            <div class="inner">
-                <div class="copy row manual" id="manual">
-                  <h1>محل قرار گرفتن راهنمای سایت :)</h1>
-                </div>
-            </div>
-        </section>
-        </div-->
+
       <div class="row">
         <section class="content">
             <div class="inner">
@@ -161,7 +153,66 @@
 <section id="signup" class="hide">
     <form class="well form-horizontal" action="" method="post"  id="signup_form">{% csrf_token %}
 <fieldset>
+    {% if  type == 'complexRegister' %}
 
+        <legend><h2><b>ثبت مجتمع مسکونی</b></h2></legend>
+        <br>
+
+        <div class="form-group {% if name.errors and type == 'complexRegister' %}has-error{% endif %}">
+            <div class="col-md-12 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input type="text" name="name" id="name" tabindex="1"
+                           class="form-control" placeholder="نام مجتمع"
+                           value="{% if type == 'complexRegister' %} {{ name.value }} {% endif %}">
+                </div>
+            </div>
+            {% if name.errors and type == 'complexRegister' %}
+                <span class="text-danger" style="text-align:center;">
+                    {{ name.errors }}
+                </span>
+            {% endif %}
+        </div>
+        <div class="form-group {% if address.errors and type == 'complexRegister' %}has-error{% endif %}">
+            <div class="col-md-12 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input type="text" name="address" id="address" tabindex="2"
+                           class="form-control" placeholder="آدرس">
+                </div>
+            </div>
+            {% if address.errors and type == 'complexRegister' %}
+                <span class="text-danger" style="text-align:center;">
+                    {{ address.errors }}
+                </span>
+            {% endif %}
+        </div>
+
+        <div class="form-group {% if blockNumber.errors and type == 'complexRegister' %}has-error{% endif %}">
+            <div class="col-md-12 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input type="number" name="blockNumber" min="0" max="50" tabindex="2"
+                           class="form-control" placeholder="تعداد بلوک ها">
+                </div>
+            </div>
+            {% if blockNumber.errors and type == 'complexRegister' %}
+                <span class="text-danger" style="text-align:center;">
+                    {{ blockNumber.errors }}
+                </span>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <input type="submit" name="submit" id="complexRegister-submit" tabindex="4"
+                           class="form-control btn btn-complexRegister" value="ثبت نام مجتمع" placeholder="ثبت">
+                </div>
+            </div>
+        </div>
+
+
+    {% else %}
     <legend>
         <center><h2><b>ثبت نام مدیر</b></h2></center>
     </legend>
@@ -283,7 +334,7 @@
     </div>
 </div>
 
-
+    {% endif %}
 </fieldset>
 </form>
 </section>

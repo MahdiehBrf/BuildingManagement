@@ -10,7 +10,7 @@ function f(){alert("همسایه با موفقیت اضافه شد"); window.loc
 
 {% block content %}
 
- <div class="main">
+    <div class="main">
         <h5>ارسال دعوت نامه</h5>
         <form action="" method="post">
             {% csrf_token %}
@@ -35,12 +35,11 @@ function f(){alert("همسایه با موفقیت اضافه شد"); window.loc
 
                 </tbody>
             </table>
-            <input type="submit" class="btn"  value="ارسال">
+            <input type="submit" class="btn" value="ارسال">
         </form>
 
 
-
-</div>
+    </div>
 
 {% endblock %}
 

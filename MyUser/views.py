@@ -54,3 +54,18 @@ def signup(request):
     context['form'] = form
     context['type'] = "signup"
     return render(request, 'index.html', context)
+
+
+def complexRegister(request):
+    name = request.POST.get('name')
+    address = request.POST.get('address')
+    blockNum = request.POST.get('blockNum')
+    context = {'name': {'value': name}, 'address': {'value': address}, 'blockNum': {'value': blockNum}}
+    if name == '':
+        context.get('name')['errors'] = 'نام مجتمع نباید خالی باشد.'
+    elif address == '':
+        context.get('address')['errors'] = 'آدرس نباید خالی باشد.'
+    elif int(blockNum) < 0:
+        context.get('blockNum')['errors'] = 'تعداد بلوک های مجتمع معتبر نیست.'
+    else:
+        pass
