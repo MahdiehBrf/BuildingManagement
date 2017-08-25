@@ -161,7 +161,10 @@
     <form class="well form-horizontal" action="" method="post"  id="signup_form">{% csrf_token %}
 <fieldset>
 
-<legend><center><h2><b>ثبت نام در سایت</b></h2></center></legend><br>
+    <legend>
+        <center><h2><b>ثبت نام مدیر</b></h2></center>
+    </legend>
+    <br>
 
 <div class="form-group  {% if form.firstname.errors and type == 'signup' %}has-error{% endif %}">
   <div class="col-md-12 inputGroupContainer">
@@ -269,7 +272,8 @@
 <section id="login" class="hide">
     <form class="well form-horizontal" action="" method="post"  id="login_form">{% csrf_token %}
     <fieldset>
-<legend><center><h2><b>ورود به سایت</b></h2></center></legend><br>
+        <legend><h2><b>ورود به سایت</b></h2></legend>
+        <br>
         {% if type == 'login' and message %}
             <div class="text-danger"> {{ form.errors.value }} {{ message }} </div>
         {% endif %}
