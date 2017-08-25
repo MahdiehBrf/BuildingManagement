@@ -18,11 +18,19 @@ class Unit(models.Model):
     block = models.ForeignKey('Block')
 
 class Block(models.Model):
-    bill_num = models.IntegerField()
     complex = models.ForeignKey('Complex')
 
     def __str__(self):
         return 'complex: ' + str(self.complex) + ' block: ' + str(self.id)
+
+class Bill(models.Model):
+    num = models.IntegerField()
+    cost = models.IntegerField()
+    date = models.DateField()
+    block = models.ForeignKey(Block)
+
+    def str(self):
+        return 'block' + str(self.block) + ' num: ' + str(self.num)
 
 
 class Complex(models.Model):
