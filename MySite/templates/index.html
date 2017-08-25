@@ -161,7 +161,10 @@
     <form class="well form-horizontal" action="" method="post"  id="signup_form">{% csrf_token %}
 <fieldset>
 
-<legend><center><h2><b>ثبت نام در سایت</b></h2></center></legend><br>
+    <legend>
+        <center><h2><b>ثبت نام مدیر</b></h2></center>
+    </legend>
+    <br>
 
 <div class="form-group  {% if form.firstname.errors and type == 'signup' %}has-error{% endif %}">
   <div class="col-md-12 inputGroupContainer">
@@ -223,6 +226,23 @@
     </span>
     {% endif %}
 
+    <div class="form-group {% if phoneNumberError and type == 'signup' %}has-error{% endif %}">
+        <div class="col-md-12 inputGroupContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                <input name="phoneNumber" placeholder="شماره تلفن" class="form-control" type="text"
+                       value="{% if type == 'signup' %} {{ phoneNumber }} {% endif %}">
+            </div>
+        </div>
+    </div>
+    {% if phoneNumberError and type == 'signup' %}
+        <span class="text-danger" style="text-align:center;">
+        {{ phoneNumberError }}
+    </span>
+    {% endif %}
+
+
+
     <div class="form-group  {% if form.password1.errors and type == 'signup' %}has-error{% endif %}">
     <div class="col-md-12 inputGroupContainer">
     <div class="input-group">
@@ -269,7 +289,8 @@
 <section id="login" class="hide">
     <form class="well form-horizontal" action="" method="post"  id="login_form">{% csrf_token %}
     <fieldset>
-<legend><center><h2><b>ورود به سایت</b></h2></center></legend><br>
+        <legend><h2><b>ورود به سایت</b></h2></legend>
+        <br>
         {% if type == 'login' and message %}
             <div class="text-danger"> {{ form.errors.value }} {{ message }} </div>
         {% endif %}
@@ -315,8 +336,13 @@
 </section>
     </body>
   <div id="footer">
-    <div class="container">
-      <p class="footer-block">طراحی و اجرا شرکت نرم افزاری آسا</p>
+      <div class="address">
+          <p>نشانی: تهران، خیابان آزادی، دانشگاه شریف، دانشکده مهندسی کامپیوتر</p>
+          <p>تلفن تماس: 02166161234</p>
     </div>
+
+      <p class="footer-block">طراحی و اجرا: شرکت نرم افزاری آسا</p>
+      <p class="foot">کلیه حقوق محفوظ و متعلق به آسا می باشد</p>
+      <div><img class="logo" src="../../../static/images/LOGO.png"></div>
   </div>
 </html>

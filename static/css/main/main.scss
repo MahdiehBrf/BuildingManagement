@@ -1,4 +1,9 @@
-
+@font-face {
+    font-family: 'brandon';
+    src: url('../fonts/BRoya.ttf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+}
 
 @mixin prefix($prop, $val) {
 	@each $prefix in '-webkit-', '-moz-', '-ms-', '-o-' {
@@ -14,6 +19,7 @@ html {
     box-sizing: border-box;
     height: 100%;
     margin: 0;
+    font-family: "IRANSans-web" !important;
     body {
         height: 100%;
         margin: 0;
@@ -125,18 +131,37 @@ html {
             line-height: 30px;
         }
     }
-     #footer {
-         bottom: 0;
-         top: 97%;
-         margin-top: 58%;
-         width: 100%;
-         position: absolute;
-         height: 60px;
-         background-color:  #98DBC6;
-         .footer-block {
-             margin: 20px 0;
-         }
-     }
+    #footer {
+        font-family: brandon;
+        text-align: center;
+        width: 100%;
+        position: absolute;
+        height: 150px;
+        background-color: #00293E;
+        color: white;
+        margin-top: 50px;
+    }
+    .foot {
+        font-size: 16px;
+    }
+    .address {
+        width: 250px;
+        position: absolute;
+        top: 6%;
+        right: 2%;
+        font-size: 18px;
+        font-family: brandon;
+        color: white;
+        text-align: right;
+    }
+
+    .logo {
+        position: absolute;
+        top: 20%;
+        left: 5%;
+        max-width: 100px;
+    }
+
 
 }
 #signup, #login {

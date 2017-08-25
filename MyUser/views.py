@@ -1,11 +1,12 @@
 from django.contrib.auth import authenticate, login as auth_login
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-
 # Create your views here.
 from django.urls import reverse
 
+from Manager.models import Manager
 from MyUser.forms import LoginForm, SignupForm1
+from MyUser.models import Member
 
 
 def login(request):
@@ -16,8 +17,12 @@ def login(request):
     if user is not None:
         if user.is_active:
             auth_login(request, user)
-            return HttpResponseRedirect(reverse('site:manager:account'))
-            # return HttpResponseRedirect(reverse('site:resident:account'))
+            member = Member.objects.get(user=user)
+            try:
+                Manager.objects.get(member=member)
+                return HttpResponseRedirect(reverse('site:manager:account'))
+            except Manager.DoesNotExist:
+                return HttpResponseRedirect(reverse('site:resident:account'))
         else:
             message = 'حساب شما غیر فعال شده است.'
     else:
@@ -28,6 +33,7 @@ def login(request):
 
 def signup(request):
     form = SignupForm1(request.POST)
+    phoneNumber = request.POST.get('phoneNumber')
     context = {}
     if form.is_valid():
         form.save()
