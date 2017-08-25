@@ -78,12 +78,12 @@ def reserve(request):
             resident_reserve.facility = form.cleaned_data['facility']
             resident_reserve.use_startDate = datetime.combine(dateForm.cleaned_data['use_startDate_0'],dateForm.cleaned_data['use_startDate_1'])
             resident_reserve.use_finishDate = datetime.combine(dateForm.cleaned_data['use_finishDate_0'],dateForm.cleaned_data['use_finishDate_1'])
-            resident_reserve.reserve_date = datetime.now().date()
+            resident_reserve.reserve_date = datetime.now()
             resident_reserve.state = 'NC'
             resident_reserve.resident = request.user.member.resident
             resident_reserve.cost = resident_reserve.facility.cost
             resident_reserve.save()
-        return HttpResponseRedirect(reverse('site:resident:myReserves'))
+            return HttpResponseRedirect(reverse('site:resident:myReserves'))
     else:
         form = ReserveForm()
     return render(request, 'resident/reserve.html', {'form': form})

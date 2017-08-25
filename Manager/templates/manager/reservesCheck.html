@@ -31,9 +31,9 @@
             <th style="width: 5%"> </th>
             <th style="width: 10%">مبلغ به ریال </th>
             <th style="width: 10%">وضعیت</th>
-            <th style="width: 5%">مدت</th>
             <th style="width: 15%">زمان و تاریخ ایجاد</th>
-            <th style="width: 15%">زمان و تاریخ استفاده</th>
+            <th style="width: 15%">زمان و تاریخ پایان استفاده</th>
+            <th style="width: 15%">زمان و تاریخ شروع استفاده</th>
             <th style="width: 10%">امکان</th>
             <th style="width: 10%">شماره واحد</th>
             <th style="width: 10%">شماره بلوک</th>
@@ -46,10 +46,10 @@
                 <td><a href="{% url 'site:manager:accept_reserve' reserve.reserve_date %}" onclick="f()">تایید</a></td>
                 <td>{{ reserve.cost }}</td>
                 <td>{{ reserve.get_state_display }}</td>
-                <td>{{ reserve.duration }}</td>
                 <td>{{ reserve.reserve_date|date:"Y / m / d" }}</td>
-                <td>{{ reserve.use_date|date:"Y / m / d" }}</td>
-                <td>{{ reserve.facility.get_type_display }}</td>
+                <td>{{ reserve.use_finishDate|date:"Y / m / d" }}</td>
+                <td>{{ reserve.use_startDate|date:"Y / m / d" }}</td>
+                <td>{{ reserve.facility.type }}</td>
                 <td>{{ reserve.resident.unit.block_id }}</td>
                 <td>{{ reserve.resident.unit_id }}</td>
                 <td>
