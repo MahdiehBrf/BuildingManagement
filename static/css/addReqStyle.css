@@ -31,6 +31,7 @@
     text-align: left;
     font-size: 22px;
     color: white;
+    font-weight: bold;
 }
 
 .topleft a{
@@ -51,6 +52,7 @@
     font-size: 22px;
     font-family: brandon;
     color: white;
+    font-weight: bold;
 }
 
 .topright p{
