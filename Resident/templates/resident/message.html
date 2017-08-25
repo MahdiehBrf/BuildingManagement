@@ -10,18 +10,35 @@ function f(){alert("همسایه با موفقیت اضافه شد"); window.loc
 
 {% block content %}
 
-<div class="main">
-    <h5>وارد کردن پیام</h5>
-    <div style="height:300px;width:300px;background-color:gray;"></div>
-	<img class="img-circle" style="float:right;top: -250px;margin: 2px;" src="../../../static/images/user_profile_female.jpg">
-	<select class="from" style="float:right;top: -250px;" name="choose"  placeholder="انتخاب قاب">
-                    <option value="بدون قاب">بدون قاب</option>
-                    <option value="قاب_1">قاب 1</option>
-                </select></td>
-	<div style="margin-top:10px;width:300px;height:60px;border-width:3px;border-color:black;border-style:solid">
-    <button type="button" class="btn" onclick="f()" style="text-algin:center;width:70px;height:50px;margin:3px;">ارسال </button>
-	<input type="text" style="width:200px;height:50px;margin:3px;">
-	</div>
+ <div class="main">
+        <h5>ارسال دعوت نامه</h5>
+        <form action="" method="post">
+            {% csrf_token %}
+            <table class="tbl" border="0" align="center">
+                <tbody>
+
+                <tr>
+
+                    <td><select id="subject" required name="receiver">
+                        {% for s in form.receiver %}
+                            {{ s }}
+                        {% endfor %}
+                    </select></td>
+                    <td><label for="subject">گیرنده </label></td>
+                </tr>
+                <tr>
+
+                    <td class="mytext">{{ form.text }}</td>
+                    <td><label for="txt">متن </label></td>
+                </tr>
+
+
+                </tbody>
+            </table>
+            <input type="submit" class="btn"  value="ارسال">
+        </form>
+
+
 
 </div>
 
