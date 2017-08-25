@@ -17,6 +17,27 @@
             <table class="tbl" border="0" align="center">
                 <tbody>
                 <tr>
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td><select id="block" required name="block">
+                        {% for s,a in form.fields.block.choices %}
+                            <option value="{{ forloop.counter }}">{{ s }}</option>
+                        {% endfor %}
+                    </select></td>
+                    <td><label for="block">بلوک </label></td>
+                </tr>
+                <tr>
+                    <td><select id="type" required name="type">
+                        {% for t in form.type %}
+                            {{ t }}
+                        {% endfor %}
+                    </select></td>
+                    <td><label for="type">نوع قبض</label></td>
+                </tr>
+                <tr>
 
                     <td class="mytext">{{ form.num }}</td>
                     <td><label>شماره قبض </label></td>
@@ -26,21 +47,6 @@
                     <td class="mytext">{{ form.cost }}</td>
                     <td><label>مبلغ به ریال </label></td>
                 </tr>
-                <tr>
-
-                    <td class="mytext">{{ form.date  }}</td>
-                    <td><label>تاریخ</label></td>
-                </tr>
-                <tr>
-
-                    <td><select id="subject" required name="block">
-                        {% for s in form.block %}
-                            {{ s }}
-                        {% endfor %}
-                    </select></td>
-                    <td><label for="subject">بلوک </label></td>
-                </tr>
-
 
 
                 </tbody>

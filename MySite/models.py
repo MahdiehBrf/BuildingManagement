@@ -12,9 +12,10 @@ FACILITY_TYPE = (
 )
 
 BILL_TYPE = (
-    ('A', 'آب'),
-    ('B', 'برق'),
-    ('G', 'گاز')
+    ('W', 'آب'),
+    ('E', 'برق'),
+    ('G', 'گاز'),
+    ('P', 'تلفن')
 )
 
 
@@ -30,7 +31,7 @@ class Block(models.Model):
         return 'complex: ' + str(self.complex) + ' block: ' + str(self.id)
 
 class Bill(models.Model):
-    type = type = models.CharField(max_length=20, choices=BILL_TYPE)
+    type = models.CharField(max_length=1, choices=BILL_TYPE)
     num = models.IntegerField()
     cost = models.IntegerField()
     date = models.DateField()

@@ -261,12 +261,13 @@ def delete_request(request, request_id):
 
 
 def enter_bill(request):
+    action_message = ''
     if request.method == 'POST':
         form = BillForm(request.POST)
         if form.is_valid():
-            form.save(commit=False)
-
-        return HttpResponseRedirect(reverse('site:manager:enterBill'))
-    else:
-        form = BillForm()
-    return render(request, 'manager/enterBill.html', {'form': form})
+            bill = form.save(commit=False)
+            bill.date = datetime.now().date()
+            bill.save()
+            action_message = 'قبض مورد نظر ثبت شد'
+    form = BillForm()
+    return render(request, 'manager/enterBill.html', {'form': form, 'messages': action_message})

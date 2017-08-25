@@ -27,4 +27,4 @@ class MessageForm(django.forms.ModelForm):
 class BillForm(django.forms.ModelForm):
     class Meta:
         model = Bill
-        fields = '__all__'
+        exclude = ['date']
