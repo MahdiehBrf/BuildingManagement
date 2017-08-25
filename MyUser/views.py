@@ -45,7 +45,7 @@ def signup(request):
             auth_login(request, user)
             member = Member.objects.create(user=user, phone_number=phoneNumber)
             member.save()
-            return render(request, 'index.html', {'complexRegister': True})
+            return render(request, 'index.html', {'type': 'complexRegister'})
             ##return render(request, "manager/addNeighbour.html")
         else:
             phoneNumberError = "شماره تلفن باید 11 رقمی باشد و با 09 آغاز شود."
