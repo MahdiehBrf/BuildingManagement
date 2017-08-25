@@ -2,6 +2,7 @@
 #
 # # Create your views here.
 from django.contrib.auth import logout as auth_logout
+from django.contrib.auth.decorators import login_required
 from django.core.mail import mail_admins
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -38,6 +39,7 @@ def send_feedback(request):
     return HttpResponseRedirect('/')
 
 
+@login_required
 def logout(request):
     auth_logout(request)
     return render(request, 'index.html')

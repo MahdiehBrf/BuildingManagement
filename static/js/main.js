@@ -1,5 +1,4 @@
  $(document).ready(function() {
-
      if (type) {
          if (type === 'signup' || type === 'complexRegister')
              $("#signup").removeClass('hide').addClass('show');
