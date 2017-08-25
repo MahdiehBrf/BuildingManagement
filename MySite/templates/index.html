@@ -226,6 +226,23 @@
     </span>
     {% endif %}
 
+    <div class="form-group {% if phoneNumberError and type == 'signup' %}has-error{% endif %}">
+        <div class="col-md-12 inputGroupContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                <input name="phoneNumber" placeholder="شماره تلفن" class="form-control" type="text"
+                       value="{% if type == 'signup' %} {{ phoneNumber }} {% endif %}">
+            </div>
+        </div>
+    </div>
+    {% if phoneNumberError and type == 'signup' %}
+        <span class="text-danger" style="text-align:center;">
+        {{ phoneNumberError }}
+    </span>
+    {% endif %}
+
+
+
     <div class="form-group  {% if form.password1.errors and type == 'signup' %}has-error{% endif %}">
     <div class="col-md-12 inputGroupContainer">
     <div class="input-group">
@@ -319,8 +336,13 @@
 </section>
     </body>
   <div id="footer">
-    <div class="container">
-      <p class="footer-block">طراحی و اجرا شرکت نرم افزاری آسا</p>
+      <div class="address">
+          <p>نشانی: تهران، خیابان آزادی، دانشگاه شریف، دانشکده مهندسی کامپیوتر</p>
+          <p>تلفن تماس: 02166161234</p>
     </div>
+
+      <p class="footer-block">طراحی و اجرا: شرکت نرم افزاری آسا</p>
+      <p class="foot">کلیه حقوق محفوظ و متعلق به آسا می باشد</p>
+      <div><img class="logo" src="../../../static/images/LOGO.png"></div>
   </div>
 </html>

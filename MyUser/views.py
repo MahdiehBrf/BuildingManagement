@@ -19,7 +19,7 @@ def login(request):
             auth_login(request, user)
             member = Member.objects.get(user=user)
             try:
-                manager = Manager.objects.get(member=member)
+                Manager.objects.get(member=member)
                 return HttpResponseRedirect(reverse('site:manager:account'))
             except Manager.DoesNotExist:
                 return HttpResponseRedirect(reverse('site:resident:account'))
@@ -33,6 +33,7 @@ def login(request):
 
 def signup(request):
     form = SignupForm1(request.POST)
+    phoneNumber = request.POST.get('phoneNumber')
     context = {}
     if form.is_valid():
         form.save()
