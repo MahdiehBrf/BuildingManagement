@@ -10,6 +10,7 @@
     max-width: 100px;
     height: auto;
     position: relative;
+    border: solid white 2px;
 }
 
 .cover {
@@ -40,7 +41,7 @@
 }
 
 .topleft a:hover{
-    color:gray;
+    color:#F2E2B2;
 }
 
 .topright {
