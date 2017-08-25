@@ -13,50 +13,53 @@ function f(){alert("درخواست رزرو با موفقیت تایید گرد�
 <div class="main">
     <h5>درخواست های رزرو من</h5>
 
-<select class="from" name="choose"  placeholder="به ترتیب">
-                    <option value="جدیدترین">جدیدترین</option>
-                    <option value="قدیمی ترین">قدیمی ترین</option>
-                </select></td>
-      <input type="date" name="time" class="from">
-از تاریخ
-    <input type="date" name="time" class="from">
-  تا تاریخ
+<form action="" method="post">
+    {% csrf_token %}
+    <select class="from" name="choose"  placeholder="به ترتیب">
+        <option value="قدیمی ترین">قدیمی ترین</option>
+        <option value="جدیدترین">جدیدترین</option>
+    </select>
+    <label for="id_startDate">از تاریخ</label>
+    <input type="date" name="startDate" id="id_startDate" class="from">
+    <label for="id_finishDate">تا تاریخ</label>
+    <input type="date" name="finishDate" id="id_finishDate" class="from">
+    <input type="submit" class="btn"  value="نمایش">
+</form>
 
 
     <table>
         <tr>
-            <th>مبلغ</th>
-            <th>وضعیت</th>
-            <th>مدت</th>
-            <th>زمان و تاریخ ایجاد</th>
-            <th>زمان و تاریخ استفاده</th>
-            <th>امکان</th>
-            <th>ردیف</th>
-        </tr>
-        <tr>
-            <td>1000000ریال</td>
-            <td>تایید شده</td>
-            <td>1:30 </td>
-            <td>96/4/19 _ 20:23 </td>
-            <td>96/4/25 _ 16:00 </td>
-            <td>استخر</td>
-            <td>1 </td>
+            <th style="width: 5%"> </th>
+            <th style="width: 10%">مبلغ به ریال </th>
+            <th style="width: 10%">وضعیت</th>
+            <th style="width: 15%">زمان و تاریخ ایجاد</th>
+            <th style="width: 15%">زمان و تاریخ پایان استفاده</th>
+            <th style="width: 15%">زمان و تاریخ شروع استفاده</th>
+            <th style="width: 10%">امکان</th>
+            <th style="width: 10%">ردیف</th>
         </tr>
 
-        <tr>
-            <td>1500000ریال</td>
-            <td>رد شده</td>
-            <td>2:00 </td>
-            <td>96/4/19 _ 20:23 </td>
-            <td>96/4/25 _ 16:00 </td>
-            <td>سالن همایش</td>
-            <td>1 </td>
-        </tr>
+
+        {% for reserve in reserves %}
+            <tr>
+                <td><a href="{% url 'site:manager:accept_reserve' reserve.reserve_date %}" onclick="f()">تایید</a></td>
+                <td>{{ reserve.cost }}</td>
+                <td>{{ reserve.get_state_display }}</td>
+                <td>{{ reserve.reserve_date|date:"Y / m / d" }}</td>
+                <td>{{ reserve.use_finishDate|date:"Y / m / d" }}</td>
+                <td>{{ reserve.use_startDate|date:"Y / m / d" }}</td>
+                <td>{{ reserve.facility.type }}</td>
+                <td>
+                    {{ forloop.counter }}
+                </td>
+            </tr>
+        {% endfor %}
 
     </table>
+        <button type="button" class="btn" onclick="window.location.href='{% url 'site:resident:reserve' %}' ">اضافه کردن درخواست رزرو جدید</button>
 
-    <button type="button" class="btn" onclick="window.location.href='reserve.html'">اضافه کردن درخواست رزرو جدید</button>
-
+    <a href="javascript:void(0)" class="btn"><img src="../../static/images/printer.png" title="چاپ" class="linkImg1"></a>
+    <a href="javascript:void(0)" class="btn"><img src="../../static/images/save.png" title="ذخیره" class="linkImg2"></a>
 </div>
 
 {% endblock %}
