@@ -15,11 +15,14 @@
     box-sizing: inherit;
 }
 
+* {
+    font-family: "IRANSans-web" !important;
+}
+
 html {
     box-sizing: border-box;
     height: 100%;
     margin: 0;
-    font-family: "IRANSans-web" !important;
     body {
         height: 100%;
         margin: 0;
@@ -100,7 +103,7 @@ html {
 
             .manual {
                 padding:100px;
-                position: relative !important;
+                position: relative;
                 min-height: 400px;
                 text-align: center;
                 margin: 3px;
@@ -139,7 +142,12 @@ html {
         height: 150px;
         background-color: #00293E;
         color: white;
-        margin-top: 50px;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 1rem;
+        top: 45%;
+        margin-top: 80%;
     }
     .foot {
         font-size: 16px;

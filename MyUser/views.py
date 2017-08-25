@@ -35,14 +35,22 @@ def signup(request):
     form = SignupForm1(request.POST)
     phoneNumber = request.POST.get('phoneNumber')
     context = {}
+    context['phoneNumber'] = phoneNumber
     if form.is_valid():
-        form.save()
-        username = form.cleaned_data.get('username')
-        raw_password = form.cleaned_data.get('password1')
-        user = authenticate(username=username, password=raw_password)
-        auth_login(request, user)
-        return render(request, "manager/addNeighbour.html")
-    else:
-        context['form'] = form
-        context['type'] = "signup"
-        return render(request, 'index.html', context)
+        if len(phoneNumber) == 11 and phoneNumber[0:2] == '09':
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            auth_login(request, user)
+            member = Member.objects.create(user=user, phone_number=phoneNumber)
+            member.save()
+            return render(request, 'index.html', {'complexRegister': True})
+            ##return render(request, "manager/addNeighbour.html")
+        else:
+            phoneNumberError = "شماره تلفن باید 11 رقمی باشد و با 09 آغاز شود."
+            context['phoneNumberError'] = phoneNumberError
+
+    context['form'] = form
+    context['type'] = "signup"
+    return render(request, 'index.html', context)
