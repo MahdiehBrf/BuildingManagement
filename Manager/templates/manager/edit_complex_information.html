@@ -15,54 +15,29 @@
             <tbody>
 
             <tr>
-
-                <td><select class="from" name="name" id="type" placeholder="">
-                    <option>ساختمان مسکونی</option>
-                    <option value>ساختمان اداری</option>
-                </select></td></td>
-                <td><label for="type">نوع ساختمان </label></td>
+                <td><input type="text" name="name" value="{{ form.name }}"></td>
+                <td><label for="address">نام مجتمع </label></td>
             </tr>
+
 
             <tr>
 
-                <td><input type="number" name="telephone" id="telephone"></td>
-                <td><label for="telephone"> شماره تلفن</label></td>
-            </tr>
-
-            <tr>
-
-               <td><input type="text" name="address" id="address" ></td>
+                <td><input type="text" name="address" value="{{ form.address }}"></td>
                 <td><label for="address">آدرس </label></td>
             </tr>
 
-             <tr>
-
-               <td><select class="from" name="choose" id="city"  placeholder="">
-                    <option>تهران</option>
-                    <option value>پردیس</option>
-                </select></td></td>
-                <td><label for="city">شهر </label></td>
-            </tr>
-			 <tr>
-
-               <td><select class="from" name="choose" id="state"  placeholder="">
-                    <option>تهران</option>
-                    <option >آذربایجان شرقی</option>
-                </select></td></td>
-                <td><label for="state">استان</label></td>
-            </tr>
-			<tr>
-
-                <td><input type="number" name="zip_code" id="zip_code"></td>
-                <td><label for="zip_code"> کد پستی</label></td>
-            </tr>
             <tr>
-                <td><input type="checkbox" name="facility1" id="f1" value="استخر">استخر
-                    <input type="checkbox" name="facility2" id="f2" value="آلاچیق">آلاچیق
-                    <input type="checkbox" name="facility3" id="f3" value="سالن ورزشی">سالن ورزشی
-                </td>
-                <td><label for="">انتخاب امکانات</label></td>
+
+                <td><input type="number" name="blockNum" value="{{ blockNum }}"></td>
+                <td><label for="blockNum">تعداد بلوک در مجتمع </label></td>
             </tr>
+
+            <tr>
+
+                <td><input type="number" name="unit_per_block" value="{{ unit_per_block }}"></td>
+                <td><label for="unit_per_block">تعداد واحد در هر بلوک</label></td>
+            </tr>
+
             </tbody>
         </table>
         <input type="submit" name="submit" tabindex="4"

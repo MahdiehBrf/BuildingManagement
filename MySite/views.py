@@ -12,8 +12,6 @@ from MyUser.views import login, signup, complexRegister
 
 def index(request):
     if request.method == 'POST':
-        print("post : ")
-        print(request.POST)
         if request.POST.get('submit') == 'ورود':
             return login(request)
         elif request.POST.get('submit') == 'ثبت نام':
@@ -42,4 +40,4 @@ def send_feedback(request):
 @login_required
 def logout(request):
     auth_logout(request)
-    return render(request, 'index.html')
+    return HttpResponseRedirect('/')

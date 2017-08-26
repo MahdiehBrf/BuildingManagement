@@ -16,7 +16,8 @@
 
 			<tr>
                <td>
-                   <input class="{% if form.firstn_ame.errors %}has-error{% endif %}" type="text" name="first_name" id="first_name" value="{{ user.firstname }} ">
+                   <input class="{% if form.first_name.errors %}has-error{% endif %}" type="text" name="first_name"
+                          id="first_name" value="{{ user.first_name }} ">
                 {% if form.first_name.errors %}
         <span class="text-danger" style="text-align:center;">
         {% for error in form.first_name.errors %}{{ error }}{% endfor %}
@@ -26,7 +27,8 @@
                 <td><label for="first_name">نام حقوقی </label></td>
             </tr>
 			<tr>
-               <td><input type="text"class=" {% if form.last_name.errors %}has-error{% endif %}" name="last_name" id="last_name"  value="{{ user.lastname }}">
+                <td><input type="text" class=" {% if form.last_name.errors %}has-error{% endif %}" name="last_name"
+                           id="last_name" value="{{ user.last_name }}">
                {% if form.last_name.errors  %}
         <span class="text-danger" style="text-align:center;">
         {% for error in form.last_name.errors %}{{ error }}{% endfor %}
@@ -79,12 +81,11 @@
                <td><input type="text" name="phone_number" id="phoneNumber" value="{{user.member.phone_number}} "></td>
                 <td><label for="phoneNumber">شماره تلفن </label></td>
             </tr>
-            {% if user.mamber_set.manager_set %}
                 <tr>
-               <td><input type="text" name="bank_acunt" id="bankAccount" value="{{user.member_set.manager_set.bank_acunt_num}} "></td>
+                    <td><input type="text" name="account_number" id="bankAccount"
+                               value="{{ user.member_set.manager_set.bank_acunt_num }} "></td>
                 <td><label for="bankAccount">حساب بانکی </label></td>
             </tr>
-            {% endif %}
             {% if form.errors %}
                 <div class="text-danger"> {{ form.errors.value }} </div>
         {% endif %}

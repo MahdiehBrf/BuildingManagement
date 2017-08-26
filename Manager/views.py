@@ -9,7 +9,7 @@ from django.utils.datetime_safe import datetime
 from Manager.forms import RequestForm, MessageForm
 from Manager.models import Request
 from MySite.forms import EventForm, NewsForm, DisplayForm, ComplexForm
-from MySite.models import Event, News, Unit
+from MySite.models import Event, News, Unit, Block
 from MyUser.forms import SignupForm1
 from MyUser.models import Member, Message
 from Resident.forms import ResidentForm
@@ -78,23 +78,42 @@ def edit_profile(request):
                 member.user = request.user
                 member.phone_number = request.POST.get('phone_number')
                 member.save()
-                return HttpResponseRedirect(reverse('site:manager:add_neighbour'))
+
+                return HttpResponseRedirect(reverse('site:manager:account'))
     return render(request, 'manager/edit_profile.html', {'user': user, 'form': user_form})
 
 
 @login_required
 def edit_complex_information(request):
     if request.method == 'POST':
-        form = ComplexForm(request.POST)
+        form = ComplexForm(request.POST, instance=request.user.member.manager.complex)
+        blockNum = int(request.POST.get('blockNum'))
+        unit_per_block = int(request.POST.get('unit_per_block'))
         if form.is_valid():
             complex = form.save(commit=False)
             complex.manager = Member.objects.filter(user=request.user)[0].manager
             complex.save()
-            return HttpResponseRedirect(reverse('site:manager:add_neighbour'))
+            blocks = Block.objects.filter(complex=complex)
+            if blocks[0].unit_number != unit_per_block:
+                for block in blocks:
+                    block.unit_number = unit_per_block
+                    block.save()
+            s = len(blocks)
+            if int(blockNum) < s:
+                for i in range(s - blockNum):
+                    blocks[i].delete()
+            elif int(blockNum) > s:
+                for i in range(int(blockNum) - s):
+                    block = Block.objects.create(complex=complex, unit_number=unit_per_block)
+                    block.save()
+            return HttpResponseRedirect(reverse('site:manager:account'))
     else:
-        form = ComplexForm()
-    print(form)
-    return render(request, 'manager/edit_complex_information.html', {'form': form})
+        form = ComplexForm(instance=request.user.member.manager.complex)
+        blocks = Block.objects.filter(complex=form.instance)
+        blockNum = len(blocks)
+        unit_per_block = blocks[0].unit_number
+    return render(request, 'manager/edit_complex_information.html',
+                  {'form': form.initial, 'blockNum': blockNum, 'unit_per_block': unit_per_block})
 
 
 @login_required

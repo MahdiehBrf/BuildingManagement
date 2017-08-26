@@ -9,6 +9,7 @@
 
         {% load i18n %}
         {% load static %}
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="{% static "css/main/main.css" %}">
@@ -163,7 +164,7 @@
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                     <input type="text" name="name" tabindex="2" class="form-control" placeholder="نام مجتمع"
-                           value="{% if type == 'complexRegister' %} {{ name.value }} {% endif %}">
+                           value="{% if type == 'complexRegister' and name.value %} {{ name.value }} {% endif %}">
                 </div>
             </div>
             {% if name.errors and type == 'complexRegister' %}
@@ -178,7 +179,7 @@
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                     <input type="text" name="address" id="address" tabindex="2"
                            class="form-control" placeholder="آدرس"
-                           value="{% if type == 'complexRegister' %} {{ address.value }} {% endif %}">
+                           value="{% if type == 'complexRegister' and address.value %} {{ address.value }} {% endif %}">
                 </div>
             </div>
             {% if address.errors and type == 'complexRegister' %}

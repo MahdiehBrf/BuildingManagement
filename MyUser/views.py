@@ -67,6 +67,7 @@ def complexRegister(request):
     blockNum = request.POST.get('blockNumber')
     unit_per_block = request.POST.get('unit_per_block')
     context = {'name': {'value': name}, 'address': {'value': address}, 'blockNum': {'value': blockNum},
+               'unit_per_block': {'value': unit_per_block},
                'type': 'complexRegister'}
     if name == '':
         context.get('name')['errors'] = 'نام مجتمع نباید خالی باشد.'
@@ -75,7 +76,7 @@ def complexRegister(request):
     elif blockNum.isdigit() and int(blockNum) < 1:
         context.get('blockNum')['errors'] = 'تعداد بلوک های مجتمع معتبر نیست.'
     elif unit_per_block.isdigit() and int(unit_per_block) < 1:
-        context.get('blockNum')['errors'] = 'تعداد واحدهای هر واحد معتبر نیست.'
+        context.get('unit_per_block')['errors'] = 'تعداد واحدهای هر بلوک معتبر نیست.'
     else:
         manager = request.user.member.manager
         complex = Complex.objects.create(manager=manager, name=name, address=address)
