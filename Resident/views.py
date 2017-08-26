@@ -8,6 +8,7 @@ from django.urls import reverse
 from django.utils.datetime_safe import datetime
 
 from MySite.forms import DisplayForm
+from MyUser.forms import SignupForm1
 from MyUser.models import Member, Message
 from Resident.forms import ReserveForm, DateForm, MessageForm, AcountForm
 from Resident.models import PayByAccount, Reserve, Receipt, Account
@@ -41,7 +42,20 @@ def view_board(request):
 
 
 def edit_profile(request):
-    return render(request, 'resident/edit_profile.html')
+    user = request.user
+    user_form = SignupForm1(instance=user)
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            user_form = SignupForm1(request.POST, instance=request.user)
+            member = Member.objects.get(user=request.user)
+            if user_form.is_valid():
+                user_form.save()
+                member.user = request.user
+                member.phone_number = request.POST.get('phone_number')
+                member.save()
+
+                return HttpResponseRedirect(reverse('site:resident:account'))
+    return render(request,  'resident/edit_profile.html', {'user': user, 'form': user_form})
 
 
 def paying_reports(request):

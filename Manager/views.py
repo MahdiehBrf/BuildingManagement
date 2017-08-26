@@ -1,6 +1,7 @@
 import random
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.db.models import Q, Sum
 from django.http import HttpResponse
@@ -225,7 +226,8 @@ def edit_n(request,neighbour_id):
             return edit_neighbours(request)
     else:
         form = ResidentForm(instance=resident)
-    return render(request, 'manager/editN.html', {'units': units, 'form':form})
+
+    return render(request, 'manager/editN.html', {'units': units, 'form':form,'unit':resident.unit_id})
 
 
 
@@ -242,9 +244,8 @@ def add_neighbour(request):
             s = "abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()?"
             passlen = 8
             user.username = "".join(random.sample(s, passlen))
-            user.password1 = "".join(random.sample(s, passlen))
-            user.password2 = user.password1
-            user.password = user.password1
+            password = User.objects.make_random_password()
+            user.set_password(password)
             if len(phoneNumber) == 11 and phoneNumber[0:2] == '09':
                 user.save()
                 member = Member.objects.create(user=user, phone_number=phoneNumber)
@@ -256,7 +257,7 @@ def add_neighbour(request):
                     resident.save()
                     send_mail(
                         'ثبت نام در سامانه مدیریت مجتمع های مسکونی و آپارتمان ها ',
-                        'سلام\n مدیر مجتمع {0} شما را به ثبت نام در سامانه مدیریت مجتمع دعوت کرده است. \n نام کاربری :{1}\n رمز عبور:{2}\n لطفا پس از ورود به سامانه نسبت به تغییر نام کاربری و رمزتان اقدام کنید.'.format(complex.name, user.username, user.password1),
+                        'سلام\n مدیر مجتمع {0} شما را به ثبت نام در سامانه مدیریت مجتمع دعوت کرده است. \n username:{1}\n password: {2}\n لطفا پس از ورود به سامانه نسبت به تغییر نام کاربری و رمزتان اقدام کنید.'.format(complex.name, user.username, password),
                         'fg75527@gmail.com',
                         [str(user.email)],
                         fail_silently=False,

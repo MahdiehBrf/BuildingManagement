@@ -12,12 +12,11 @@
         <table class="tbl" border="0" align="center">
             <tbody>
 
-
             <tr>
                 <td><select name="unit" id="unit" style="text-align: right;">
-                    <option value="{{ form.unit.id }}">{{ form.unit.id }}</option>
-                    {% for unit in units %}
-                        <option value="{{ unit.id }}">{{ unit.id }}</option>
+                    <option value="{{ unit}}" selected>{{ unit }}</option>
+                    {% for u in units %}
+                        <option value="{{ u.id }}">{{ u.id }}</option>
                     {% endfor %}
                 </select></td>
                 <td><label for="unit">شماره واحد </label></td>
