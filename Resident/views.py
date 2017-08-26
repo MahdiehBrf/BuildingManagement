@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.forms import Form
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 # Create your views here.
 from django.urls import reverse
 from django.utils.datetime_safe import datetime
@@ -176,7 +176,25 @@ def increase_cash(request):
 
 
 def select_pay_way(request, receipt_id):
-    return render(request, 'resident/select_payWay.html')
+    receipt = get_object_or_404(Receipt, pk=receipt_id)
+    resident = request.user.member.resident
+    account = Account.objects.get(resident=resident)
+    if request.method == 'POST':
+        if 'bank' in request.POST:
+            p = PayByBank(date=datetime.today().date(), amount=receipt.cost, resident=resident, receipt=receipt)
+            p.save()
+            return render(request, 'resident/payBankSuccess.html')
+        elif 'account' in request.POST:
+            cash = account.cash
+            if cash < receipt.cost:
+                return render(request, 'resident/payAccountFail.html', {'r': receipt, 'acount': account})
+            else:
+                account.cash = account.cash - receipt.cost
+                account.save()
+                p = PayByAccount(date=datetime.today().date(), amount=receipt.cost, account=account, receipt=receipt)
+                p.save()
+                return render(request, 'resident/payAccountSuccess.html', {'acount': account})
+    return render(request, 'resident/select_payWay.html', {'r': receipt})
 
 
 def pay_receipt(request, receipt_id):
