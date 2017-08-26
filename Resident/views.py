@@ -1,15 +1,16 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.forms import Form
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 # Create your views here.
 from django.urls import reverse
 from django.utils.datetime_safe import datetime
 
 from MySite.forms import DisplayForm
 from MyUser.models import Member, Message
-from Resident.forms import ReserveForm, DateForm, MessageForm
-from Resident.models import PayByAccount, Reserve, Receipt
+from Resident.forms import ReserveForm, DateForm, MessageForm, AcountForm
+from Resident.models import PayByAccount, Reserve, Receipt, Account
 from Resident.models import PayByBank
 
 
@@ -146,7 +147,54 @@ def view_reserves(request):
 
 
 def view_bill(request, receipt_id):
+    receipt = get_object_or_404(Receipt, pk=receipt_id)
+    block = receipt.resident.unit.block
+    size = 0
+    events = block.board.event_set.filter(date__gt=receipt.start_date, date__lte=receipt.finish_date)
+    bills= block.bill_set.filter(date__gt=receipt.start_date, date__lte=receipt.finish_date)
+    for unit in block.unit_set.all():
+        if unit.resident:
+            size += unit.resident.member_count
+    # costs = (events.values_list('cost')/size)*receipt.resident.member_count
+    # costs += (bills.values_list('cost')/size)*receipt.resident.member_count
+    return render(request, 'resident/viewBill.html', {'receipt': receipt})
     return render(request, 'resident/viewBill.html')
+
+
+def increase_cash(request):
+    resident = request.user.member.resident
+    a = Account.objects.get(resident=resident)
+    if request.method == 'POST':
+        form = AcountForm(request.POST)
+        if form.is_valid():
+            acc = form.save(commit=False)
+            a.cash = a.cash + int(acc.cash)
+            a.save();
+        return render(request, 'resident/success.html', {'acount': a})
+    form = AcountForm()
+    return render(request, 'resident/increase.html', {'acount': a, 'form': form})
+
+
+def select_pay_way(request, receipt_id):
+    receipt = get_object_or_404(Receipt, pk=receipt_id)
+    resident = request.user.member.resident
+    account = Account.objects.get(resident=resident)
+    if request.method == 'POST':
+        if 'bank' in request.POST:
+            p = PayByBank(date=datetime.today().date(), amount=receipt.cost, resident=resident, receipt=receipt)
+            p.save()
+            return render(request, 'resident/payBankSuccess.html')
+        elif 'account' in request.POST:
+            cash = account.cash
+            if cash < receipt.cost:
+                return render(request, 'resident/payAccountFail.html', {'r': receipt, 'acount': account})
+            else:
+                account.cash = account.cash - receipt.cost
+                account.save()
+                p = PayByAccount(date=datetime.today().date(), amount=receipt.cost, account=account, receipt=receipt)
+                p.save()
+                return render(request, 'resident/payAccountSuccess.html', {'acount': account})
+    return render(request, 'resident/select_payWay.html', {'r': receipt})
 
 
 def pay_receipt(request, receipt_id):

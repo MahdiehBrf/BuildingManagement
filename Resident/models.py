@@ -63,7 +63,7 @@ class Receipt(models.Model):
 
 
 class Account(models.Model):
-    cash = models.IntegerField()
+    cash = models.PositiveIntegerField()
     resident = models.OneToOneField(Resident)
 
     def __str__(self):

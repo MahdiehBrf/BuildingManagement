@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth.models import User
 
 from MyUser.models import Message
-from Resident.models import Resident, Reserve
+from Resident.models import Resident, Reserve, Account
 
 
 class Resident_UserForm(forms.ModelForm):
@@ -35,3 +35,9 @@ class MessageForm(django.forms.ModelForm):
     class Meta:
         model = Message
         exclude = ['sender', 'theme_type']
+
+
+class AcountForm(django.forms.ModelForm):
+    class Meta:
+        model = Account
+        exclude = ['resident']

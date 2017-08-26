@@ -132,7 +132,14 @@
             </div>
         </li>
 
-        <a href="{% url 'site:manager:enterBill'%}" class="notDropdown">وارد کردن قبض</a>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">امور مالی</a>
+            <div class="dropdown-content">
+                <a href="{% url 'site:manager:enterBill'%}">وارد کردن قبض</a>
+                 <a href="{% url 'site:manager:calculateReceipts'%}">محاسبه ی شارژ</a>
+            </div>
+        </li>
+
 
         <a href="{% url 'site:manager:requests'%}" class="notDropdown">درخواست پشتیبانی</a>
 

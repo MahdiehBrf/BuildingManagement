@@ -53,6 +53,7 @@ class Complex(models.Model):
     address = models.CharField(max_length=200)
     manager = models.OneToOneField(Manager)
     unit_number = models.IntegerField()
+    last_calculation_date = models.DateField()
 
     def __str__(self):
         return 'name: ' + self.name + ' manager: ' + str(self.manager)
