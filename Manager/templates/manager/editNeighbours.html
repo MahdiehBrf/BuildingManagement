@@ -10,8 +10,7 @@
 {% block content %}
 <div class="main">
     <h5>ساکنین</h5>
-
-    <table>
+    <table class="tbl" border="O" align="center">
         <tr>
 
             <th>حذف</th>
@@ -21,35 +20,23 @@
             <th>نام سرپرست</th>
             <th> شماره واحد</th>
         </tr>
+        {% for neighbour in neighbours %}
         <tr>
-            <td><a href="javascript:void(0)"><img src="../../../static/images/delete.png" class="linkImg"></a></td>
-            <td><a href="editN.html"><img src="../../../static/images/edit.jpg" class="linkImg"></a></td>
-            <td>2</td>
-            <td>5</td>
-            <td>هاشم بابایی</td>
-            <td>1</td>
+            {% load static %}
+            <td><a href="{% url 'site:manager:deleteNeighbour' neighbour.id %}"><img
+                    src="{% static "images/delete.png" %}" class="linkImg"></a></td>
+            <td><a href="{% url 'site:manager:editN' %}"><img src="{% static "images/edit.jpg" %}" class="linkImg"></a>
+            </td>
+            <td>{{ neighbour.car_count }}</td>
+            <td>{{ neighbour.member_count }}</td>
+            <td>{{ neighbour.member.user.first_name }} {{ neighbour.member.user.last_name }}</td>
+            <td>{{ neighbour.unit.id }}</td>
         </tr>
-        <tr>
-            <td><a href="javascript:void(0)"><img src="../../../static/images/delete.png" class="linkImg"></a></td>
-            <td><a href="editN.html"><img src="../../../static/images/edit.jpg" class="linkImg"></a></td>
-            <td>1</td>
-            <td>4</td>
-            <td>مسعود حیدری</td>
-            <td>2</td>
-        </tr>
-        <tr>
-            <td><a href="javascript:void(0)"><img src="../../../static/images/delete.png" class="linkImg"></a></td>
-            <td><a href="editN.html"><img src="../../../static/images/edit.jpg" class="linkImg"></a></td>
-            <td>0</td>
-            <td>3</td>
-            <td>علی علوی</td>
-            <td>3</td>
-        </tr>
+        {% endfor %}
 
     </table>
 
-    <a type="button" class="btn" href="{% url 'site:manager:addNeighbour"' %}">اضافه کردن همسایه جدید</a>
-
+    <a type="button" class="btn" href="{% url 'site:manager:addNeighbour' %}">اضافه کردن همسایه جدید</a>
 
 </div>
 {% endblock %}

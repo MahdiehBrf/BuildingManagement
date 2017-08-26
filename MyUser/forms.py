@@ -1,7 +1,8 @@
 
 from django import forms
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
 from MyUser.models import Member
 
 
@@ -23,7 +24,13 @@ class SignupForm1(UserCreationForm):
 
 
 class SignupForm2(forms.ModelForm):
-    pass
+    email = forms.EmailField(required=True)
+    firstname = forms.CharField(max_length=50, required=True)
+    lastname = forms.CharField(max_length=50, required=True)
+
+    class Meta:
+        model = User
+        fields = ('firstname', 'lastname', 'email')
 
 class MessageForm(forms.ModelForm):
     class Meta:

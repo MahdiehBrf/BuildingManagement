@@ -1,3 +1,5 @@
+import random
+
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponseRedirect
@@ -10,10 +12,10 @@ from Manager.forms import RequestForm, MessageForm, BillForm
 from Manager.models import Request
 from MySite.forms import EventForm, NewsForm, DisplayForm, ComplexForm
 from MySite.models import Event, News, Unit, Block
-from MyUser.forms import SignupForm1
+from MyUser.forms import SignupForm1, SignupForm2
 from MyUser.models import Member, Message
 from Resident.forms import ResidentForm
-from Resident.models import Reserve, PayByBank, PayByAccount
+from Resident.models import Reserve, PayByBank, PayByAccount, Resident
 
 
 @login_required
@@ -88,38 +90,38 @@ def edit_complex_information(request):
     if request.method == 'POST':
         form = ComplexForm(request.POST, instance=request.user.member.manager.complex)
         blockNum = int(request.POST.get('blockNum'))
-        unit_per_block = int(request.POST.get('unit_per_block'))
         if form.is_valid():
             complex = form.save(commit=False)
             complex.manager = Member.objects.filter(user=request.user)[0].manager
             complex.save()
             blocks = Block.objects.filter(complex=complex)
-            if blocks[0].unit_number != unit_per_block:
-                for block in blocks:
-                    block.unit_number = unit_per_block
-                    block.save()
             s = len(blocks)
             if int(blockNum) < s:
                 for i in range(s - blockNum):
                     blocks[i].delete()
             elif int(blockNum) > s:
                 for i in range(int(blockNum) - s):
-                    block = Block.objects.create(complex=complex, unit_number=unit_per_block)
+                    block = Block.objects.create(complex=complex)
                     block.save()
             return HttpResponseRedirect(reverse('site:manager:account'))
     else:
         form = ComplexForm(instance=request.user.member.manager.complex)
         blocks = Block.objects.filter(complex=form.instance)
         blockNum = len(blocks)
-        unit_per_block = blocks[0].unit_number
     return render(request, 'manager/edit_complex_information.html',
-                  {'form': form.initial, 'blockNum': blockNum, 'unit_per_block': unit_per_block})
+                  {'form': form.initial, 'blockNum': blockNum})
 
 
 @login_required
 def edit_neighbours(request):
-    return render(request, 'manager/editNeighbours.html')
+    complex = request.user.member.manager.complex
+    neighbours = Resident.objects.filter(unit__block__complex=complex)
+    return render(request, 'manager/editNeighbours.html', {'neighbours': neighbours})
 
+
+@login_required
+def delete_neighbour(request):
+    pass
 
 @login_required
 def edit_unit(request):
@@ -208,17 +210,37 @@ def requests(request):
 '''
 @login_required
 def add_neighbour(request):
+    complex = request.user.member.manager.complex
+    units = Unit.objects.filter(block__complex=complex).filter(resident=None)
     if request.method == 'POST':
-        form = ResidentForm(request.POST)
-        if form.is_valid():
-            manager_request = form.save(commit=False)
-            manager_request.manager = Member.objects.filter(user= request.user)[0].manager
-            manager_request.state = 'W'
-            manager_request.save()
+        form1 = SignupForm2(request.POST)
+        form2 = ResidentForm(request.POST)
+        phoneNumber = request.POST.get('phoneNumber')
+        if form1.is_valid():
+            user = form1.save(commit=False)
+            s = "abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()?"
+            passlen = 8
+            user.username = "".join(random.sample(s, passlen))
+            user.password1 = "".join(random.sample(s, passlen))
+            user.password2 = user.password1
+            user.save()
+            if len(phoneNumber) == 11 and phoneNumber[0:2] == '09':
+                member = Member.objects.create(user=user, phoneNumber=phoneNumber)
+                member.save()
+                if form2.is_valid():
+                    resident = form2.save(commit=False)
+                    resident.member = member
+                    resident.save()
+                    return edit_neighbours(request)
+            else:
+                error = 'وارد کردن شماره تلفن الزامی است و باید 11 رقمی باشد و با 09 آغاز شود.'
+                render(request, 'manager/addNeighbour.html',
+                       {'form1': form1, 'form2': form2, 'units': units, 'phoneNumber': phoneNumber, 'error': error})
         return HttpResponseRedirect(reverse('site:manager:requests'))
     else:
-        form = ResidentForm()
-    return render(request, 'manager/addNeighbour.html', {'form': form})
+        form1 = SignupForm2()
+        form2 = ResidentForm()
+    return render(request, 'manager/addNeighbour.html', {'form1': form1, 'form2': form2, 'units': units})
     #return render(request, 'addNeighbour.html')
 
 

@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 
 from Manager.models import Manager
-from MySite.models import Complex, Block
+from MySite.models import Complex, Block, Board
 from MyUser.forms import LoginForm, SignupForm1
 from MyUser.models import Member
 
@@ -84,5 +84,7 @@ def complexRegister(request):
         for i in range(int(blockNum)):
             block = Block.objects.create(complex=complex)
             block.save()
+            board = Board.objects.create(block=block)
+            board.save()
         return HttpResponseRedirect(reverse('site:manager:account'))
     return render(request, 'index.html', context)

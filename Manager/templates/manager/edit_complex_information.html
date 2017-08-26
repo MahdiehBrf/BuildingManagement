@@ -2,7 +2,7 @@
 
 {% block title %}اطلاعات مجتمع{% endblock %}
 
-{% block css %}<link rel="stylesheet" type="text/css" href="../../../static/css/viewBillStyles.css"/>{% endblock %}
+{% block css %}{% endblock %}
 
 {% block script %}
 {% endblock %}
@@ -15,14 +15,14 @@
             <tbody>
 
             <tr>
-                <td><input type="text" name="name" value="{{ name }}"></td>
+                <td><input type="text" name="name" value="{{ form.name }}"></td>
                 <td><label for="address">نام مجتمع </label></td>
             </tr>
 
 
             <tr>
 
-                <td><input type="text" name="address" value="{{ address }}"></td>
+                <td><input type="text" name="address" value="{{ form.address }}"></td>
                 <td><label for="address">آدرس </label></td>
             </tr>
 
@@ -34,8 +34,8 @@
 
             <tr>
 
-                <td><input type="text" name="address" value="{{ unit_per_block }}"></td>
-                <td><label for="address">تعداد واحد در هر بلوک</label></td>
+                <td><input type="text" name="unit_number" value="{{ form.unit_number }}"></td>
+                <td><label for="unit_number">تعداد واحد در هر بلوک</label></td>
             </tr>
 
             </tbody>
