@@ -1,0 +1,39 @@
+{% extends 'resident/residentBase.html' %}
+
+{% block title %}افزايش اعتبار{% endblock %}
+
+{% block css %}<link rel="stylesheet" type="text/css" href="../../../static/css/addReqStyle.css"/>{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="main">
+        <h5>افزايش اعتبار</h5>
+        <p style="color: #1E656D; font-weight: bold;">موجودي فعلي شما: {{acount.cash}} ريال </p>
+        <p>لطفا مبلغ مورد نظر خود را جهت افزايش اعتبار وارد فرماييد</p>
+        <form action="" method="post">
+            {% csrf_token %}
+            <table class="tbl" border="0" align="center">
+                <tbody>
+
+                <tr style="">
+                    <td><label for="cash">ريال</label></td>
+                    <td>{{form.cash}}</td>
+                </tr>
+
+
+                </tbody>
+            </table>
+          <img src="../../../static/images/BankTejarat.png" style="float:left; padding-bottom: 100px;">
+            <input type="submit" class="btn" value="پرداخت از طريق بانک تجارت" style="width: 250px; font-size:18px; font-weight: bold; margin-bottom: 100px;">
+        </form>
+
+
+    </div>
+
+{% endblock %}
+
+
+

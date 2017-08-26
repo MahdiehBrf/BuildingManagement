@@ -27,6 +27,7 @@
             background-color: #00293E;
             color: white;
             margin-top: 50px;
+
         }
 
         .foot{
@@ -126,7 +127,7 @@
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropbtn">امور مالی</a>
                 <div class="dropdown-content">
-                    <a href="#">افزایش اعتبار</a>
+                    <a href="{% url 'site:resident:increase'%}">افزایش اعتبار</a>
                     <a href="{% url 'site:resident:bills'%}">پرداخت قبض</a>
                 </div>
             </li>

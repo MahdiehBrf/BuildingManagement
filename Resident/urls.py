@@ -13,5 +13,7 @@ urlpatterns = [
     url(r'^paying_reports/$', views.paying_reports, name='payingReports_user'),
     url(r'^edit_profile/$', views.edit_profile, name='edit_profile'),
     url(r'^board/$', views.view_board, name='board'),
+    url(r'^increase/$', views.increase_cash, name='increase'),
+    url(r'^select_payWay/$', views.select_pay_way, name='select_payWay'),
     url(r'^$', views.account, name='account'),
     ]

@@ -1,0 +1,32 @@
+{% extends 'resident/residentBase.html' %}
+
+{% block title %}انتخاب روش پرداخت{% endblock %}
+
+{% block css %}<link rel="stylesheet" type="text/css" href="../../../static/css/addReqStyle.css"/>{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="main">
+        <h5>انتخاب روش پرداخت</h5>
+        <p style="color: #1E656D; font-weight: bold;">مبلغ قبض: {{acount.cash}} ريال </p>
+        <p>لطفا روش مورد نظر خود را جهت پرداخت قبض فرماييد</p>
+        <form action="" method="post">
+            {% csrf_token %}
+
+          <img src="../../../static/images/BankTejarat.png" style="float:left; padding-bottom: 100px;">
+            <input type="submit" class="btn" value="پرداخت از طریق بانک تجارت" style="width: 250px; font-size:18px; font-weight: bold; margin-bottom: 100px;">
+            <input type="submit" class="btn" value="پرداخت درون برنامه ای" style="float: right; width: 250px; font-size:18px; font-weight: bold; margin-bottom: 100px;">
+           <img src="../../../static/images/ico_pago.png" style="float:right; padding-bottom: 100px;">
+
+        </form>
+
+
+    </div>
+
+{% endblock %}
+
+
+
