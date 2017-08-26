@@ -154,9 +154,9 @@ def view_bill(request, receipt_id):
     for unit in block.unit_set.all():
         if unit.resident:
             size += unit.resident.member_count
-    costs = (events.values_list('cost')/size)*receipt.resident.member_count
-    costs += (bills.values_list('cost')/size)*receipt.resident.member_count
-    return render(request, 'resident/viewBill.html', {'receipt': receipt, 'costs': costs})
+    # costs = (events.values_list('cost')/size)*receipt.resident.member_count
+    # costs += (bills.values_list('cost')/size)*receipt.resident.member_count
+    return render(request, 'resident/viewBill.html', {'receipt': receipt})
 
 def pay_receipt(request, receipt_id):
     return render(request, 'resident/viewBill.html')
