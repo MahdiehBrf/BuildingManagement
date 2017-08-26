@@ -13,7 +13,10 @@ RESERVE_STATE = {
     ('A', 'تایید شده')
 }
 
-
+RECEIPT_STATE = {
+    ('P','پرداخت شده'),
+    ('NP','پرداخت نشده')
+}
 
 class Resident(models.Model):
     member = models.OneToOneField(Member)
@@ -54,14 +57,15 @@ class Receipt(models.Model):
     start_date = models.DateField()
     finish_date = models.DateField()
     cost = models.IntegerField(null=True)
-    paid_cost = models.IntegerField(null=True)
+    # paid_cost = models.IntegerField(null=True)
     # event_cost = models.IntegerField(null=True)
     # facility_cost = models.IntegerField(null=True)
-    # common_bills_cost = models.IntegerField(nu)
+    # common_bills_cost = models.IntegerField(null=True)
+    state = models.CharField(max_length=2, choices=RECEIPT_STATE)
     resident= models.ForeignKey(Resident)
 
     def __str__(self):
-        return 'date: ' + str(self.date) + ' cost: ' + str(self.cost)
+        return 'date: ' + str(self.start_date) + ' cost: ' + str(self.cost)
 
 
 class Account(models.Model):

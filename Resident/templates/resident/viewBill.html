@@ -11,46 +11,57 @@
 
 <div class="main">
     <h5>قبض شماره {{ receipt.id }}</h5>
-
-    <table>
+<table>
         <tr>
+            <th>مبلغ شما = (مبلغ
+            * {{ receipt.resident.member_count }}) / {{ size }}</th>
             <th>مبلغ</th>
             <th>زمان و تاریخ</th>
             <th>توضیحات</th>
             <th>نوع</th>
-            <th>شماره</th>
+
         </tr>
+        {% for event, eventCost in events %}
+            <tr>
+                <td>{{ eventCost}}</td>
+                <td>{{ event.cost }}</td>
+                <td>{{ event.date|date:"Y / m / d" }}</td>
+                <td>{{ event.description }}</td>
+                <td>رویداد</td>
+
+            </tr>
+        {% endfor %}
+        {% for bill, billCost in bills %}
+            <tr>
+            <td>{{ billCost }}</td>
+                <td>{{ bill.cost }}</td>
+                <td>{{ bill.date|date:"Y / m / d" }}</td>
+                <td>{{ bill.get_type_display }}</td>
+                <td>قبض</td>
+
+            </tr>
+        {% endfor %}
+        {% for reserve in reserves %}
+            <tr>
+                <td>{{ reserve.cost }}</td>
+                <td>{{ reserve.cost }}</td>
+                <td>{{ reserve.reserve_date|date:"Y / m / d" }}</td>
+                <td>{{ reserve.facility.type }}</td>
+                <td>رزرو</td>
+
+            </tr>
+        {% endfor %}
         <tr>
-            <td>ریال250000</td>
-            <td>96/4/27</td>
-            <td>تعمیر سیستم آبیاری چمن ها</td>
-            <td>تعمیرات</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td>ریال150000</td>
-            <td>96/4/29</td>
-            <td>گل کاری باغچه ها</td>
-            <td>باغبانی</td>
-            <td>2</td>
-        </tr>
-        <tr>
-            <td>ریال50000</td>
-            <td>96/5/1</td>
-            <td>رنگ آمیزی درب پارکینگ</td>
-            <td>تعمیرات</td>
-            <td>3</td>
+            <td>{{ receipt.cost }}</td>
+            <td>مجموع</td>
+            <td></td>
+            <td></td>
+            <td></td>
         </tr>
 
-        <tr>
-            <td>ریال450000</td>
-            <td>مجموع</td>
-            <td>  </td>
-            <td> </td>
-            <td> </td>
-        </tr>
 
     </table>
+
     <button type="button" class="btn" onclick="f()">پرداخت</button>
     <br><br><br>
     <a href="javascript:void(0)" class="btn"><img src="../../../static/images/printer.png" class="linkImg1"></a>
