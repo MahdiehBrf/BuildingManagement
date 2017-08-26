@@ -15,22 +15,22 @@ class LoginForm(forms.ModelForm):
 
 class SignupForm1(UserCreationForm):
     email = forms.EmailField(required=True)
-    firstname = forms.CharField(max_length=50, required=True)
-    lastname = forms.CharField(max_length=50, required=True)
+    first_name = forms.CharField(max_length=50, required=True)
+    last_name = forms.CharField(max_length=50, required=True)
 
     class Meta:
         model = User
-        fields = ('username','firstname','lastname','email',"password1", "password2")
+        fields = ('username','first_name','last_name','email',"password1", "password2")
 
 
 class SignupForm2(forms.ModelForm):
     email = forms.EmailField(required=True)
-    firstname = forms.CharField(max_length=50, required=True)
-    lastname = forms.CharField(max_length=50, required=True)
+    first_name = forms.CharField(max_length=50, required=True)
+    last_name = forms.CharField(max_length=50, required=True)
 
     class Meta:
         model = User
-        fields = ('firstname', 'lastname', 'email')
+        fields = ('first_name', 'last_name', 'email')
 
 class MessageForm(forms.ModelForm):
     class Meta:
