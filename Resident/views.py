@@ -147,6 +147,17 @@ def view_reserves(request):
 
 
 def view_bill(request, receipt_id):
+    receipt = get_object_or_404(Receipt, pk=receipt_id)
+    block = receipt.resident.unit.block
+    size = 0
+    events = block.board.event_set.filter(date__gt=receipt.start_date, date__lte=receipt.finish_date)
+    bills= block.bill_set.filter(date__gt=receipt.start_date, date__lte=receipt.finish_date)
+    for unit in block.unit_set.all():
+        if unit.resident:
+            size += unit.resident.member_count
+    # costs = (events.values_list('cost')/size)*receipt.resident.member_count
+    # costs += (bills.values_list('cost')/size)*receipt.resident.member_count
+    return render(request, 'resident/viewBill.html', {'receipt': receipt})
     return render(request, 'resident/viewBill.html')
 
 
