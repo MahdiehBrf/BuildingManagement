@@ -51,11 +51,13 @@ class Reserve(models.Model):
 
 
 class Receipt(models.Model):
-    date = models.DateField()
+    start_date = models.DateField()
+    finish_date = models.DateField()
     cost = models.IntegerField(null=True)
-    event_cost = models.IntegerField(null=True)
-    facility_cost = models.IntegerField(null=True)
-    common_bills_cost = models.IntegerField()
+    paid_cost = models.IntegerField(null=True)
+    # event_cost = models.IntegerField(null=True)
+    # facility_cost = models.IntegerField(null=True)
+    # common_bills_cost = models.IntegerField(nu)
     resident= models.ForeignKey(Resident)
 
     def __str__(self):

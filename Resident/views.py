@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 # Create your views here.
 from django.urls import reverse
 from django.utils.datetime_safe import datetime
@@ -146,8 +146,17 @@ def view_reserves(request):
 
 
 def view_bill(request, receipt_id):
-    return render(request, 'resident/viewBill.html')
-
+    receipt = get_object_or_404(Receipt, pk=receipt_id)
+    block = receipt.resident.unit.block
+    size = 0
+    events = block.board.event_set.filter(date__gt=receipt.start_date, date__lte=receipt.finish_date)
+    bills= block.bill_set.filter(date__gt=receipt.start_date, date__lte=receipt.finish_date)
+    for unit in block.unit_set.all():
+        if unit.resident:
+            size += unit.resident.member_count
+    costs = (events.values_list('cost')/size)*receipt.resident.member_count
+    costs += (bills.values_list('cost')/size)*receipt.resident.member_count
+    return render(request, 'resident/viewBill.html', {'receipt': receipt, 'costs': costs})
 
 def pay_receipt(request, receipt_id):
     return render(request, 'resident/viewBill.html')

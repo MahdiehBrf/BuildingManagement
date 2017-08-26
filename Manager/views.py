@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
+from django.db.models import Q, Sum
+from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 # Create your views here.
@@ -9,11 +10,11 @@ from django.utils.datetime_safe import datetime
 from Manager.forms import RequestForm, MessageForm, BillForm
 from Manager.models import Request
 from MySite.forms import EventForm, NewsForm, DisplayForm, ComplexForm
-from MySite.models import Event, News, Unit
+from MySite.models import Event, News, Unit, Bill, Block
 from MyUser.forms import SignupForm1
 from MyUser.models import Member, Message
 from Resident.forms import ResidentForm
-from Resident.models import Reserve, PayByBank, PayByAccount
+from Resident.models import Reserve, PayByBank, PayByAccount, Receipt
 
 
 @login_required
@@ -64,7 +65,6 @@ def view_board(request):
     return render(request, 'manager/board.html', {'events': events, 'newsSet': news_set})
 
 
-
 @login_required
 def edit_profile(request):
     user = request.user
@@ -105,6 +105,7 @@ def edit_neighbours(request):
 @login_required
 def edit_unit(request):
     return render(request, 'manager/editUnit.html')
+
 
 @login_required
 def paying_reports(request):
@@ -185,6 +186,8 @@ def requests(request):
     car_count = models.IntegerField()
     unit = models.OneToOneField(Unit)p
 '''
+
+
 @login_required
 def add_neighbour(request):
     if request.method == 'POST':
@@ -271,3 +274,26 @@ def enter_bill(request):
             action_message = 'قبض مورد نظر ثبت شد'
     form = BillForm()
     return render(request, 'manager/enterBill.html', {'form': form, 'messages': action_message})
+
+
+def calculate_receipts(request):
+    complex = request.user.member.manager.complex
+    for block in Block.objects.filter(complex=complex):
+        size = 0
+        events_cost = block.board.event_set.filter(date__gt=complex.last_calculation_date).aggregate(Sum('cost'))['cost__sum']
+        bills_cost = block.bill_set.filter(date__gt=complex.last_calculation_date).aggregate(Sum('cost'))['cost__sum']
+        if events_cost or bills_cost:
+            for unit in block.unit_set.all():
+                if unit.resident:
+                    size += unit.resident.member_count
+            if not events_cost:
+                events_cost = 0
+            if not bills_cost:
+                bills_cost = 0
+            for unit in block.unit_set.all():
+                if unit.resident:
+                    receipt = Receipt(start_date=complex.last_calculation_date, finish_date=datetime.today().date(), cost=((events_cost+bills_cost)/size) * unit.resident.member_count, resident=unit.resident, paid_cost=0)
+                    receipt.save()
+            complex.last_calculation_date = datetime.today().date()
+            complex.save()
+    return render(request, 'manager/account.html')
