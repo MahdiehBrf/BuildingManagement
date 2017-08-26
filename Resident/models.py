@@ -56,6 +56,7 @@ class Receipt(models.Model):
     event_cost = models.IntegerField(null=True)
     facility_cost = models.IntegerField(null=True)
     common_bills_cost = models.IntegerField()
+    resident= models.ForeignKey(Resident)
 
     def __str__(self):
         return 'date: ' + str(self.date) + ' cost: ' + str(self.cost)

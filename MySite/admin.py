@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from MySite.models import Complex, Block, Board, Event, News, Facility, Unit
+from MySite.models import Complex, Block, Board, Event, News, Facility, Unit, Bill
 
 admin.site.register(Complex)
 admin.site.register(Block)
@@ -10,3 +10,4 @@ admin.site.register(Event)
 admin.site.register(News)
 admin.site.register(Facility)
 admin.site.register(Unit)
+admin.site.register(Bill)

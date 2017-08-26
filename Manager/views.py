@@ -6,7 +6,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.utils.datetime_safe import datetime
 
-from Manager.forms import RequestForm, MessageForm
+from Manager.forms import RequestForm, MessageForm, BillForm
 from Manager.models import Request
 from MySite.forms import EventForm, NewsForm, DisplayForm, ComplexForm
 from MySite.models import Event, News, Unit, Block
@@ -277,3 +277,16 @@ def delete_request(request, request_id):
     manager_request = get_object_or_404(Request, pk=request_id)
     manager_request.delete()
     return HttpResponseRedirect(reverse('site:manager:requests'))
+
+
+def enter_bill(request):
+    action_message = ''
+    if request.method == 'POST':
+        form = BillForm(request.POST)
+        if form.is_valid():
+            bill = form.save(commit=False)
+            bill.date = datetime.now().date()
+            bill.save()
+            action_message = 'قبض مورد نظر ثبت شد'
+    form = BillForm()
+    return render(request, 'manager/enterBill.html', {'form': form, 'messages': action_message})

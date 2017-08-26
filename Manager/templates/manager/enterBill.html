@@ -1,0 +1,61 @@
+{% extends 'manager/managerBase.html' %}
+
+{% block title %}وارد کردن قبض{% endblock %}
+
+{% block css %}<link rel="stylesheet" type="text/css" href="../../../static/css/addReqStyle.css"/>{% endblock %}
+
+{% block script %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="main">
+    <h5>وارد کردن قبض</h5>
+    <form action="" method="post">
+            {% csrf_token %}
+            <table class="tbl" border="0" align="center">
+                <tbody>
+                <tr>
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td><select id="block" required name="block">
+                        {% for s,a in form.fields.block.choices %}
+                            <option value="{{ forloop.counter }}">{{ s }}</option>
+                        {% endfor %}
+                    </select></td>
+                    <td><label for="block">بلوک </label></td>
+                </tr>
+                <tr>
+                    <td><select id="type" required name="type">
+                        {% for t in form.type %}
+                            {{ t }}
+                        {% endfor %}
+                    </select></td>
+                    <td><label for="type">نوع قبض</label></td>
+                </tr>
+                <tr>
+
+                    <td class="mytext">{{ form.num }}</td>
+                    <td><label>شماره قبض </label></td>
+                </tr>
+                <tr>
+
+                    <td class="mytext">{{ form.cost }}</td>
+                    <td><label>مبلغ به ریال </label></td>
+                </tr>
+
+
+                </tbody>
+            </table>
+            <input type="submit" class="btn"  value="انجام شد">
+        </form>
+
+
+
+</div>
+
+{% endblock %}

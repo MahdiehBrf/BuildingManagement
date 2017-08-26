@@ -9,7 +9,7 @@ from django.utils.datetime_safe import datetime
 from MySite.forms import DisplayForm
 from MyUser.models import Member, Message
 from Resident.forms import ReserveForm, DateForm, MessageForm
-from Resident.models import PayByAccount, Reserve
+from Resident.models import PayByAccount, Reserve, Receipt
 from Resident.models import PayByBank
 
 
@@ -112,7 +112,20 @@ def select_contact(request):
 
 
 def view_bills(request):
-    return render(request, 'resident/bills.html')
+    resident = request.user.member.resident
+    receipts = None
+    if request.method == 'POST':
+        form = DisplayForm(request.POST)
+        if form.is_valid():
+            receipts = Receipt.objects.filter(resident=resident, date__gte=form.cleaned_data['startDate'],
+                                              date__lte=form.cleaned_data['finishDate'])  # TODO
+        else:
+            receipts = Receipt.objects.filter(resident=resident)
+        if request.POST['choose'] == 'جدیدترین':
+            receipts = receipts.order_by('-reserve_date')
+    else:
+        receipts = Receipt.objects.filter(resident=resident)
+    return render(request, 'resident/bills.html', {'receipts': receipts})
 
 
 def view_reserves(request):
@@ -132,5 +145,9 @@ def view_reserves(request):
     return render(request, 'resident/myReserves.html', {'reserves': reserves})
 
 
-def view_bill(request):
+def view_bill(request, receipt_id):
+    return render(request, 'resident/viewBill.html')
+
+
+def pay_receipt(request, receipt_id):
     return render(request, 'resident/viewBill.html')
