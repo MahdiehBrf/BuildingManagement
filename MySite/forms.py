@@ -7,13 +7,8 @@ from MySite.models import Complex, News, Event
 class ComplexForm(django.forms.ModelForm):
     class Meta:
         model = Complex
-        fields = ['name', 'address']
+        fields = ['name', 'address', 'unit_number']
 
-
-# class ReserveForm(django.forms.ModelForm):
-#     class Meta:
-#         model = Reserve
-#         exclude = ['reserve_date']
 
 
 class NewsForm(django.forms.ModelForm):

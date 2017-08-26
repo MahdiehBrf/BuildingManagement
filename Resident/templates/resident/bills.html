@@ -10,7 +10,7 @@
 {% block content %}
 
 <div class="main">
-    <h5>قبوض</h5>
+    <h5>شارژها</h5>
 
 
 <form action="" method="post">
@@ -40,8 +40,8 @@
         </tr>
         {% for receipt in receipts %}
             <tr>
-                <td><a href="{% url 'site:resident:payReceipt' receipt.id %}" ><img src="../../../static/images/pay.png" class="linkImg1"></a></td>
-                <td><a href="{% url 'site:resident:viewBill' receipt.id %}" ><img src="../../../static/images/view.png" class="linkImg1"></a></td>
+                <td><a href="{% url 'site:resident:select_payWay' receipt.id %}" ><img src="../../../static/images/pay.png" title="پرداخت" class="linkImg1"></a></td>
+                <td><a href="{% url 'site:resident:viewBill' receipt.id %}" ><img src="../../../static/images/view.png" title="مشاهده" class="linkImg1"></a></td>
                 <td>{{ receipt.cost }}</td>
                 <td>{{ receipt.finish_date|date:"Y / m / d" }}</td>
                 <td>{{ receipt.start_date|date:"Y / m / d" }}</td>

@@ -8,46 +8,96 @@
 {% endblock %}
 
 {% block content %}
-
 <div class="main">
-    <h5> ویرایش اطلاعات ساکن</h5>
-   <form action="Welcome.html" method="post">
+    <h5> ویرایش اطلاعات مدیر</h5>
+   <form action="" method="post" style="direction: ltr">{% csrf_token %}
         <table class="tbl" border="0" align="center">
             <tbody>
 
 			<tr>
-               <td><input type="text" name="first_name" id="first_name" value="نام قبلی "></td>
+               <td>
+                {% if form.first_name.errors %}
+        <span class="text-danger" style="text-align:center;">
+        {% for error in form.first_name.errors %}{{ error }}{% endfor %}
+    </span>
+               {% endif %}
+                   <input class="{% if form.first_name.errors %}has-error{% endif %}" type="text" name="first_name"
+                          id="first_name" value="{{ user.first_name }} ">
+               </td>
                 <td><label for="first_name">نام حقوقی </label></td>
             </tr>
 			<tr>
-               <td><input type="text" name="last_name" id="last_name"  value="نام خانوادگی قبلی "></td>
+                <td>{% if form.last_name.errors  %}
+                    <span class="text-danger" style="text-align:center;">
+                        {% for error in form.last_name.errors %}{{ error }}{% endfor %}
+                    </span>
+                    {% endif %}
+                    <input type="text" class=" {% if form.last_name.errors %}has-error{% endif %}" name="last_name"
+                           id="last_name" value="{{ user.last_name }}">
+               </td>
                 <td><label for="last_name">نام خانوادگی </label></td>
             </tr>
 			<tr>
-               <td><input type="text" name="email" id="email" value="ایمیل " ></td>
+               <td>
+                   {% if form.email.errors%}
+                        <span class="text-danger" style="text-align:center;">
+                        {% for error in form.email.errors %}{{ error }}{% endfor %}
+                        </span>
+                    {% endif %}
+                   <input type="text" name="email" id="email" value="{{user.email }}" >
+
+               </td>
                 <td><label for="email">ایمیل </label></td>
             </tr>
 			<tr>
-               <td><input type="text" name="username" id="username" value="نام کاربری قبلی "></td>
+                <td>
+                    {% if form.username.errors %}
+                     <span class="text-danger" style="text-align:center;">
+                    <p>{% for error in form.username.errors %}{{ error }}{% endfor %}</p>
+                    </span>
+                    {% endif %}
+                   <input type="text" name="username" id="username" value="{{ user.username}} ">
+               </td>
                 <td><label for="username">نام کاربری </label></td>
             </tr>
             <tr>
-               <td><input type="password" name="password" id="password" value="رمز قبلی "></td>
+               <td>
+                   {% if form.password2.errors %}
+                    <span class="text-danger">
+                    <p>{% for error in form.password2.errors %}{{ error }}{% endfor %}</p>
+                    </span>
+                    {% endif %}
+                   <input type="password" name="password1" id="password" class=" {% if form.password2.errors %}has-error{% endif %}">
+               </td>
                 <td><label for="password">رمز </label></td>
             </tr>
 			<tr>
-               <td><input type="password" name="password" id="passworda" value="رمز قبلی "></td>
+               <td>{% if form.password2.errors %}
+        <span class="text-danger">
+        <p>{% for error in form.password2.errors %}{{ error }}{% endfor %}</p>
+    </span>
+    {% endif %}
+                   <input type="password" name="password2" id="passworda " class=" {% if form.password2.errors %}has-error{% endif %}">
+               </td>
                 <td><label for="passworda">تایید رمز </label></td>
             </tr>
+            <tr>
+               <td><input type="text" name="phone_number" id="phoneNumber" value="{{user.member.phone_number}} "></td>
+                <td><label for="phoneNumber">شماره تلفن </label></td>
+            </tr>
 
+            {% if form.errors %}
+                <div class="text-danger"> {{ form.errors.value }} </div>
+        {% endif %}
             </tbody>
         </table>
+<input type="submit" name="submit"  tabindex="4"
+                           class="form-control btn btn-login" value="ویرایش" placeholder="ویرایش">
+
+
     </form>
 
-    <button type="button" class="btn" onclick="f()">ثبت</button>
-
 </div>
-
 {% endblock %}
 
 

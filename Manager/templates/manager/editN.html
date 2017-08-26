@@ -4,47 +4,40 @@
 
 {% block css %}<link rel="stylesheet" type="text/css" href="../../../static/css/addReqStyle.css"/>{% endblock %}
 
-{% block script %}
-    function f(){alert("اطلاعات همسایه با موفقیت به روز شد"); window.location.href="editNeighbours.html";}
-{% endblock %}
 
 {% block content %}
 <div class="main">
     <h5>ویرایش کردن اطلاعات همسایه</h5>
-    <form action="Welcome.html" method="post">
+    <form action="" method="post" style="direction: rtl">{% csrf_token %}
         <table class="tbl" border="0" align="center">
             <tbody>
 
             <tr>
-
-               <td><input type="number" name="unit" id="unit" min="1" max="100" value="1"></td>
+                <td><select name="unit" id="unit" style="text-align: right;">
+                    <option value="{{ unit}}" selected>{{ unit }}</option>
+                    {% for u in units %}
+                        <option value="{{ u.id }}">{{ u.id }}</option>
+                    {% endfor %}
+                </select></td>
                 <td><label for="unit">شماره واحد </label></td>
             </tr>
 
             <tr>
-
-                <td><input type="text" name="username" id="username" value="hashem.b"></td>
-                <td><label for="username"> نام کاربری سرپرست</label></td>
-            </tr>
-
-            <tr>
-
-               <td><input type="number" name="count" id="count" min="1" max="10" value="5"></td>
+               <td><input type="number" name="member_count" id="count" min="1" max="10" value="{{ form.member_count.value }}"></td>
                 <td><label for="count">تعداد اعضای خانواده </label></td>
             </tr>
 
             <tr>
-
-               <td><input type="number" name="car" id="car" min="1" max="5" value="2"></td>
+               <td><input type="number" name="car_count" id="car" min="1" max="5" value="{{ form.car_count.value }}"></td>
                 <td><label for="car">تعداد اتومبیل </label></td>
             </tr>
 
 
             </tbody>
         </table>
+      <button type="submit" class="btn" >ثبت</button>
     </form>
 
-    <button type="button" class="btn" onclick="f()">ثبت</button>
 
 </div>
 {% endblock %}

@@ -24,11 +24,18 @@ class Unit(models.Model):
     area = models.IntegerField()
     block = models.ForeignKey('Block')
 
+    def __str__(self):
+        return str(self.block) + 'Unit : ' + str(self.id)
+
+
+
+
 class Block(models.Model):
     complex = models.ForeignKey('Complex')
 
+
     def __str__(self):
-        return 'complex: ' + str(self.complex) + ' block: ' + str(self.id)
+        return 'complex: ' + str(self.complex.name) + ' block: ' + str(self.id)
 
 class Bill(models.Model):
     type = models.CharField(max_length=1, choices=BILL_TYPE)
@@ -45,6 +52,7 @@ class Complex(models.Model):
     name = models.CharField(max_length=50)
     address = models.CharField(max_length=200)
     manager = models.OneToOneField(Manager)
+    unit_number = models.IntegerField()
     last_calculation_date = models.DateField()
 
     def __str__(self):

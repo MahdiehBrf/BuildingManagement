@@ -1,0 +1,23 @@
+{% extends 'resident/residentBase.html' %}
+
+{% block title %}تراکنش موفق{% endblock %}
+
+{% block css %}<link rel="stylesheet" type="text/css" href="../../../static/css/addReqStyle.css"/>{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="main">
+        <p style="color: #DC143C;">خطا: موجودی حساب شما برای پرداخت قبض کافی نیست</p>
+        <p style="color: #1E656D; font-weight: bold;">موجودي شما: {{acount.cash}} ريال </p>
+        <p style="color: #1E656D; font-weight: bold;">مبلغ شارژ: {{r.cost}} ريال </p>
+
+        <button type="button" class="btn" style="width: 170px;" onclick="window.location.href='{% url 'site:resident:increase' %}' ">افزایش اعتبار</button>
+    </div>
+
+{% endblock %}
+
+
+

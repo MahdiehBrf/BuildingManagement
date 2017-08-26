@@ -9,6 +9,7 @@
 
         {% load i18n %}
         {% load static %}
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="{% static "css/main/main.css" %}">
@@ -162,9 +163,8 @@
             <div class="col-md-12 inputGroupContainer">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="text" name="name" id="name" tabindex="1"
-                           class="form-control" placeholder="نام مجتمع"
-                           value="{% if type == 'complexRegister' %} {{ name.value }} {% endif %}">
+                    <input type="text" name="name" tabindex="2" class="form-control" placeholder="نام مجتمع"
+                           value="{% if type == 'complexRegister' and name.value %} {{ name.value }} {% endif %}">
                 </div>
             </div>
             {% if name.errors and type == 'complexRegister' %}
@@ -178,7 +178,8 @@
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                     <input type="text" name="address" id="address" tabindex="2"
-                           class="form-control" placeholder="آدرس">
+                           class="form-control" placeholder="آدرس"
+                           value="{% if type == 'complexRegister' and address.value %} {{ address.value }} {% endif %}">
                 </div>
             </div>
             {% if address.errors and type == 'complexRegister' %}
@@ -188,20 +189,36 @@
             {% endif %}
         </div>
 
-        <div class="form-group {% if blockNumber.errors and type == 'complexRegister' %}has-error{% endif %}">
+        <div class="form-group {% if blockNum.errors and type == 'complexRegister' %}has-error{% endif %}">
             <div class="col-md-12 inputGroupContainer">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                    <input type="number" name="blockNumber" min="0" max="50" tabindex="2"
-                           class="form-control" placeholder="تعداد بلوک ها">
+                    <input type="number" name="blockNumber" min="1" max="50" tabindex="2"
+                           class="form-control" placeholder="تعداد بلوک ها" value="{{ blockNum }}">
                 </div>
             </div>
-            {% if blockNumber.errors and type == 'complexRegister' %}
+            {% if blockNum.errors and type == 'complexRegister' %}
                 <span class="text-danger" style="text-align:center;">
-                    {{ blockNumber.errors }}
+                    {{ blockNum.errors }}
                 </span>
             {% endif %}
         </div>
+
+        <div class="form-group {% if unit_per_block.errors and type == 'complexRegister' %}has-error{% endif %}">
+            <div class="col-md-12 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input type="number" name="unit_per_block" min="1" max="32" tabindex="2"
+                           class="form-control" placeholder="تعداد واحدها در هر بلوک">
+                </div>
+            </div>
+            {% if unit_per_block.errors and type == 'complexRegister' %}
+                <span class="text-danger" style="text-align:center;">
+                    {{ unit_per_block.errors }}
+                </span>
+            {% endif %}
+        </div>
+
         <div class="form-group">
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
@@ -218,32 +235,33 @@
     </legend>
     <br>
 
-<div class="form-group  {% if form.firstname.errors and type == 'signup' %}has-error{% endif %}">
+        <div class="form-group  {% if form.first_name.errors and type == 'signup' %}has-error{% endif %}">
   <div class="col-md-12 inputGroupContainer">
   <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input  name="firstname" placeholder="نام" class="form-control"  type="text" value="{% if type == 'signup' %} {{ form.firstname.value }} {% endif %}">
+      <input name="first_name" placeholder="نام" class="form-control" type="text"
+             value="{% if type == 'signup' %} {{ form.first_name.value }} {% endif %}">
     </div>
   </div>
 </div>
-    {% if form.firstname.errors and type == 'signup' %}
+        {% if form.first_name.errors and type == 'signup' %}
         <span class="text-danger" style="text-align:center;">
-        {% for error in form.firstname.errors %}{{ error }}{% endfor %}
+        {% for error in form.first_name.errors %}{{ error }}{% endfor %}
     </span>
     {% endif %}
 
-    <div class="form-group  {% if form.lastname.errors and type == 'signup' %}has-error{% endif %}">
+        <div class="form-group  {% if form.last_name.errors and type == 'signup' %}has-error{% endif %}">
     <div class="col-md-12 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-        <input name="lastname" placeholder="نام خانوادگی" class="form-control" type="text"
-               value="{% if type == 'signup' %} {{ form.lastname.value }} {% endif %}">
+        <input name="last_name" placeholder="نام خانوادگی" class="form-control" type="text"
+               value="{% if type == 'signup' %} {{ form.last_name.value }} {% endif %}">
     </div>
   </div>
 </div>
-    {% if form.lastname.errors and type == 'signup' %}
+        {% if form.last_name.errors and type == 'signup' %}
         <span class="text-danger" style="text-align:center;">
-        {% for error in form.lastname.errors %}{{ error }}{% endfor %}
+        {% for error in form.last_name.errors %}{{ error }}{% endfor %}
     </span>
     {% endif %}
 
@@ -292,6 +310,23 @@
         {{ phoneNumberError }}
     </span>
     {% endif %}
+
+        <div class="form-group {% if accountNumberError and type == 'signup' %}has-error{% endif %}">
+            <div class="col-md-12 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                    <input name="accountNumber" placeholder="شماره حساب" class="form-control" type="text"
+                           title="جهت واریز قبض پرداختی همسایگان به شماره حساب شما نیاز داریم."
+                           value="{% if type == 'signup' %} {{ accountNumber }} {% endif %}">
+                </div>
+            </div>
+        </div>
+        {% if accountNumberError and type == 'signup' %}
+            <span class="text-danger" style="text-align:center;">
+        {{ accountNumberError }}
+    </span>
+        {% endif %}
+
 
 
 
