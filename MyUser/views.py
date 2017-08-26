@@ -79,10 +79,10 @@ def complexRegister(request):
         context.get('unit_per_block')['errors'] = 'تعداد واحدهای هر بلوک معتبر نیست.'
     else:
         manager = request.user.member.manager
-        complex = Complex.objects.create(manager=manager, name=name, address=address)
+        complex = Complex.objects.create(manager=manager, name=name, address=address, unit_number=int(unit_per_block))
         complex.save()
         for i in range(int(blockNum)):
-            block = Block.objects.create(complex=complex, unit_number=int(unit_per_block))
+            block = Block.objects.create(complex=complex)
             block.save()
         return HttpResponseRedirect(reverse('site:manager:account'))
     return render(request, 'index.html', context)

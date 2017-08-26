@@ -1,4 +1,4 @@
-from django.conf.urls import url, include
+from django.conf.urls import url
 
 from . import views
 
@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^board/add_to_board$', views.add_to_board, name='add_to_board'),
     url(r'^board/$', views.view_board, name='board'),
     url(r'^enterBill/$', views.enter_bill, name='enterBill'),
+    url(r'^(?P<unit_id>[0-9]+)/delete_unit/$', views.delete_unit, name='deleteUnit'),
     url(r'^$', views.account, name='account'),
     ]

@@ -123,7 +123,9 @@ def edit_neighbours(request):
 
 @login_required
 def edit_unit(request):
-    return render(request, 'manager/editUnit.html')
+    complex = request.user.member.manager.complex
+    units = Unit.objects.filter(block__complex=complex)
+    return render(request, 'manager/editUnit.html', {'units': units})
 
 @login_required
 def paying_reports(request):
@@ -216,7 +218,7 @@ def add_neighbour(request):
         return HttpResponseRedirect(reverse('site:manager:requests'))
     else:
         form = ResidentForm()
-    return render(request, 'manager/addRequest.html', {'form': form})
+    return render(request, 'manager/addNeighbour.html', {'form': form})
     #return render(request, 'addNeighbour.html')
 
 
@@ -237,7 +239,22 @@ def add_request(request):
 
 @login_required
 def add_unit(request):
-    return render(request, 'manager/addUnit.html')
+    blocks = Block.objects.filter(complex=request.user.member.manager.complex)
+    if request.method == 'POST':
+        area = request.POST.get('area')
+        block = request.POST.get('block')
+        if area != '' and area.isdigit() and block != '':
+            block = Block.objects.get(id=block)
+            if len(block.unit_set) < request.user.member.manager.complex:
+                unit = Unit.objects.create(block=block, area=int(area))
+                unit.save()
+                return edit_unit(request)
+            else:
+                error = 'تمام واحدهای این بلوک افزوده شده اند.'
+        else:
+            error = 'شماره بلوک و متراژ الزامی است.'
+        return render(request, 'manager/addUnit.html', {'blocks': blocks, 'error': error})
+    return render(request, 'manager/addUnit.html', {'blocks': blocks})
 
 
 @login_required
@@ -290,3 +307,8 @@ def enter_bill(request):
             action_message = 'قبض مورد نظر ثبت شد'
     form = BillForm()
     return render(request, 'manager/enterBill.html', {'form': form, 'messages': action_message})
+
+
+def delete_unit(request, unit_id):
+    Unit.objects.get(id=unit_id).delete()
+    return edit_unit(request)
