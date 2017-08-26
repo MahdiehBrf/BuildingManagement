@@ -12,27 +12,51 @@
 
 <div class="main">
     <h5>وارد کردن اطلاعات همسایه ی جدید</h5>
-    <form action="" method="post">{% csrf_token %}
+    <form action="" method="post" style="direction: ltr">{% csrf_token %}
         <table class="tbl" border="0" align="center">
             <tbody>
             <tr>
-                <td><input type="text" name="firstname" id="firstname" value="{{ form1.firstname }}"></td>
+                <td><input type="text" name="first_name" id="firstname" value="{{ form1.first_name.value }}">
+                {% if form1.first_name.errors %}
+                        <span class="text-danger">
+                            <p>{{ form1.first_name.errors }}</p>
+                        </span>
+                    {% endif %}
+                </td>
                 <td><label for="firstname">نام</label></td>
             </tr>
             <tr>
-                <td><input type="text" name="lastname" id="lastname" value="{{ form1.lastname }}"></td>
+                <td><input type="text" name="last_name" id="lastname" value="{{ form1.last_name.value }}">
+                {% if form1.last_name.errors %}
+                        <span class="text-danger">
+                            <p>{{ form1.last_name.errors }}</p>
+                        </span>
+                    {% endif %}
+                </td>
                 <td><label for="username"> نام خانوادگی</label></td>
             </tr>
             <tr>
-                <td><input type="email" name="username" id="email" value="{{ form1.email }}"></td>
+                <td><input type="email" name="email" id="email" value="{{ form1.email.value }}">
+                    {% if form1.email.errors %}
+                        <span class="text-danger">
+                            <p>{{ form1.email.errors }}</p>
+                        </span>
+                    {% endif %}
+                </td>
                 <td><label for="email">ایمیل</label></td>
             </tr>
             <tr>
-                <td><input type="number" name="phoneNumber" id="phoneNumber" value="{{ phoneNumber }}"></td>
+                <td><input type="number" name="phoneNumber" id="phoneNumber" value="{{ phoneNumber }}">
+                {% if error %}
+                        <span class="text-danger">
+                            <p>{{ error }}</p>
+                        </span>
+                {% endif %}
+                </td>
                 <td><label for="phoneNumber">شماره تلفن</label></td>
             </tr>
             <tr>
-                <td><select name="unit" id="unit">
+                <td><select name="unit" id="unit" style="text-align: right;">
                     <option value="" selected disabled>------</option>
                     {% for unit in units %}
                         <option value="{{ unit.id }}">{{ unit.id }}</option>
@@ -41,11 +65,11 @@
                 <td><label for="unit">شماره واحد </label></td>
             </tr>
             <tr>
-               <td><input type="number" name="count" id="count" min="1" max="10"></td>
+               <td><input type="number" name="member_count" id="count" min="1" max="10" value="{{ form2.member_count.value }}"></td>
                 <td><label for="count">تعداد اعضای خانواده </label></td>
             </tr>
             <tr>
-               <td><input type="number" name="car" id="car" min="1" max="5"></td>
+               <td><input type="number" name="car_count" id="car" min="1" max="5" value="{{ form2.car_count.value }}"></td>
                 <td><label for="car">تعداد اتومبیل </label></td>
             </tr>
             </tbody>

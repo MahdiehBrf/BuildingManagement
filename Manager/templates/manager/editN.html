@@ -8,40 +8,37 @@
 {% block content %}
 <div class="main">
     <h5>ویرایش کردن اطلاعات همسایه</h5>
-    <form action="" method="post">
+    <form action="" method="post" style="direction: rtl">{% csrf_token %}
         <table class="tbl" border="0" align="center">
             <tbody>
 
-            <tr>
 
-               <td><input type="number" name="unit" id="unit" min="1" max="100" value="1"></td>
+            <tr>
+                <td><select name="unit" id="unit" style="text-align: right;">
+                    <option value="{{ form.unit.id }}">{{ form.unit.id }}</option>
+                    {% for unit in units %}
+                        <option value="{{ unit.id }}">{{ unit.id }}</option>
+                    {% endfor %}
+                </select></td>
                 <td><label for="unit">شماره واحد </label></td>
             </tr>
 
             <tr>
-
-                <td><input type="text" name="username" id="username" value="hashem.b"></td>
-                <td><label for="username"> نام کاربری سرپرست</label></td>
-            </tr>
-
-            <tr>
-
-               <td><input type="number" name="count" id="count" min="1" max="10" value="5"></td>
+               <td><input type="number" name="member_count" id="count" min="1" max="10" value="{{ form.member_count.value }}"></td>
                 <td><label for="count">تعداد اعضای خانواده </label></td>
             </tr>
 
             <tr>
-
-               <td><input type="number" name="car" id="car" min="1" max="5" value="2"></td>
+               <td><input type="number" name="car_count" id="car" min="1" max="5" value="{{ form.car_count.value }}"></td>
                 <td><label for="car">تعداد اتومبیل </label></td>
             </tr>
 
 
             </tbody>
         </table>
+      <button type="submit" class="btn" >ثبت</button>
     </form>
 
-    <button type="button" class="btn" onclick="f()">ثبت</button>
 
 </div>
 {% endblock %}

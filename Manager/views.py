@@ -1,6 +1,7 @@
 import random
 
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -120,8 +121,9 @@ def edit_neighbours(request):
 
 
 @login_required
-def delete_neighbour(request):
-    pass
+def delete_neighbour(request,neighbour_id):
+    Resident.objects.get(id=neighbour_id).delete()
+    return edit_neighbours(request)
 
 @login_required
 def edit_unit(request):
@@ -202,12 +204,25 @@ def requests(request):
         manager_requests = Request.objects.all()
     return render(request, 'manager/requests.html', {'requests': manager_requests})
 
-'''
-    member = models.OneToOneField(User)
-    member_count = models.IntegerField()
-    car_count = models.IntegerField()
-    unit = models.OneToOneField(Unit)p
-'''
+
+@login_required
+def edit_n(request,neighbour_id):
+    resident = Resident.objects.get(id=neighbour_id)
+    complex = request.user.member.manager.complex
+    units = Unit.objects.filter(block__complex=complex).filter(resident=None)
+    if request.method == 'POST':
+        form = ResidentForm(request.POST, instance=resident)
+        if form.is_valid():
+            r = form.save(commit=False)
+            r.member = request.user.member
+            r.save()
+            return edit_neighbours(request)
+    else:
+        form = ResidentForm(instance=resident)
+    return render(request, 'manager/editN.html', {'units': units, 'form':form})
+
+
+
 @login_required
 def add_neighbour(request):
     complex = request.user.member.manager.complex
@@ -223,25 +238,33 @@ def add_neighbour(request):
             user.username = "".join(random.sample(s, passlen))
             user.password1 = "".join(random.sample(s, passlen))
             user.password2 = user.password1
-            user.save()
+            user.password = user.password1
             if len(phoneNumber) == 11 and phoneNumber[0:2] == '09':
-                member = Member.objects.create(user=user, phoneNumber=phoneNumber)
-                member.save()
+                user.save()
+                member = Member.objects.create(user=user, phone_number=phoneNumber)
                 if form2.is_valid():
                     resident = form2.save(commit=False)
                     resident.member = member
+
+                    member.save()
                     resident.save()
+                    send_mail(
+                        'ثبت نام در سامانه مدیریت مجتمع های مسکونی و آپارتمان ها ',
+                        'سلام\n مدیر مجتمع {0} شما را به ثبت نام در سامانه مدیریت مجتمع دعوت کرده است. \n نام کاربری :{1}\n رمز عبور:{2}\n لطفا پس از ورود به سامانه نسبت به تغییر نام کاربری و رمزتان اقدام کنید.'.format(complex.name, user.username, user.password1),
+                        'fg75527@gmail.com',
+                        [str(user.email)],
+                        fail_silently=False,
+                    )
                     return edit_neighbours(request)
+                else:
+                    user.delete()
             else:
                 error = 'وارد کردن شماره تلفن الزامی است و باید 11 رقمی باشد و با 09 آغاز شود.'
                 render(request, 'manager/addNeighbour.html',
                        {'form1': form1, 'form2': form2, 'units': units, 'phoneNumber': phoneNumber, 'error': error})
-        return HttpResponseRedirect(reverse('site:manager:requests'))
     else:
-        form1 = SignupForm2()
-        form2 = ResidentForm()
-    return render(request, 'manager/addNeighbour.html', {'form1': form1, 'form2': form2, 'units': units})
-    #return render(request, 'addNeighbour.html')
+        return render(request, 'manager/addNeighbour.html', {'units': units})
+    return render(request, 'manager/addNeighbour.html', {'form1': form1, 'form2': form2, 'units': units,'phoneNumber':phoneNumber})
 
 
 @login_required
@@ -267,7 +290,8 @@ def add_unit(request):
         block = request.POST.get('block')
         if area != '' and area.isdigit() and block != '':
             block = Block.objects.get(id=block)
-            if len(block.unit_set) < request.user.member.manager.complex:
+            units = Unit.objects.filter(block=block)
+            if len(units) < request.user.member.manager.complex.unit_number:
                 unit = Unit.objects.create(block=block, area=int(area))
                 unit.save()
                 return edit_unit(request)
@@ -277,11 +301,6 @@ def add_unit(request):
             error = 'شماره بلوک و متراژ الزامی است.'
         return render(request, 'manager/addUnit.html', {'blocks': blocks, 'error': error})
     return render(request, 'manager/addUnit.html', {'blocks': blocks})
-
-
-@login_required
-def edit_n(request):
-    return render(request, 'manager/editN.html')
 
 
 @login_required

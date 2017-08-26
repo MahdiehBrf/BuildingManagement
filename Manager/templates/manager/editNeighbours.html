@@ -25,7 +25,7 @@
             {% load static %}
             <td><a href="{% url 'site:manager:deleteNeighbour' neighbour.id %}"><img
                     src="{% static "images/delete.png" %}" class="linkImg"></a></td>
-            <td><a href="{% url 'site:manager:editN' %}"><img src="{% static "images/edit.jpg" %}" class="linkImg"></a>
+            <td><a href="{% url 'site:manager:editN' neighbour.id %}"><img src="{% static "images/edit.jpg" %}" class="linkImg"></a>
             </td>
             <td>{{ neighbour.car_count }}</td>
             <td>{{ neighbour.member_count }}</td>
