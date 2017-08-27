@@ -14,7 +14,7 @@
         <h5>ارسال دعوت نامه</h5>
         <form action="" method="post">
             {% csrf_token %}
-            <table class="tbl" border="0" align="center">
+            <table  border="0" align="center">
                 <tbody>
 
                 <tr>
@@ -28,7 +28,7 @@
                 </tr>
                 <tr>
 
-                    <td class="mytext">{{ form.text }}</td>
+                    <td>{{ form.text }}</td>
                     <td><label for="txt">متن </label></td>
                 </tr>
 

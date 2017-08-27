@@ -16,7 +16,7 @@ from Resident.models import PayByBank
 
 
 def account(request):
-    return render(request, 'resident/account.html')
+    return render(request, 'resident/bills.html')
 
 
 @login_required
@@ -227,6 +227,8 @@ def select_pay_way(request, receipt_id):
         if 'bank' in request.POST:
             p = PayByBank(date=datetime.today().date(), amount=receipt.cost, resident=resident, receipt=receipt)
             p.save()
+            receipt.state = 'P'
+            receipt.save()
             return render(request, 'resident/payBankSuccess.html')
         elif 'account' in request.POST:
             cash = account.cash
@@ -237,6 +239,8 @@ def select_pay_way(request, receipt_id):
                 account.save()
                 p = PayByAccount(date=datetime.today().date(), amount=receipt.cost, account=account, receipt=receipt)
                 p.save()
+                receipt.state = 'P'
+                receipt.save()
                 return render(request, 'resident/payAccountSuccess.html', {'acount': account})
     return render(request, 'resident/select_payWay.html', {'r': receipt})
 

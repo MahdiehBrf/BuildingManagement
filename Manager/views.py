@@ -25,7 +25,7 @@ from Resident.models import Resident
 
 @login_required
 def account(request):
-    return render(request, 'manager/account.html')
+    return render(request, 'manager/payingReports.html')
 
 
 @login_required

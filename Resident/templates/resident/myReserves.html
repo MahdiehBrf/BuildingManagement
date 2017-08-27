@@ -13,23 +13,23 @@ function f(){alert("درخواست رزرو با موفقیت تایید گرد�
 <div class="main">
     <h5>درخواست های رزرو من</h5>
 
-<form action="" method="post">
+<form action="" method="post"style="direction: rtl;">
     {% csrf_token %}
-    <select class="from" name="choose"  placeholder="به ترتیب">
+    <select class="from" name="choose"  placeholder="به ترتیب"style="width:100px;">
         <option value="قدیمی ترین">قدیمی ترین</option>
         <option value="جدیدترین">جدیدترین</option>
     </select>
     <label for="id_startDate">از تاریخ</label>
-    <input type="date" name="startDate" id="id_startDate" class="from">
+    <input type="date" name="startDate" id="id_startDate" class="from" style="width:200px;">
     <label for="id_finishDate">تا تاریخ</label>
-    <input type="date" name="finishDate" id="id_finishDate" class="from">
+    <input type="date" name="finishDate" id="id_finishDate" class="from" style="width:200px;">
     <input type="submit" class="btn"  value="نمایش">
 </form>
 
 
     <table>
         <tr>
-            <th style="width: 5%"> </th>
+
             <th style="width: 10%">مبلغ به ریال </th>
             <th style="width: 10%">وضعیت</th>
             <th style="width: 15%">زمان و تاریخ ایجاد</th>
@@ -42,7 +42,6 @@ function f(){alert("درخواست رزرو با موفقیت تایید گرد�
 
         {% for reserve in reserves %}
             <tr>
-                <td><a href="{% url 'site:manager:accept_reserve' reserve.reserve_date %}" onclick="f()">تایید</a></td>
                 <td>{{ reserve.cost }}</td>
                 <td>{{ reserve.get_state_display }}</td>
                 <td>{{ reserve.reserve_date|date:"Y / m / d" }}</td>

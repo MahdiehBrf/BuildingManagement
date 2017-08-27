@@ -137,6 +137,7 @@ li.dropdown {
 
 .main {
    padding: 5%;
+   padding-top: 1%;
    padding-bottom: 10%;
    margin: 5%;
    border: solid 2px;
@@ -165,7 +166,7 @@ table {
 }
 
 th, td {
-    text-align: right;
+    text-align: center;
     padding: 8px;
 }
 
@@ -205,9 +206,7 @@ th {
     margin: 35px;
 }
 
-form{
-    direction: rtl;
-}
+
 
 .btn[type=submit] {
     background-color: #ACA9A8;
