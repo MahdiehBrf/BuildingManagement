@@ -1,0 +1,68 @@
+{% extends 'resident/residentBase.html' %}
+
+{% block title %}قبوض{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="../../../static/css/viewBillStyles.css"/>{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="main">
+        <h5>شارژهای پرداخت نشده</h5>
+
+
+        <form action="" method="post">
+            {% csrf_token %}
+            <select class="from" name="choose" placeholder="به ترتیب" style="width:100px;">
+                <option value="قدیمی ترین">قدیمی ترین</option>
+                <option value="جدیدترین">جدیدترین</option>
+            </select>
+            <label for="id_startDate">از تاریخ</label>
+            <input type="date" name="startDate" id="id_startDate" class="from" style="width:200px;">
+            <label for="id_finishDate">تا تاریخ</label>
+            <input type="date" name="finishDate" id="id_finishDate" class="from" style="width:200px;">
+            <input type="submit" class="btn" value="نمایش">
+        </form>
+
+
+        <table>
+            <tr>
+
+                <th>مبلغ</th>
+                <th>تاریخ پایان</th>
+                <th>تاریخ شروع</th>
+                <th>شماره قبض</th>
+                <th>شماره واحد</th>
+                <th>شماره بلوک</th>
+                <th>شماره</th>
+            </tr>
+            {% for receipt in receipts %}
+                <tr>
+                    <td>{{ receipt.cost }}</td>
+                    <td>{{ receipt.finish_date|date:"Y / m / d" }}</td>
+                    <td>{{ receipt.start_date|date:"Y / m / d" }}</td>
+                    <td>{{ receipt.id }}</td>
+                    <td>{{ receipt.resident.unit.block.id }}</td>
+                    <td>{{ receipt.resident.unit.id }}</td>
+                    <td>
+                        {{ forloop.counter }}
+                    </td>
+                </tr>
+            {% endfor %}
+
+
+        </table>
+
+        <button type="button" class="btn" onclick="window.location.href='{% url 'site:manager:calculateReceipts' %}' ">
+            محاسبه ی شارژ
+        </button>
+
+        <a href="javascript:void(0)" class="btn"><img src="../../../static/images/printer.png" class="linkImg1"></a>
+        <a href="javascript:void(0)" class="btn"><img src="../../../static/images/save.png" class="linkImg2"></a>
+
+    </div>
+
+{% endblock %}

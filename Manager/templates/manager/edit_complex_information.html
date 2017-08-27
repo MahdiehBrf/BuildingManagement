@@ -2,14 +2,15 @@
 
 {% block title %}اطلاعات مجتمع{% endblock %}
 
-{% block css %}{% endblock %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="../../../static/css/viewBillStyles.css"/>{% endblock %}
 
 {% block script %}
 {% endblock %}
 
 {% block content %}
 <div class="main">
-    <h5>ویرایش اطلاعات همسایه</h5>
+    <h5>اطلاعات مجتمع</h5>
     <form action="" method="post" style="direction: ltr">{% csrf_token %}
         <table class="tbl" border="0" align="center">
             <tbody>
@@ -28,23 +29,24 @@
 
             <tr>
 
-                <td><input type="number" name="blockNum" value="{{ blockNum }}"></td>
+                <td><input type="number" min="1" name="blockNum" value="{{ blockNum }}"></td>
                 <td><label for="blockNum">تعداد بلوک در مجتمع </label></td>
             </tr>
 
             <tr>
 
-                <td><input type="text" name="unit_number" value="{{ form.unit_number }}"></td>
+                <td><input type="number" min="1" name="unit_number" value="{{ form.unit_number }}"></td>
                 <td><label for="unit_number">تعداد واحد در هر بلوک</label></td>
             </tr>
 
             </tbody>
         </table>
         <input type="submit" name="submit" tabindex="4"
-               class="form-control btn btn-login" value="ویرایش" placeholder="ویرایش">
+               class="form-control btn btn-login" value="ویرایش" placeholder="ویرایش"
+               style="background-color:#F62A00; color:white; font-weight: bold;">
     </form>
     <a type="button" class="btn" href="{% url 'site:manager:editFacility' %}" style="color: white;
-background-color: #ACA9A8;
+
     border: none;
     padding: 15px 32px;
     text-align: center;
@@ -53,7 +55,8 @@ background-color: #ACA9A8;
     font-size: 16px;
     float: left;
     margin: 35px;
-    height: 20px;">اضافه کردم امکانات جدید به مجتمع</a>
+    font-weight: bold;
+    height: 20px;">اضافه کردن امکانات جدید به مجتمع</a>
 
 
 </div>

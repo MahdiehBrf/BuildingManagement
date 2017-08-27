@@ -5,6 +5,7 @@
 {% block css %}<link rel="stylesheet" type="text/css" href="../../../static/css/addReqStyle.css"/>{% endblock %}
 
 {% block script %}
+    function f(){alert("قبض با موفقیت اضافه شد")}
 
 {% endblock %}
 
@@ -17,14 +18,10 @@
             <table class="tbl" border="0" align="center">
                 <tbody>
                 <tr>
-                    {% for message in messages %}
-                        {{ message }}
-                    {% endfor %}
-                </tr>
-                <tr>
                     <td><select id="block" required name="block">
-                        {% for s,a in form.fields.block.choices %}
-                            <option value="{{ forloop.counter }}">{{ s }}</option>
+                        <option disabled selected style="color: black;">---------</option>
+                        {% for block in blocks %}
+                            <option value="{{ block.id }}">{{ block.id }}</option>
                         {% endfor %}
                     </select></td>
                     <td><label for="block">بلوک </label></td>
@@ -51,7 +48,7 @@
 
                 </tbody>
             </table>
-            <input type="submit" class="btn"  value="انجام شد">
+        <input type="submit" class="btn" onclick="f()" value="اضافه">
         </form>
 
 

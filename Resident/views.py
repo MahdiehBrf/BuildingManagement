@@ -1,6 +1,5 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from django.forms import Form
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 # Create your views here.
@@ -11,12 +10,12 @@ from MySite.forms import DisplayForm
 from MyUser.forms import SignupForm1
 from MyUser.models import Member, Message
 from Resident.forms import ReserveForm, DateForm, MessageForm, AcountForm
-from Resident.models import PayByAccount, Reserve, Receipt, Account
+from Resident.models import PayByAccount, Reserve, Receipt, Account, Resident
 from Resident.models import PayByBank
 
 
 def account(request):
-    return render(request, 'resident/account.html')
+    return render(request, 'resident/bills.html')
 
 
 @login_required
@@ -42,6 +41,25 @@ def view_board(request):
         news_set = resident.unit.block.board.news_set.all()
         events = resident.unit.block.board.event_set.all()
     return render(request, 'resident/board.html', {'events': events, 'newsSet': news_set})
+
+
+@login_required
+def view_event(request):
+    resident = request.user.member.resident
+    events = None
+    if request.method == 'POST':
+        form = DisplayForm(request.POST)
+        if form.is_valid():
+            events = resident.unit.block.board.event_set.filter(board__block=resident.unit.block,
+                                                                date__gte=form.cleaned_data['startDate'],
+                                                                date__lte=form.cleaned_data['finishDate'])
+        else:
+            events = resident.unit.block.board.event_set.all()
+        if request.POST['choose'] == 'جدیدترین':
+            events = events.order_by('-date')
+    else:
+        events = resident.unit.block.board.event_set.all()
+    return render(request, 'resident/events.html', {'events': events})
 
 
 def edit_profile(request):
@@ -91,6 +109,7 @@ def paying_reports(request):
 
 
 def reserve(request):
+    facility = request.user.member.resident.unit.block.facility_set.all()
     if request.method == 'POST':
         form = ReserveForm(request.POST)
         dateForm = DateForm(request.POST)
@@ -107,11 +126,13 @@ def reserve(request):
             return HttpResponseRedirect(reverse('site:resident:myReserves'))
     else:
         form = ReserveForm()
-    return render(request, 'resident/reserve.html', {'form': form})
+    return render(request, 'resident/reserve.html', {'form': form, 'facilities': facility})
 
 
 @login_required
 def message(request):
+    block = request.user.member.resident.unit.block
+    receivers = Resident.objects.filter(unit__block=block)
     if request.method == 'POST':
         form = MessageForm(request.POST)
         if form.is_valid():
@@ -122,7 +143,7 @@ def message(request):
         return HttpResponseRedirect(reverse('site:resident:select_contact'))
     else:
         form = MessageForm()
-    return render(request, 'resident/message.html', {'form': form})
+    return render(request, 'resident/message.html', {'form': form, 'receivers': receivers})
 
 
 @login_required
@@ -214,6 +235,8 @@ def select_pay_way(request, receipt_id):
         if 'bank' in request.POST:
             p = PayByBank(date=datetime.today().date(), amount=receipt.cost, resident=resident, receipt=receipt)
             p.save()
+            receipt.state = 'P'
+            receipt.save()
             return render(request, 'resident/payBankSuccess.html')
         elif 'account' in request.POST:
             cash = account.cash
@@ -224,6 +247,8 @@ def select_pay_way(request, receipt_id):
                 account.save()
                 p = PayByAccount(date=datetime.today().date(), amount=receipt.cost, account=account, receipt=receipt)
                 p.save()
+                receipt.state = 'P'
+                receipt.save()
                 return render(request, 'resident/payAccountSuccess.html', {'acount': account})
     return render(request, 'resident/select_payWay.html', {'r': receipt})
 

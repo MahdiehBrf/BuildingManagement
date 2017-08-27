@@ -8,9 +8,8 @@
 .img-circle {
     border-radius: 50%;
     max-width: 100px;
-    height: auto;
-    position: relative;
     border: solid white 2px;
+    margin: 0;
 }
 
 .cover {
@@ -53,6 +52,7 @@
     font-family: brandon;
     color: white;
     font-weight: bold;
+    margin: auto;
 }
 
 .topright p{
@@ -137,6 +137,7 @@ li.dropdown {
 
 .main {
    padding: 5%;
+    padding-top: 1%;
    padding-bottom: 10%;
    margin: 5%;
    border: solid 2px;
@@ -147,7 +148,7 @@ li.dropdown {
 
 .main a {
   display: inline-block;
-    color: #F18D9E;
+    color: #F62A00;
     padding: 0px;
     text-decoration: none;
 }
@@ -165,7 +166,7 @@ table {
 }
 
 th, td {
-    text-align: right;
+    text-align: center;
     padding: 8px;
 }
 
@@ -203,10 +204,6 @@ th {
     font-size: 16px;
     float: left;
     margin: 35px;
-}
-
-form{
-    direction: rtl;
 }
 
 .btn[type=submit] {

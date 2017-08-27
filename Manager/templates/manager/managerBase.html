@@ -5,7 +5,6 @@
     {% load static %}
     <title>{% block title %}{% endblock %}</title>
     <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
-    <link rel="stylesheet" type="text/css" href="../../../static/css/viewBillStyles.css"/>
     <style>
          @font-face {
              font-family: 'brandon';
@@ -50,10 +49,12 @@
              text-align: right;
          }
 
-         .mytext{
+         #id_text {
             font-family: brandon;
             font-size: 18px;
             text-align: right;
+             width: 400px;
+             height: 150px;
          }
 
          .address{
@@ -75,22 +76,22 @@
          }
 
          .highlighted {
-    background-color: rgba(0,0,0,.4);
-    text-align: center;
-}
+             background-color: rgba(0, 0, 0, .4);
+             text-align: center;
+         }
 
 
     </style>
     {% block css %}{% endblock %}
 
-    <script>{% block script %}{% endblock %}</script>
+    <script type="text/javascript">{% block script %}{% endblock %}</script>
 </head>
 <body>
 <div class="container">
 
     <img class="cover" src="../../../static/images/test.jpg">
     <div class="topright"><img class="img-circle" src="../../../static/images/user_profile_female.jpg">
-        <p class="highlighted">زهرا بابایی</p></div>
+        <p class="highlighted"> {{ user.get_full_name }}</p></div>
     <div class="topleft" style="display:grid; z-index:5">
         <a href="{% url 'site:manager:select_contact'%}"><img src="../../../static/images/message.png"
                                                               style="height:50px;width:50px;"/></a>
@@ -114,9 +115,11 @@
             </div>
         </li>
         <li class="dropdown">
-            <a href="javascript:void(0)" class="dropbtn">اطلاعیه ها</a>
+            <a href="javascript:void(0)" class="dropbtn">بورد</a>
             <div class="dropdown-content">
-                <a href="{% url 'site:manager:board'%}">بورد</a>
+                <a href="{% url 'site:manager:board' %}">اخبار</a>
+                <a href="{% url 'site:manager:events' %}">رویدادها</a>
+                <a href="{% url 'site:manager:add_to_board' %}">اطلاعیه جدید</a>
             </div>
         </li>
         <li class="dropdown">
@@ -136,7 +139,7 @@
             <a href="javascript:void(0)" class="dropbtn">امور مالی</a>
             <div class="dropdown-content">
                 <a href="{% url 'site:manager:enterBill'%}">وارد کردن قبض</a>
-                 <a href="{% url 'site:manager:calculateReceipts'%}">محاسبه ی شارژ</a>
+                <a href="{% url 'site:manager:viewBills' %}">محاسبه ی شارژ</a>
             </div>
         </li>
 
