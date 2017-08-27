@@ -5,6 +5,27 @@
 {% block css %}<link rel="stylesheet" type="text/css" href="../../../static/css/viewBillStyles.css"/>{% endblock %}
 
 {% block script %}
+function f(){alert("درخواست رزرو با موفقیت تایید گردید")}
+    function g(){alert("درخواست رزرو با موفقیت رد گردید")}
+    function printDiv(divName) {
+     var printContents = document.getElementById(divName).innerHTML;
+     var originalContents = document.body.innerHTML;
+
+     document.body.innerHTML = printContents;
+
+     window.print();
+
+     document.body.innerHTML = originalContents;
+}
+    function save(filename, divName) {
+  var el = document.createElement('a');
+  el.setAttribute('href', 'data:text/html;charset=utf-8,' + encodeURIComponent(document.getElementById(divName).innerHTML));
+  el.setAttribute('download', filename);
+  el.style.display = 'none';
+  document.body.appendChild(el);
+  el.click();
+  document.body.removeChild(el);
+}
 {% endblock %}
 
 {% block content %}
@@ -27,7 +48,7 @@
 </form>
 
 
-
+<div id="printableArea">
     <table>
         <tr>
             <th>پرداخت</th>
@@ -54,11 +75,11 @@
 
 
     </table>
+</div>
 
 
-
-    <a href="javascript:void(0)" class="btn"><img src="../../../static/images/printer.png" title="چاپ" class="linkImg1"></a>
-    <a href="javascript:void(0)" class="btn"><img src="../../../static/images/save.png" title="ذخیره" class="linkImg2"></a>
+    <a href="javascript:void(0)" onclick="printDiv('printableArea')" class="btn"><img src="../../static/images/printer.png" title="چاپ" class="linkImg1"></a>
+    <a href="javascript:void(0)" onclick="save('reservesCheck.html', 'printableArea')" class="btn"><img src="../../static/images/save.png" title="ذخیره" class="linkImg2"></a>
 
 </div>
 
