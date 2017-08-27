@@ -1,16 +1,16 @@
-{% extends 'resident/residentBase.html' %}
+{% extends 'manager/managerBase.html' %}
 
-{% block title %}اخبار{% endblock %}
+{% block title %}رویدادها{% endblock %}
 
 {% block css %}<link rel="stylesheet" type="text/css" href="../../../static/css/viewBillStyles.css"/>{% endblock %}
 
 {% block script %}
+
 {% endblock %}
 
 {% block content %}
-
 <div class="main">
-    <h5>اخبار</h5>
+    <h5>رویدادها</h5>
 
 
 <form action="" method="post">
@@ -26,22 +26,22 @@
     <input type="submit" class="btn"  value="نمایش">
 </form>
 
-
-
     <table>
         <tr>
+            <th>مبلغ</th>
             <th>توضیحات</th>
-            <th>عنوان</th>
             <th>زمان و تاریخ</th>
+            <th>شماره بلوک</th>
             <th>شماره</th>
             <th>ردیف</th>
         </tr>
-        {% for news in newsSet %}
+        {% for event in events %}
             <tr>
-                <td>{{ news.description }}</td>
-                <td>{{ news.title }}</td>
-                <td>{{ news.date|date:"Y / m / d" }}</td>
-                <td>{{ news.id }}</td>
+                <td>{{ event.cost }}</td>
+                <td>{{ event.description }}</td>
+                <td>{{ event.date|date:"Y / m / d" }}</td>
+                <td>{{ event.board.block_id }}</td>
+                <td>{{ event.id }}</td>
                 <td>
                     {{ forloop.counter }}
                 </td>
@@ -51,10 +51,9 @@
 
     </table>
 
-    <a href="javascript:void(0)" class="btn"><img src="../../../static/images/printer.png" class="linkImg1"></a>
-    <a href="javascript:void(0)" class="btn"><img src="../../../static/images/save.png" class="linkImg2"></a>
+    <a href="javascript:void(0)" class="btn"><img src="../../../static/images/printer.png" title="چاپ" class="linkImg1"></a>
+    <a href="javascript:void(0)" class="btn"><img src="../../../static/images/save.png" title="ذخیره" class="linkImg2"></a>
 
 </div>
-
 {% endblock %}
 

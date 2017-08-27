@@ -8,9 +8,8 @@
 .img-circle {
     border-radius: 50%;
     max-width: 100px;
-    height: auto;
-    position: relative;
     border: solid white 2px;
+    margin: 0;
 }
 
 .cover {
@@ -53,6 +52,7 @@
     font-family: brandon;
     color: white;
     font-weight: bold;
+    margin: auto;
 }
 
 .topright p{

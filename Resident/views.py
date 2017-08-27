@@ -40,6 +40,23 @@ def view_board(request):
     return render(request, 'resident/board.html', {'events': events, 'newsSet': news_set})
 
 
+@login_required
+def view_event(request):
+    resident = request.user.member.resident
+    events = None
+    if request.method == 'POST':
+        form = DisplayForm(request.POST)
+        if form.is_valid():
+            events = resident.unit.block.board.event_set.filter(board__block=resident.unit.block, date__gte=form.cleaned_data['startDate'], date__lte=form.cleaned_data['finishDate'])
+        else:
+            events = resident.unit.block.board.event_set.all()
+        if request.POST['choose'] == 'جدیدترین':
+            events = events.order_by('-date')
+    else:
+        events = resident.unit.block.board.event_set.all()
+    return render(request, 'resident/events.html', {'events': events})
+
+
 def edit_profile(request):
     return render(request, 'resident/edit_profile.html')
 

@@ -13,8 +13,6 @@ RESERVE_STATE = {
     ('A', 'تایید شده')
 }
 
-
-
 class Resident(models.Model):
     member = models.OneToOneField(Member)
     member_count = models.IntegerField()

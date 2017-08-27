@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^edit_profile/$', views.edit_profile, name='edit_profile'),
     url(r'^board/add_to_board$', views.add_to_board, name='add_to_board'),
     url(r'^board/$', views.view_board, name='board'),
+    url(r'^events/$', views.view_event, name='events'),
     url(r'^enterBill/$', views.enter_bill, name='enterBill'),
     url(r'^$', views.account, name='account'),
     ]

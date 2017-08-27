@@ -87,7 +87,7 @@
 
     <img class="cover" src="../../../static/images/test.jpg">
     <div class="topright"><img class="img-circle" src="../../../static/images/user_profile_female.jpg">
-        <p class="highlighted">زهرا بابایی</p></div>
+        <p class="highlighted"> {{ user.get_full_name }}</p></div>
     <div class="topleft" style="display:grid; z-index:5">
         <a href="{% url 'site:resident:select_contact' %}"><img src="../../../static/images/message.png"
                                                                 style="height:50px;width:50px;"/></a>
@@ -106,9 +106,10 @@
                 </div>
             </li>
             <li class="dropdown">
-                <a href="javascript:void(0)" class="dropbtn">اطلاعیه ها</a>
+                <a href="javascript:void(0)" class="dropbtn">بورد</a>
                 <div class="dropdown-content">
-                    <a href="{% url 'site:resident:board'%}">بورد</a>
+                    <a href="{% url 'site:resident:board'%}">اخبار</a>
+                    <a href="{% url 'site:resident:events'%}">رویدادها</a>
                 </div>
             </li>
             <li class="dropdown">

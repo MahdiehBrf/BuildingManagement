@@ -64,6 +64,22 @@ def view_board(request):
         events = Event.objects.filter(board__block__complex=manager.complex)
     return render(request, 'manager/board.html', {'events': events, 'newsSet': news_set})
 
+@login_required
+def view_event(request):
+    manager = request.user.member.manager
+    events = None
+    if request.method == 'POST':
+        form = DisplayForm(request.POST)
+        if form.is_valid():
+            events = Event.objects.filter(board__block__complex=manager.complex, date__gte=form.cleaned_data['startDate'], date__lte=form.cleaned_data['finishDate'])
+        else:
+            events = Event.objects.filter(board__block__complex=manager.complex)
+        if request.POST['choose'] == 'جدیدترین':
+            events = events.order_by('-date')
+    else:
+        events = Event.objects.filter(board__block__complex=manager.complex)
+    return render(request, 'manager/events.html', {'events': events})
+
 
 @login_required
 def edit_profile(request):
