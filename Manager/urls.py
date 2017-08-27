@@ -3,8 +3,11 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
+    url(r'^view_bills/$', views.view_bills, name='viewBills'),
     url(r'^calculate_receipts/$', views.calculate_receipts, name='calculateReceipts'),
-    url(r'^(?P<reserve_id>\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}.[0-9]*\W\d{2}:\d{2})/$', views.accept_reserve, name='accept_reserve'),
+    url(r'^(?P<reserve_id>\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}.[0-9]*\W\d{2}:\d{2})/reject_reserve/$', views.reject_reserve,
+        name='reject_reserve'),
+    url(r'^(?P<reserve_id>\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}.[0-9]*\W\d{2}:\d{2})/accept_reserve/$', views.accept_reserve, name='accept_reserve'),
     url(r'^(?P<request_id>[0-9]+)/view_request/$', views.view_request, name='viewRequest'),
     url(r'^(?P<request_id>[0-9]+)/delete_request/$', views.delete_request, name='delete_request'),
     url(r'^select_contact/$', views.select_contact, name='select_contact'),

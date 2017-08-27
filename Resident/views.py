@@ -11,7 +11,7 @@ from MySite.forms import DisplayForm
 from MyUser.forms import SignupForm1
 from MyUser.models import Member, Message
 from Resident.forms import ReserveForm, DateForm, MessageForm, AcountForm
-from Resident.models import PayByAccount, Reserve, Receipt, Account
+from Resident.models import PayByAccount, Reserve, Receipt, Account, Resident
 from Resident.models import PayByBank
 
 
@@ -108,6 +108,7 @@ def paying_reports(request):
 
 
 def reserve(request):
+    facility = request.user.member.resident.unit.block.facility_set.all()
     if request.method == 'POST':
         form = ReserveForm(request.POST)
         dateForm = DateForm(request.POST)
@@ -124,11 +125,13 @@ def reserve(request):
             return HttpResponseRedirect(reverse('site:resident:myReserves'))
     else:
         form = ReserveForm()
-    return render(request, 'resident/reserve.html', {'form': form})
+    return render(request, 'resident/reserve.html', {'form': form, 'facilities' : facility})
 
 
 @login_required
 def message(request):
+    block = request.user.member.resident.unit.block
+    receivers = Resident.objects.filter(unit__block=block)
     if request.method == 'POST':
         form = MessageForm(request.POST)
         if form.is_valid():
@@ -139,7 +142,7 @@ def message(request):
         return HttpResponseRedirect(reverse('site:resident:select_contact'))
     else:
         form = MessageForm()
-    return render(request, 'resident/message.html', {'form': form})
+    return render(request, 'resident/message.html', {'form': form, 'receivers': receivers})
 
 
 @login_required

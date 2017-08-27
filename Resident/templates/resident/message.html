@@ -19,12 +19,15 @@ function f(){alert("همسایه با موفقیت اضافه شد"); window.loc
 
                 <tr>
 
-                    <td><select id="subject" required name="receiver">
-                        {% for s in form.receiver %}
-                            {{ s }}
-                        {% endfor %}
+                    <td><select id="receiver" required name="receiver">
+                        <option disabled selected style="color: black;">---------</option>
+                    {% for receiver in receivers %}
+                        <option value="{{ receiver.id }}">{{ receiver.member.user.first_name }}
+                        {{ receiver.member.user.last_name }}
+                        </option>
+                    {% endfor %}
                     </select></td>
-                    <td><label for="subject">گیرنده </label></td>
+                    <td><label for="receiver">گیرنده </label></td>
                 </tr>
                 <tr>
 

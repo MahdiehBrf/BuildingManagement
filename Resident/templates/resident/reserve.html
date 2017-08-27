@@ -20,11 +20,13 @@ function f(){alert("درخواست رزرو با موفقیت ثیت گردید"
             <tr>
 
                <td><select id="facility" required name="facility">
-                        {% for f in form.facility %}
-                            {{ f }}
-                        {% endfor %}
+                        <option disabled selected style="color: black;">---------</option>
+                    {% for facility in facilities %}
+                        <option value="{{ facility.id }}">{{ facility.type }}
+                        </option>
+                    {% endfor %}
                     </select></td>
-                <td><label for="facility">امکان </label></td>
+                    <td><label for="facility">امکان</label></td>
             </tr>
 
             <tr>

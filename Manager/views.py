@@ -341,6 +341,8 @@ def select_contact(request):
 
 @login_required
 def message(request):
+    complex = request.user.member.manager.complex
+    recievers = Resident.objects.filter(unit__block__complex=complex)
     if request.method == 'POST':
         form = MessageForm(request.POST)
         if form.is_valid():
@@ -351,7 +353,7 @@ def message(request):
         return HttpResponseRedirect(reverse('site:manager:select_contact'))
     else:
         form = MessageForm()
-    return render(request, 'manager/message.html', {'form': form})
+    return render(request, 'manager/message.html', {'form': form, 'receivers': recievers})
 
 
 @login_required
@@ -367,16 +369,15 @@ def delete_request(request, request_id):
 
 
 def enter_bill(request):
-    action_message = ''
+    block_set = request.user.member.manager.complex.block_set.all()
     if request.method == 'POST':
         form = BillForm(request.POST)
         if form.is_valid():
             bill = form.save(commit=False)
             bill.date = datetime.now().date()
             bill.save()
-            action_message = 'قبض مورد نظر ثبت شد'
     form = BillForm()
-    return render(request, 'manager/enterBill.html', {'form': form, 'messages': action_message})
+    return render(request, 'manager/enterBill.html', {'form': form, 'blocks': block_set})
 
 
 
@@ -405,11 +406,11 @@ def calculate_receipts(request):
                     c = ((events_cost+bills_cost)/size) * unit.resident.member_count
                     if reserves_cost:
                         c = c+ reserves_cost
-                    receipt = Receipt(start_date=complex.last_calculation_date, finish_date=datetime.today().date(), cost=c, resident=unit.resident, paid_cost=0)
+                    receipt = Receipt(start_date=complex.last_calculation_date, finish_date=datetime.today().date(), cost=c, resident=unit.resident, state='NP')
                     receipt.save()
             complex.last_calculation_date = datetime.today().date()
             complex.save()
-    return render(request, 'manager/account.html')
+    return HttpResponseRedirect(reverse('site:manager:viewBills'))
 
 
 def edit_facility(request):
@@ -438,3 +439,29 @@ def add_facility(request):
             error = 'وارد کردن تمام فیلدها الزامی است.'
         return render(request, 'manager/addFacility.html', {'blocks': blocks, 'error': error})
     return render(request, 'manager/addFacility.html', {'blocks': blocks})
+
+
+def reject_reserve(request, reserve_id):
+    reserve = get_object_or_404(Reserve, pk=reserve_id)
+    reserve.state = 'R'
+    reserve.save()
+    return HttpResponseRedirect(reverse('site:manager:reservesCheck'))
+
+
+def view_bills(request):
+    complex = request.user.member.manager.complex
+    receipts = None
+    if request.method == 'POST':
+        form = DisplayForm(request.POST)
+        if form.is_valid():
+            receipts = Receipt.objects.filter(state='NP', resident__unit__block__complex=complex, start_date__gte=form.cleaned_data['startDate'],
+                                              start_date__lte=form.cleaned_data['finishDate'])  # TODO
+        else:
+            receipts = Receipt.objects.filter(state='NP', resident__unit__block__complex=complex)
+        if request.POST['choose'] == 'جدیدترین':
+            receipts = receipts.order_by('-start_date')
+        elif request.POST['choose'] == 'قدیمی ترین':
+            receipts = receipts.order_by('start_date')
+    else:
+        receipts = Receipt.objects.filter(state='NP', resident__unit__block__complex=complex)
+    return render(request, 'manager/viewBills.html', {'receipts': receipts})
