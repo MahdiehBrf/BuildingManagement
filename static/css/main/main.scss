@@ -88,7 +88,7 @@ html {
                 }
             }
             @media screen and (max-height: 735px) {
-                top: 300px
+                top: 600px
             }
             .inner {
                 position: relative;
@@ -196,8 +196,8 @@ html {
         bottom: 0;
         left: 0;
         padding: 1rem;
-        top: 45%;
-        margin-top: 80%;
+        top: 65%;
+        margin-top: 90%;
     }
     .foot {
         font-size: 16px;
@@ -239,5 +239,11 @@ html {
     @include prefix(box-shadow, rgba(0, 0, 0, 0.2) 10px 10px 10px);
     .well{
         margin: 0;
+    }
+}
+
+@media screen and (max-width: 1000px){
+    #footer{
+        display: none;
     }
 }

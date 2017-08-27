@@ -7,14 +7,12 @@
         <option name="settingsModule" value="BuildingManagement/settings.py" />
         <option name="manageScript" value="manage.py" />
         <option name="environment" value="&lt;map/&gt;" />
-        <option name="commandsToSkip" value="" />
       </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
-
-    <orderEntry type="jdk" jdkName="Python 3.4.3 virtualenv at E:\Terms\TERM 6\40418 Systems Analysis and Design\Project\Project final\env" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.5.3 virtualenv at F:\BuildingManagement_venv" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">
