@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.db.models import Q, Sum
-from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 # Create your views here.
@@ -15,15 +14,13 @@ from Manager.forms import RequestForm, MessageForm, BillForm
 from Manager.models import Request
 from MySite.forms import EventForm, NewsForm, DisplayForm, ComplexForm
 from MySite.models import Event, News, Unit, Block
-from MyUser.forms import SignupForm1, SignupForm2
-from MyUser.models import Member, Message
-from Resident.forms import ResidentForm
-from Resident.models import Reserve, PayByBank, PayByAccount, Resident
-from MySite.models import Event, News, Unit, Bill, Block
+from MySite.models import Facility
 from MyUser.forms import SignupForm1
+from MyUser.forms import SignupForm2
 from MyUser.models import Member, Message
 from Resident.forms import ResidentForm
 from Resident.models import Reserve, PayByBank, PayByAccount, Receipt
+from Resident.models import Resident
 
 
 @login_required
@@ -75,6 +72,22 @@ def view_board(request):
         news_set = News.objects.filter(board__block__complex=manager.complex)
         events = Event.objects.filter(board__block__complex=manager.complex)
     return render(request, 'manager/board.html', {'events': events, 'newsSet': news_set})
+
+@login_required
+def view_event(request):
+    manager = request.user.member.manager
+    events = None
+    if request.method == 'POST':
+        form = DisplayForm(request.POST)
+        if form.is_valid():
+            events = Event.objects.filter(board__block__complex=manager.complex, date__gte=form.cleaned_data['startDate'], date__lte=form.cleaned_data['finishDate'])
+        else:
+            events = Event.objects.filter(board__block__complex=manager.complex)
+        if request.POST['choose'] == 'جدیدترین':
+            events = events.order_by('-date')
+    else:
+        events = Event.objects.filter(board__block__complex=manager.complex)
+    return render(request, 'manager/events.html', {'events': events})
 
 
 @login_required
@@ -132,7 +145,7 @@ def edit_neighbours(request):
 @login_required
 def delete_neighbour(request,neighbour_id):
     Resident.objects.get(id=neighbour_id).delete()
-    return edit_neighbours(request)
+    return HttpResponseRedirect(reverse('site:manager:edditNeighbours'))
 
 @login_required
 def edit_unit(request):
@@ -271,7 +284,7 @@ def add_neighbour(request):
                         [str(user.email)],
                         fail_silently=False,
                     )
-                    return edit_neighbours(request)
+                    return HttpResponseRedirect(reverse('site:manager:editNeighbours'))
                 else:
                     user.delete()
             else:
@@ -310,7 +323,7 @@ def add_unit(request):
             if len(units) < request.user.member.manager.complex.unit_number:
                 unit = Unit.objects.create(block=block, area=int(area))
                 unit.save()
-                return edit_unit(request)
+                return HttpResponseRedirect(reverse('site:manager:editUnit'))
             else:
                 error = 'تمام واحدهای این بلوک افزوده شده اند.'
         else:
@@ -369,7 +382,7 @@ def enter_bill(request):
 
 def delete_unit(request, unit_id):
     Unit.objects.get(id=unit_id).delete()
-    return edit_unit(request)
+    return HttpResponseRedirect(reverse('site:manager:editUser'))
 
 
 def calculate_receipts(request):
@@ -397,3 +410,31 @@ def calculate_receipts(request):
             complex.last_calculation_date = datetime.today().date()
             complex.save()
     return render(request, 'manager/account.html')
+
+
+def edit_facility(request):
+    complex = request.user.member.manager.complex
+    facility = Facility.objects.filter(block__complex=complex)
+    return render(request, 'manager/editFacility.html', {'facilities': facility})
+
+
+def delete_facility(request, facility_id):
+    Facility.objects.get(id=facility_id).delete()
+    return HttpResponseRedirect(reverse('site:manager:editFacility'))
+
+
+def add_facility(request):
+    blocks = Block.objects.filter(complex=request.user.member.manager.complex)
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        cost = request.POST.get('cost')
+        block = request.POST.get('block')
+        if cost != '' and cost.isdigit() and block != '' and name != '':
+            block = Block.objects.get(id=block)
+            facility = Facility.objects.create(type=name, cost=cost, block=block)
+            facility.save()
+            return HttpResponseRedirect(reverse('site:manager:editFacility'))
+        else:
+            error = 'وارد کردن تمام فیلدها الزامی است.'
+        return render(request, 'manager/addFacility.html', {'blocks': blocks, 'error': error})
+    return render(request, 'manager/addFacility.html', {'blocks': blocks})

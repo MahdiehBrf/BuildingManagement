@@ -2,13 +2,12 @@
 
 {% block title %}اضافه کردن واحد{% endblock %}
 
-{% block css %}<link rel="stylesheet" type="text/css" href="../../../static/css/addReqStyle.css"/>{% endblock %}
-
+{% block css %}{% endblock %}
 
 {% block content %}
 <div class="main">
     <h5>افزودن واحد جدید</h5>
-    <form action="" method="post">{% csrf_token %}
+    <form action="" method="post" style="direction: ltr">{% csrf_token %}
         {% if error %}
             <div class="text-danger"> {{ error }} </div>
         {% endif %}
@@ -24,7 +23,7 @@
                 <td><label for="block">شماره بلوک </label></td>
             </tr>
             <tr>
-               <td><input type="number" name="area" id="area" min="1" max="500"></td>
+                <td><input type="number" name="area" id="area" min="1" max="1000"></td>
                 <td><label for="area">متراژ</label></td>
             </tr>
             </tbody>

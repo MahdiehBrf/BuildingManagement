@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^send_feedback/$', views.send_feedback,name='send_feedback'),
     url(r'^logout/$', views.logout, name='log_out'),
+    url(r'^forget_password/$', views.forget_password, name='forget_password'),
 ]

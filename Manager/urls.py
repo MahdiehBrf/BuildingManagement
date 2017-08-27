@@ -22,8 +22,12 @@ urlpatterns = [
     url(r'^edit_profile/$', views.edit_profile, name='edit_profile'),
     url(r'^board/add_to_board$', views.add_to_board, name='add_to_board'),
     url(r'^board/$', views.view_board, name='board'),
+    url(r'^events/$', views.view_event, name='events'),
     url(r'^enterBill/$', views.enter_bill, name='enterBill'),
     url(r'^(?P<unit_id>[0-9]+)/delete_unit/$', views.delete_unit, name='deleteUnit'),
     url(r'^(?P<neighbour_id>[0-9]+)/delete_neighbour/$', views.delete_neighbour, name='deleteNeighbour'),
     url(r'^$', views.account, name='account'),
+    url(r'^add_facility/$', views.add_facility, name='addFacility'),
+    url(r'^edit_facility/$', views.edit_facility, name='editFacility'),
+    url(r'^(?P<facility_id>[0-9]+)/delete_facility/$', views.delete_facility, name='deleteFacility'),
     ]
