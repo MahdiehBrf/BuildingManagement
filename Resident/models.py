@@ -14,8 +14,8 @@ RESERVE_STATE = {
 }
 
 RECEIPT_STATE = {
-    ('P','پرداخت شده'),
-    ('NP','پرداخت نشده')
+    ('P', 'پرداخت شده'),
+    ('NP', 'پرداخت نشده')
 }
 
 class Resident(models.Model):

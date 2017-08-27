@@ -1,5 +1,4 @@
 import random
-
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
@@ -13,7 +12,7 @@ from django.utils.datetime_safe import datetime
 from Manager.forms import RequestForm, MessageForm, BillForm
 from Manager.models import Request
 from MySite.forms import EventForm, NewsForm, DisplayForm, ComplexForm
-from MySite.models import Event, News, Unit, Block
+from MySite.models import Event, News, Unit, Block, Board
 from MySite.models import Facility
 from MyUser.forms import SignupForm1
 from MyUser.forms import SignupForm2
@@ -109,7 +108,9 @@ def edit_complex_information(request):
             elif int(blockNum) > s:
                 for i in range(int(blockNum) - s):
                     block = Block.objects.create(complex=complex)
+                    board = Board.objects.create(block=block)
                     block.save()
+                    board.save()
             return HttpResponseRedirect(reverse('site:manager:account'))
     else:
         form = ComplexForm(instance=request.user.member.manager.complex)
@@ -385,11 +386,13 @@ def calculate_receipts(request):
                 bills_cost = 0
             for unit in block.unit_set.all():
                 if unit.resident:
-                    reserves_cost = unit.resident.reserve_set.filter(reserve_date__gt=complex.last_calculation_date, state='A').aggregate(Sum('cost'))['cost__sum']
-                    c = ((events_cost+bills_cost)/size) * unit.resident.member_count
+                    reserves_cost = unit.resident.reserve_set.filter(reserve_date__gt=complex.last_calculation_date,
+                                                                     state='A').aggregate(Sum('cost'))['cost__sum']
+                    c = ((events_cost + bills_cost) / size) * unit.resident.member_count
                     if reserves_cost:
-                        c = c+ reserves_cost
-                    receipt = Receipt(start_date=complex.last_calculation_date, finish_date=datetime.today().date(), cost=c, resident=unit.resident, paid_cost=0)
+                        c = c + reserves_cost
+                    receipt = Receipt(start_date=complex.last_calculation_date, finish_date=datetime.today().date(),
+                                      cost=c, resident=unit.resident, paid_cost=0)
                     receipt.save()
             complex.last_calculation_date = datetime.today().date()
             complex.save()

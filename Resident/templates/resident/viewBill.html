@@ -11,10 +11,10 @@
 
 <div class="main">
     <h5>قبض شماره {{ receipt.id }}</h5>
-<table>
+    <table>
         <tr>
             <th>مبلغ شما = (مبلغ
-            * {{ receipt.resident.member_count }}) / {{ size }}</th>
+                * {{ receipt.resident.member_count }}) / {{ size }}</th>
             <th>مبلغ</th>
             <th>زمان و تاریخ</th>
             <th>توضیحات</th>
@@ -23,7 +23,7 @@
         </tr>
         {% for event, eventCost in events %}
             <tr>
-                <td>{{ eventCost}}</td>
+                <td>{{ eventCost }}</td>
                 <td>{{ event.cost }}</td>
                 <td>{{ event.date|date:"Y / m / d" }}</td>
                 <td>{{ event.description }}</td>
@@ -33,7 +33,7 @@
         {% endfor %}
         {% for bill, billCost in bills %}
             <tr>
-            <td>{{ billCost }}</td>
+                <td>{{ billCost }}</td>
                 <td>{{ bill.cost }}</td>
                 <td>{{ bill.date|date:"Y / m / d" }}</td>
                 <td>{{ bill.get_type_display }}</td>

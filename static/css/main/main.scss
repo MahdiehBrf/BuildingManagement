@@ -1,6 +1,12 @@
+$main_color:  #00293E;
+$second_color: #1E656D;
+$third_color: #F1F3CE;
+$forth_color: #F62A00;
+$font_color: #white;
+
 @font-face {
     font-family: 'brandon';
-    src: url('../fonts/BRoya.ttf') format('truetype');
+    src: url('../../fonts/BRoya.ttf') format('truetype');
     font-style: normal;
     font-weight: normal;
 }
@@ -16,7 +22,7 @@
 }
 
 * {
-    font-family: "IRANSans-web" !important;
+    font-family: brandon !important;
 }
 
 html {
@@ -32,11 +38,14 @@ html {
         @include prefix(align-items, center);
         @include prefix(flex-align, center);
         @include prefix(display, flex);
+        .nav{
+                text-align: center;
+        }
         .navbar{
-            background-image: linear-gradient(to bottom,#98DBC6 0,#98DBC6 100%);
+            background-image: linear-gradient(to bottom,$main_color 0,$main_color 100%);
             li:hover{
-                background-image: linear-gradient(to bottom,#F18D9E 0,#F18D9E 100%);
-            }//
+                background-image: linear-gradient(to bottom,$forth_color 0,$forth_color 100%);
+            }
         }
 
         .container-fluid{
@@ -111,6 +120,7 @@ html {
             }
             .contact{
                 .well{
+
                     @media screen and (min-width: 800px) {
                     margin: 5px 25%;
                     }
@@ -119,19 +129,35 @@ html {
         }
 
     }
-    fieldset {
-        direction: rtl;
-        text-align: center;
-        .form-group {
-            margin-top: 8px;
-            margin-bottom: 0;
-        }
-        .inputGroupContainer input.form-control {
-            text-align: right;
-        }
-        .text-danger {
+    .well {
+        background-color: $third_color;
+        background-image: none;
+        fieldset {
+            direction: rtl;
             text-align: center;
-            line-height: 30px;
+            .form-group {
+                margin-top: 8px;
+                margin-bottom: 0;
+                .btn{
+                    background-color: $forth_color;
+                    color: white;
+                    width: 50%;
+                }
+            }
+            .inputGroupContainer input.form-control {
+                text-align: right;
+            }
+            .text-danger {
+                text-align: center;
+                line-height: 30px;
+            }
+            .input-group-addon{
+                background-color: $third_color;
+            }
+            .forgetButton{
+               background-color: $third_color;
+                border: none;
+            }
         }
     }
     #footer {
