@@ -2,14 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% load static %}
     <title>{% block title %}{% endblock %}</title>
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="stylesheet" type="text/css" href="../../../static/css/viewBillStyles.css"/>
     <style>
          @font-face {
-  font-family: 'brandon';
-  src:  url('../fonts/BRoya.ttf') format('truetype');
-  font-style:normal;
-  font-weight:normal;
-}
+             font-family: 'brandon';
+             src: url("{% static "fonts/BRoya.ttf"%}") format('truetype');
+             font-style: normal;
+             font-weight: normal;
+         }
          body{
              margin: 0;
          }
@@ -92,7 +95,7 @@
     <div class="topleft" style="display:grid; z-index:5">
         <a href="{% url 'site:manager:select_contact'%}"><img src="../../../static/images/message.png"
                                                               style="height:50px;width:50px;"/></a>
-        <a href="">خروج</a>
+        <a href="/logout/">خروج</a>
         <p>96/5/5</p>
 
     </div>

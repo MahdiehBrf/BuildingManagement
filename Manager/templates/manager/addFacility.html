@@ -1,0 +1,46 @@
+{% extends 'manager/managerBase.html' %}
+
+{% block title %}افزودن امکانات {% endblock %}
+
+{% block css %}{% endblock %}
+
+
+{% block content %}
+    <div class="main">
+        <h5>افزودن امکانات</h5>
+        <form action="" method="post" style="direction: ltr">{% csrf_token %}
+            {% if error %}
+                <div class="text-danger"> {{ error }} </div>
+            {% endif %}
+            <table class="tbl" border="0" align="center">
+                <tbody>
+                <tr>
+                    <td><input type="text" name="name" id="name"></td>
+                    <td><label for="name">نام</label></td>
+                </tr>
+                <tr>
+                    <td><select name="block" id="block">
+                        <option disabled selected style="color: black;">-----</option>
+                        {% for block in blocks %}
+                            <option value="{{ block.id }}">{{ block.id }}</option>
+                        {% endfor %}
+                    </select></td>
+                    <td><label for="block">شماره بلوک </label></td>
+                </tr>
+                <tr>
+                    <td><input type="number" name="cost" id="cost" min="1" max="10000"
+                               title="هزینه را به تومان وارد کنید."></td>
+                    <td><label for="cost">هزینه</label></td>
+                </tr>
+                </tbody>
+            </table>
+            <input type="submit" class="btn" value="ثبت"/>
+        </form>
+
+
+    </div>
+{% endblock %}
+
+
+
+

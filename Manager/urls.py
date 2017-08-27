@@ -1,4 +1,4 @@
-from django.conf.urls import url, include
+from django.conf.urls import url
 
 from . import views
 
@@ -9,7 +9,7 @@ urlpatterns = [
     url(r'^(?P<request_id>[0-9]+)/delete_request/$', views.delete_request, name='delete_request'),
     url(r'^select_contact/$', views.select_contact, name='select_contact'),
     url(r'^message/$', views.message, name='message'),
-    url(r'^edit_n/$', views.edit_n, name='editN'),
+    url(r'^(?P<neighbour_id>[0-9]+)/edit_n/$', views.edit_n, name='editN'),
     url(r'^add_unit/$', views.add_unit, name='addUnit'),
     url(r'^add_request/$', views.add_request, name='addRequest'),
     url(r'^add_neighbour/$', views.add_neighbour, name='addNeighbour'),
@@ -24,5 +24,10 @@ urlpatterns = [
     url(r'^board/$', views.view_board, name='board'),
     url(r'^events/$', views.view_event, name='events'),
     url(r'^enterBill/$', views.enter_bill, name='enterBill'),
+    url(r'^(?P<unit_id>[0-9]+)/delete_unit/$', views.delete_unit, name='deleteUnit'),
+    url(r'^(?P<neighbour_id>[0-9]+)/delete_neighbour/$', views.delete_neighbour, name='deleteNeighbour'),
     url(r'^$', views.account, name='account'),
+    url(r'^add_facility/$', views.add_facility, name='addFacility'),
+    url(r'^edit_facility/$', views.edit_facility, name='editFacility'),
+    url(r'^(?P<facility_id>[0-9]+)/delete_facility/$', views.delete_facility, name='deleteFacility'),
     ]

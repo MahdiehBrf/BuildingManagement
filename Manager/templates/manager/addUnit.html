@@ -2,43 +2,35 @@
 
 {% block title %}اضافه کردن واحد{% endblock %}
 
-{% block css %}<link rel="stylesheet" type="text/css" href="../../../static/css/addReqStyle.css"/>{% endblock %}
-
-{% block script %}
-    function f(){alert("واحد با موفقیت اضافه شد"); window.location.href="editUnit.html";}
-{% endblock %}
+{% block css %}{% endblock %}
 
 {% block content %}
 <div class="main">
-    <h5>وارد کردن اطلاعات واحد جدید</h5>
-    <form action="Welcome.html" method="post">
+    <h5>افزودن واحد جدید</h5>
+    <form action="" method="post" style="direction: ltr">{% csrf_token %}
+        {% if error %}
+            <div class="text-danger"> {{ error }} </div>
+        {% endif %}
         <table class="tbl" border="0" align="center">
             <tbody>
-
             <tr>
-
-               <td><input type="number" name="unit" id="unit" min="1" max="100"></td>
-                <td><label for="unit">شماره واحد </label></td>
-            </tr>
-
-            <tr>
-
-               <td><input type="number" name="block" id="block" min="1" max="100"></td>
+                <td><select name="block" id="block">
+                    <option disabled selected style="color: black;">-----</option>
+                    {% for block in blocks %}
+                        <option value="{{ block.id }}">{{ block.id }}</option>
+                    {% endfor %}
+                </select></td>
                 <td><label for="block">شماره بلوک </label></td>
             </tr>
-
             <tr>
-
-               <td><input type="number" name="area" id="area" min="1" max="500"></td>
+                <td><input type="number" name="area" id="area" min="1" max="1000"></td>
                 <td><label for="area">متراژ</label></td>
             </tr>
-
-
             </tbody>
         </table>
+        <input type="submit" class="btn" value="ثبت"/>
     </form>
 
-    <button type="button" class="btn" onclick="f()">ثبت</button>
 
 </div>
 {% endblock %}

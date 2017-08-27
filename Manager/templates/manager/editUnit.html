@@ -8,13 +8,8 @@
 {% endblock %}
 
 {% block content %}
-<div class="main">
+    <div class="main" style="direction: ltr">
     <h5>واحدها</h5>
-
-   <select class="from" name="choose"  placeholder="به ترتیب">
-                    <option value="جدیدترین">شماره واحد صعودی</option>
-                    <option value="قدیمی ترین">شماره واحد نزولی</option>
-                </select></td>
 
     <table>
         <tr>
@@ -23,28 +18,18 @@
             <th>شماره بلوک</th>
             <th> شماره واحد</th>
         </tr>
+        {% for unit in units %}
         <tr>
-            <td><a href="javascript:void(0)"><img src="../../../static/images/delete.png" class="linkImg"></a></td>
-            <td>180 مترمربع</td>
-            <td>2</td>
-            <td>1</td>
+            <td><a href="{% url 'site:manager:deleteUnit' unit.id %}" onclick="f({{ unit.id }})"><img
+                    src="../../../static/images/delete.png" class="linkImg"></a></td>
+            <td>{{ unit.area }} متر مربع</td>
+            <td>{{ unit.block.id }}</td>
+            <td>{{ unit.id }}</td>
         </tr>
-        <tr>
-            <td><a href="javascript:void(0)"><img src="../../../static/images/delete.png" class="linkImg"></a></td>
-            <td>100 متر مربع</td>
-            <td>3</td>
-            <td>2</td>
-        </tr>
-        <tr>
-            <td><a href="javascript:void(0)"><img src="../../../static/images/delete.png" class="linkImg"></a></td>
-            <td>100 متر مربع</td>
-            <td>1</td>
-            <td>13</td>
-        </tr>
-
+        {% endfor %}
     </table>
 
-    <button type="button" class="btn" onclick="window.location.href='addUnit.html'">اضافه کردن واحد جدید</button>
+    <a type="button" class="btn" href="{% url 'site:manager:addUnit' %}">اضافه کردن واحد جدید</a>
 
 </div>
 {% endblock %}
