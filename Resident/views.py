@@ -1,6 +1,5 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from django.forms import Form
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 # Create your views here.
@@ -51,7 +50,9 @@ def view_event(request):
     if request.method == 'POST':
         form = DisplayForm(request.POST)
         if form.is_valid():
-            events = resident.unit.block.board.event_set.filter(board__block=resident.unit.block, date__gte=form.cleaned_data['startDate'], date__lte=form.cleaned_data['finishDate'])
+            events = resident.unit.block.board.event_set.filter(board__block=resident.unit.block,
+                                                                date__gte=form.cleaned_data['startDate'],
+                                                                date__lte=form.cleaned_data['finishDate'])
         else:
             events = resident.unit.block.board.event_set.all()
         if request.POST['choose'] == 'جدیدترین':
@@ -125,7 +126,7 @@ def reserve(request):
             return HttpResponseRedirect(reverse('site:resident:myReserves'))
     else:
         form = ReserveForm()
-    return render(request, 'resident/reserve.html', {'form': form, 'facilities' : facility})
+    return render(request, 'resident/reserve.html', {'form': form, 'facilities': facility})
 
 
 @login_required
@@ -158,7 +159,8 @@ def view_bills(request):
     if request.method == 'POST':
         form = DisplayForm(request.POST)
         if form.is_valid():
-            receipts = Receipt.objects.filter(state='NP', resident=resident, start_date__gte=form.cleaned_data['startDate'],
+            receipts = Receipt.objects.filter(state='NP', resident=resident,
+                                              start_date__gte=form.cleaned_data['startDate'],
                                               start_date__lte=form.cleaned_data['finishDate'])  # TODO
         else:
             receipts = Receipt.objects.filter(state='NP', resident=resident)
@@ -196,17 +198,20 @@ def view_bill(request, receipt_id):
     size = 0
     events = block.board.event_set.filter(date__gt=receipt.start_date, date__lte=receipt.finish_date)
     bills= block.bill_set.filter(date__gt=receipt.start_date, date__lte=receipt.finish_date)
-    reserves = receipt.resident.reserve_set.filter(reserve_date__gt=receipt.start_date, reserve_date__lte=receipt.finish_date, state='A')
+    reserves = receipt.resident.reserve_set.filter(reserve_date__gt=receipt.start_date,
+                                                   reserve_date__lte=receipt.finish_date, state='A')
     for unit in block.unit_set.all():
         if unit.resident:
             size += unit.resident.member_count
     eventsCost = []
     for event in events:
-        eventsCost.append(round(event.cost*receipt.resident.member_count/size, 4))
+        eventsCost.append(round(event.cost * receipt.resident.member_count / size, 4))
     billsCost = []
     for bill in bills:
-        billsCost.append(round(bill.cost*receipt.resident.member_count/size, 4))
-    return render(request, 'resident/viewBill.html', {'receipt': receipt, 'events': zip(events, eventsCost),'bills': zip(bills, billsCost), 'reserves':reserves, 'size':size})
+        billsCost.append(round(bill.cost * receipt.resident.member_count / size, 4))
+    return render(request, 'resident/viewBill.html',
+                  {'receipt': receipt, 'events': zip(events, eventsCost), 'bills': zip(bills, billsCost),
+                   'reserves': reserves, 'size': size})
 
 def increase_cash(request):
     resident = request.user.member.resident
@@ -246,7 +251,6 @@ def select_pay_way(request, receipt_id):
                 receipt.save()
                 return render(request, 'resident/payAccountSuccess.html', {'acount': account})
     return render(request, 'resident/select_payWay.html', {'r': receipt})
-
 
 
 def pay_receipt(request, receipt_id):

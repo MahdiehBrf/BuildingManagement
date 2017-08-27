@@ -33,18 +33,18 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="#" class="navbar-brand">شرکت آس</a>
+            <a href="#" class="navbar-brand" style="color: white">شرکت آس</a>
         </div>
-        <div id="navbarCollapse" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li id="login_bottum"><a href="#">ورود</a></li>
-                <li id="signup_bottum"><a href="#">ثبت نام</a></li>
+        <div id="navbarCollapse" class="collapse navbar-collapse" >
+            <ul class="nav navbar-nav" >
+                <li id="login_bottum"><a href="#" style="color: white">ورود</a></li>
+                <li id="signup_bottum"><a href="#" style="color: white" >ثبت نام</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#contact">تماس با ما</a></li>
-                <li><a href="#manual">راهنما</a></li>
-                <li><a href="#about-app">معرفی برنامه</a></li>
-                <li><a href="#" >صفحه اصلی</a></li>
+                <li><a href="#contact" style="color: white">تماس با ما</a></li>
+                <li><a href="#manual" style="color: white">راهنما</a></li>
+                <li><a href="#about-app" style="color: white">معرفی برنامه</a></li>
+                <li><a href="#"  style="color: white">صفحه اصلی</a></li>
             </ul>
         </div>
     </div>
@@ -64,7 +64,19 @@
         </section>
     </div>
     <div class="row">
-        <section class="content">
+        <section class="content ">
+            <div class="myHead col-md-6 col-xs-12">
+            <h2>
+                سامانه مدیریت ساختمان آس چه کاری انجام می دهد؟
+            </h2>
+            <p>
+                آس، نرم افزار مدیریت و حسابداری ساختمان و مجتمع از طریق اینترنت می باشد که کمک میکند مدیران بدون دارا بودن دانش حسابداری، به امور مالی رسیدگی کنند و در کوتاه ترین زمان ممکن اخبار و اطلاعیه ها را با ساکنان و مالکان به اشتراک بگذارند. همچنین شارژ ماهانه هر واحد به صورت اتوماتیک براساس قبض ها و رویدادها محاسبه می شود و ساکنین می توانند بدهی خود را با ریز هزینه ها مشاهده کنند و آن را ازطریق پرداخت درون برنامه ای یا اتصال به درگاه بانکی تسویه کنند.
+            </p>
+                </div>
+        </section>
+    </div>
+    <div class="row">
+        <section class="content" style="background-color: #F1F3CE">
             <div class="inner">
                 <div class="copy row" id="about-app">
                     <!--h1>معرفی برنامه</h1-->
@@ -88,58 +100,70 @@
             </div>
         </section>
         </div>
-
+    <div class="row">
+        <section class="content" >
+            <div class="inner">
+                <div class="copy row manual" id="manual" style="margin:0;direction: rtl">
+                    <div class="img col-xs-12 col-md-6">
+                        <img src="{% static 'images/1.jpg' %}" >
+                    </div>
+                    <div class="discreption col-xs-12 col-md-6">
+                        <h3> محاسبه شارژ واحدها:</h3>
+                        <p>
+مدیر مجتمع می تواند هر زمان درخواست محاسبه شارژ دهد و به این ترتیب شارژ باتوجه به هزینه های صورت گرفته و قبض ها از تاریخ قبلی محاسبه شارژ، برای هر واحد باتوجه به تعداد ساکنین محاسبه می شود.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+</div>
       <div class="row">
         <section class="content">
             <div class="inner">
-                <div class="copy row contact" id="contact">
-                    <form class="well form-horizontal col-xs-12 col-sm-6 " action="/send_feedback/" method="post"  id="contact_form">{% csrf_token %}
-                        <fieldset>
+                <div class="copy row contact" id="contact" style="margin:0;">
+                    <form class="well form-horizontal col-xs-12 row " action="/send_feedback/" method="post"  id="contact_form" style="margin:0;">{% csrf_token %}
+                        <fieldset class="col-xs-12 col-md-6" >
 <div class="form-group">
-  <div class="col-md-8 inputGroupContainer">
+  <div class="col-md-12 inputGroupContainer">
   <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
   <input  name="first_name" placeholder="نام" class="form-control"  type="text">
     </div>
   </div>
-  <label class="col-md-4 control-label">نام</label>
 </div>
 
 <div class="form-group">
-    <div class="col-md-8 inputGroupContainer">
+    <div class="col-md-12 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
   <input name="last_name" placeholder="نام خانوادگی" class="form-control"  type="text">
     </div>
   </div>
-  <label class="col-md-4 control-label" >نام خانوادگی</label>
 </div>
 
        <div class="form-group">
-    <div class="col-md-8 inputGroupContainer">
+    <div class="col-md-12 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
   <input name="email" placeholder="آدرس ایمیل" class="form-control"  type="text">
     </div>
   </div>
-  <label class="col-md-4 control-label">ایمیل</label>
 </div>
 
 <div class="form-group">
-    <div class="col-md-8 inputGroupContainer">
+    <div class="col-md-12 inputGroupContainer">
     <div class="input-group">
         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
         	<textarea class="form-control" name="text" placeholder="پیام خود را وارد کنید."></textarea>
   </div>
   </div>
-  <label class="col-md-4 control-label">پیام</label>
 </div>
 
 <!--<div class="alert alert-success col-md-12" role="alert" id="success_message">پیام با موفقیت ارسال شد. <i class="glyphicon glyphicon-thumbs-up"></i> متشکریم .</div>-->
 
 <div class="form-group">
   <div class="col-md-12">
-      <button type="submit" class="form-control btn">ارسال</button>
+      <button type="submit" class="form-control btn send">ارسال</button>
   </div>
 </div>
 </fieldset>
@@ -404,7 +428,7 @@
                     <input type="password" name="password" id="password" tabindex="2"
                            class="form-control" placeholder="رمز">
                 </div>
-                <p style="text-align: left;font-size: small;"><button type="submit" class="forgerButton" style="background-color: #f3f3f3;border: none;}">رمز ورود را فراموش کرده ام.</button></p>
+                <p style="text-align: left;font-size: small;"><button type="submit" class="forgetButton" >رمز ورود را فراموش کرده ام.</button></p>
             </div>
             {% if form.password.errors and type == 'login' %}
                 <span class="text-danger" style="text-align:center;">
@@ -430,7 +454,8 @@
     </form>
 </section>
     </body>
-  <div id="footer">
+
+  <div id="footer" class="col-xs-12">
       <div class="address">
           <p>نشانی: تهران، خیابان آزادی، دانشگاه شریف، دانشکده مهندسی کامپیوتر</p>
           <p>تلفن تماس: 02166161234</p>

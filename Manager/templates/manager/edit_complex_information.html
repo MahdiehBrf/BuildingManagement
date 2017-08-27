@@ -2,7 +2,8 @@
 
 {% block title %}اطلاعات مجتمع{% endblock %}
 
-{% block css %}{% endblock %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="../../../static/css/viewBillStyles.css"/>{% endblock %}
 
 {% block script %}
 {% endblock %}
@@ -28,20 +29,21 @@
 
             <tr>
 
-                <td><input type="number" name="blockNum" value="{{ blockNum }}"></td>
+                <td><input type="number" min="1" name="blockNum" value="{{ blockNum }}"></td>
                 <td><label for="blockNum">تعداد بلوک در مجتمع </label></td>
             </tr>
 
             <tr>
 
-                <td><input type="text" name="unit_number" value="{{ form.unit_number }}"></td>
+                <td><input type="number" min="1" name="unit_number" value="{{ form.unit_number }}"></td>
                 <td><label for="unit_number">تعداد واحد در هر بلوک</label></td>
             </tr>
 
             </tbody>
         </table>
         <input type="submit" name="submit" tabindex="4"
-               class="form-control btn btn-login" value="ویرایش" placeholder="ویرایش" style="background-color:#F62A00; color:white; font-weight: bold;">
+               class="form-control btn btn-login" value="ویرایش" placeholder="ویرایش"
+               style="background-color:#F62A00; color:white; font-weight: bold;">
     </form>
     <a type="button" class="btn" href="{% url 'site:manager:editFacility' %}" style="color: white;
 

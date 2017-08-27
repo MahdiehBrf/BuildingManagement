@@ -20,9 +20,9 @@
                 <tr>
                     <td><select id="block" required name="block">
                         <option disabled selected style="color: black;">---------</option>
-                    {% for block in blocks %}
-                        <option value="{{ block.id }}">{{ block.id }}</option>
-                    {% endfor %}
+                        {% for block in blocks %}
+                            <option value="{{ block.id }}">{{ block.id }}</option>
+                        {% endfor %}
                     </select></td>
                     <td><label for="block">بلوک </label></td>
                 </tr>
@@ -48,7 +48,7 @@
 
                 </tbody>
             </table>
-            <input type="submit" class="btn" onclick="f()" value="اضافه">
+        <input type="submit" class="btn" onclick="f()" value="اضافه">
         </form>
 
 

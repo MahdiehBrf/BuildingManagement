@@ -13,7 +13,7 @@ from django.utils.datetime_safe import datetime
 from Manager.forms import RequestForm, MessageForm, BillForm
 from Manager.models import Request
 from MySite.forms import EventForm, NewsForm, DisplayForm, ComplexForm
-from MySite.models import Event, News, Unit, Block
+from MySite.models import Event, News, Unit, Block, Board
 from MySite.models import Facility
 from MyUser.forms import SignupForm1
 from MyUser.forms import SignupForm2
@@ -73,6 +73,7 @@ def view_board(request):
         events = Event.objects.filter(board__block__complex=manager.complex)
     return render(request, 'manager/board.html', {'events': events, 'newsSet': news_set})
 
+
 @login_required
 def view_event(request):
     manager = request.user.member.manager
@@ -80,7 +81,9 @@ def view_event(request):
     if request.method == 'POST':
         form = DisplayForm(request.POST)
         if form.is_valid():
-            events = Event.objects.filter(board__block__complex=manager.complex, date__gte=form.cleaned_data['startDate'], date__lte=form.cleaned_data['finishDate'])
+            events = Event.objects.filter(board__block__complex=manager.complex,
+                                          date__gte=form.cleaned_data['startDate'],
+                                          date__lte=form.cleaned_data['finishDate'])
         else:
             events = Event.objects.filter(board__block__complex=manager.complex)
         if request.POST['choose'] == 'جدیدترین':
@@ -125,7 +128,9 @@ def edit_complex_information(request):
             elif int(blockNum) > s:
                 for i in range(int(blockNum) - s):
                     block = Block.objects.create(complex=complex)
+                    board = Board.objects.create(block=block)
                     block.save()
+                    board.save()
             return HttpResponseRedirect(reverse('site:manager:account'))
     else:
         form = ComplexForm(instance=request.user.member.manager.complex)
@@ -402,11 +407,13 @@ def calculate_receipts(request):
                 bills_cost = 0
             for unit in block.unit_set.all():
                 if unit.resident:
-                    reserves_cost = unit.resident.reserve_set.filter(reserve_date__gt=complex.last_calculation_date, state='A').aggregate(Sum('cost'))['cost__sum']
-                    c = ((events_cost+bills_cost)/size) * unit.resident.member_count
+                    reserves_cost = unit.resident.reserve_set.filter(reserve_date__gt=complex.last_calculation_date,
+                                                                     state='A').aggregate(Sum('cost'))['cost__sum']
+                    c = ((events_cost + bills_cost) / size) * unit.resident.member_count
                     if reserves_cost:
-                        c = c+ reserves_cost
-                    receipt = Receipt(start_date=complex.last_calculation_date, finish_date=datetime.today().date(), cost=c, resident=unit.resident, state='NP')
+                        c = c + reserves_cost
+                    receipt = Receipt(start_date=complex.last_calculation_date, finish_date=datetime.today().date(),
+                                      cost=c, resident=unit.resident, state='NP')
                     receipt.save()
             complex.last_calculation_date = datetime.today().date()
             complex.save()
@@ -454,7 +461,8 @@ def view_bills(request):
     if request.method == 'POST':
         form = DisplayForm(request.POST)
         if form.is_valid():
-            receipts = Receipt.objects.filter(state='NP', resident__unit__block__complex=complex, start_date__gte=form.cleaned_data['startDate'],
+            receipts = Receipt.objects.filter(state='NP', resident__unit__block__complex=complex,
+                                              start_date__gte=form.cleaned_data['startDate'],
                                               start_date__lte=form.cleaned_data['finishDate'])  # TODO
         else:
             receipts = Receipt.objects.filter(state='NP', resident__unit__block__complex=complex)

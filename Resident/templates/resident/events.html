@@ -2,80 +2,84 @@
 
 {% block title %}رویدادها{% endblock %}
 
-{% block css %}<link rel="stylesheet" type="text/css" href="../../../static/css/viewBillStyles.css"/>{% endblock %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="../../../static/css/viewBillStyles.css"/>{% endblock %}
 
 {% block script %}
-function f(){alert("درخواست رزرو با موفقیت تایید گردید")}
+    function f(){alert("درخواست رزرو با موفقیت تایید گردید")}
     function g(){alert("درخواست رزرو با موفقیت رد گردید")}
     function printDiv(divName) {
-     var printContents = document.getElementById(divName).innerHTML;
-     var originalContents = document.body.innerHTML;
+    var printContents = document.getElementById(divName).innerHTML;
+    var originalContents = document.body.innerHTML;
 
-     document.body.innerHTML = printContents;
+    document.body.innerHTML = printContents;
 
-     window.print();
+    window.print();
 
-     document.body.innerHTML = originalContents;
-}
+    document.body.innerHTML = originalContents;
+    }
     function save(filename, divName) {
-  var el = document.createElement('a');
-  el.setAttribute('href', 'data:text/html;charset=utf-8,' + encodeURIComponent(document.getElementById(divName).innerHTML));
-  el.setAttribute('download', filename);
-  el.style.display = 'none';
-  document.body.appendChild(el);
-  el.click();
-  document.body.removeChild(el);
-}
+    var el = document.createElement('a');
+    el.setAttribute('href', 'data:text/html;charset=utf-8,' +
+    encodeURIComponent(document.getElementById(divName).innerHTML));
+    el.setAttribute('download', filename);
+    el.style.display = 'none';
+    document.body.appendChild(el);
+    el.click();
+    document.body.removeChild(el);
+    }
 {% endblock %}
 
 {% block content %}
-<div class="main">
-    <h5>رویدادها</h5>
+    <div class="main">
+        <h5>رویدادها</h5>
 
 
-<form action="" method="post" style="direction:rtl;">
-    {% csrf_token %}
-    <select class="from" name="choose"  placeholder="به ترتیب"style="width:100px;">
-        <option value="قدیمی ترین">قدیمی ترین</option>
-        <option value="جدیدترین">جدیدترین</option>
-    </select>
-    <label for="id_startDate">از تاریخ</label>
-    <input type="date" name="startDate" id="id_startDate" class="from"style="width:200px;">
-    <label for="id_finishDate">تا تاریخ</label>
-    <input type="date" name="finishDate" id="id_finishDate" class="from"style="width:200px;">
-    <input type="submit" class="btn"  value="نمایش">
-</form>
+        <form action="" method="post" style="direction:rtl;">
+            {% csrf_token %}
+            <select class="from" name="choose" placeholder="به ترتیب" style="width:100px;">
+                <option value="قدیمی ترین">قدیمی ترین</option>
+                <option value="جدیدترین">جدیدترین</option>
+            </select>
+            <label for="id_startDate">از تاریخ</label>
+            <input type="date" name="startDate" id="id_startDate" class="from" style="width:200px;">
+            <label for="id_finishDate">تا تاریخ</label>
+            <input type="date" name="finishDate" id="id_finishDate" class="from" style="width:200px;">
+            <input type="submit" class="btn" value="نمایش">
+        </form>
 
-    <div id="printableArea">
-    <table>
-        <tr>
-            <th>مبلغ</th>
-            <th>توضیحات</th>
-            <th>زمان و تاریخ</th>
-            <th>شماره بلوک</th>
-            <th>شماره</th>
-            <th>ردیف</th>
-        </tr>
-        {% for event in events %}
-            <tr>
-                <td>{{ event.cost }}</td>
-                <td>{{ event.description }}</td>
-                <td>{{ event.date|date:"Y / m / d" }}</td>
-                <td>{{ event.board.block_id }}</td>
-                <td>{{ event.id }}</td>
-                <td>
-                    {{ forloop.counter }}
-                </td>
-            </tr>
-        {% endfor %}
+        <div id="printableArea">
+            <table>
+                <tr>
+                    <th>مبلغ</th>
+                    <th>توضیحات</th>
+                    <th>زمان و تاریخ</th>
+                    <th>شماره بلوک</th>
+                    <th>شماره</th>
+                    <th>ردیف</th>
+                </tr>
+                {% for event in events %}
+                    <tr>
+                        <td>{{ event.cost }}</td>
+                        <td>{{ event.description }}</td>
+                        <td>{{ event.date|date:"Y / m / d" }}</td>
+                        <td>{{ event.board.block_id }}</td>
+                        <td>{{ event.id }}</td>
+                        <td>
+                            {{ forloop.counter }}
+                        </td>
+                    </tr>
+                {% endfor %}
 
 
-    </table>
-</div>
+            </table>
+        </div>
 
-    <a href="javascript:void(0)" onclick="printDiv('printableArea')" class="btn"><img src="../../static/images/printer.png" title="چاپ" class="linkImg1"></a>
-    <a href="javascript:void(0)" onclick="save('reservesCheck.html', 'printableArea')" class="btn"><img src="../../static/images/save.png" title="ذخیره" class="linkImg2"></a>
+        <a href="javascript:void(0)" onclick="printDiv('printableArea')" class="btn"><img
+                src="../../static/images/printer.png" title="چاپ" class="linkImg1"></a>
+        <a href="javascript:void(0)" onclick="save('reservesCheck.html', 'printableArea')" class="btn"><img
+                src="../../static/images/save.png" title="ذخیره" class="linkImg2"></a>
 
-</div>
+    </div>
 {% endblock %}
 
