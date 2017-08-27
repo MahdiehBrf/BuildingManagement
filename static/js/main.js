@@ -3,7 +3,7 @@
      if (type) {
          if (type === 'signup' || type === 'complexRegister')
              $("#signup").removeClass('hide').addClass('show');
-         if (type === 'login')
+         if (type === 'login' || type === 'forget_password')
              $("#login").removeClass('hide').addClass('show');
      }
 

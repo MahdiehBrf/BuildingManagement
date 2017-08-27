@@ -387,7 +387,7 @@
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                     <input type="text" name="username" id="username" tabindex="1"
                            class="form-control" placeholder="نام کاربری"
-                           value="{% if type == 'login' %} {{ form.username.value }} {% endif %}">
+                           value="{% if type == 'login' and form8%} {{ form.username.value }} {% endif %}">
                 </div>
             </div>
             {% if form.username.errors and type == 'login' %}
@@ -396,6 +396,7 @@
                 </span>
             {% endif %}
         </div>
+    {% if type != 'forger_password' %}
         <div class="form-group {% if form.password.errors and type == 'login' %}has-error{% endif %}">
             <div class="col-md-12 inputGroupContainer">
                 <div class="input-group">
@@ -403,6 +404,7 @@
                     <input type="password" name="password" id="password" tabindex="2"
                            class="form-control" placeholder="رمز">
                 </div>
+                <p style="text-align: left;font-size: small;"><button type="submit" class="forgerButton" style="background-color: #f3f3f3;border: none;}">رمز ورود را فراموش کرده ام.</button></p>
             </div>
             {% if form.password.errors and type == 'login' %}
                 <span class="text-danger" style="text-align:center;">
@@ -410,11 +412,17 @@
                 </span>
             {% endif %}
         </div>
+    {% endif %}
         <div class="form-group">
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
+                    {% if type != 'forget_password' %}
                     <input type="submit" name="submit" id="login-submit" tabindex="4"
                            class="form-control btn btn-login" value="ورود" placeholder="ورود">
+                    {% else %}
+                        <input type="submit" name="submit" id="login-submit" tabindex="4"
+                           class="form-control btn btn-login" value="بازیابی رمز" placeholder="بازیابی رمز">
+                    {% endif %}
                 </div>
             </div>
         </div>
