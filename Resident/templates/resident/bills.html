@@ -33,7 +33,8 @@
             <th>پرداخت</th>
             <th>مشاهده</th>
             <th>مبلغ</th>
-            <th>زمان و تاریخ</th>
+            <th>تاریخ پایان</th>
+            <th>تاریخ شروع</th>
             <th>شماره قبض</th>
             <th>شماره</th>
         </tr>
@@ -42,7 +43,8 @@
                 <td><a href="{% url 'site:resident:select_payWay' receipt.id %}" ><img src="../../../static/images/pay.png" title="پرداخت" class="linkImg1"></a></td>
                 <td><a href="{% url 'site:resident:viewBill' receipt.id %}" ><img src="../../../static/images/view.png" title="مشاهده" class="linkImg1"></a></td>
                 <td>{{ receipt.cost }}</td>
-                <td>{{ receipt.date|date:"Y / m / d" }}</td>
+                <td>{{ receipt.finish_date|date:"Y / m / d" }}</td>
+                <td>{{ receipt.start_date|date:"Y / m / d" }}</td>
                 <td>{{ receipt.id }}</td>
                 <td>
                     {{ forloop.counter }}

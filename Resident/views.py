@@ -35,6 +35,9 @@ def view_board(request):
         if request.POST['choose'] == 'جدیدترین':
             news_set = news_set.order_by('-date')
             events = events.order_by('-date')
+        elif request.POST['choose'] == 'قدیمی ترین':
+            news_set = news_set.order_by('date')
+            events = events.order_by('date')
     else:
         news_set = resident.unit.block.board.news_set.all()
         events = resident.unit.block.board.event_set.all()
@@ -77,6 +80,9 @@ def paying_reports(request):
         if request.POST['choose'] == 'جدیدترین':
             bank_reports = bank_reports.order_by('-date')
             account_reports = account_reports.order_by('-date')
+        elif request.POST['choose'] == 'قدیمی ترین':
+            bank_reports = bank_reports.order_by('date')
+            account_reports = account_reports.order_by('date')
     else:
         bank_reports = PayByBank.objects.filter(resident=resident)
         account_reports = PayByAccount.objects.filter(account__resident=resident)
@@ -132,14 +138,16 @@ def view_bills(request):
     if request.method == 'POST':
         form = DisplayForm(request.POST)
         if form.is_valid():
-            receipts = Receipt.objects.filter(resident=resident, date__gte=form.cleaned_data['startDate'],
-                                              date__lte=form.cleaned_data['finishDate'])  # TODO
+            receipts = Receipt.objects.filter(state='NP', resident=resident, start_date__gte=form.cleaned_data['startDate'],
+                                              start_date__lte=form.cleaned_data['finishDate'])  # TODO
         else:
-            receipts = Receipt.objects.filter(resident=resident)
+            receipts = Receipt.objects.filter(state='NP', resident=resident)
         if request.POST['choose'] == 'جدیدترین':
-            receipts = receipts.order_by('-reserve_date')
+            receipts = receipts.order_by('-start_date')
+        elif request.POST['choose'] == 'قدیمی ترین':
+            receipts = receipts.order_by('start_date')
     else:
-        receipts = Receipt.objects.filter(resident=resident)
+        receipts = Receipt.objects.filter(state='NP', resident=resident)
     return render(request, 'resident/bills.html', {'receipts': receipts})
 
 
@@ -155,6 +163,8 @@ def view_reserves(request):
             reserves = Reserve.objects.filter(resident=resident)
         if request.POST['choose'] == 'جدیدترین':
             reserves = reserves.order_by('-reserve_date')
+        elif request.POST['choose'] == 'قدیمی ترین':
+            reserves = reserves.order_by('reserve_date')
     else:
         reserves = Reserve.objects.filter(resident=resident)
     return render(request, 'resident/myReserves.html', {'reserves': reserves})
@@ -166,14 +176,17 @@ def view_bill(request, receipt_id):
     size = 0
     events = block.board.event_set.filter(date__gt=receipt.start_date, date__lte=receipt.finish_date)
     bills= block.bill_set.filter(date__gt=receipt.start_date, date__lte=receipt.finish_date)
+    reserves = receipt.resident.reserve_set.filter(reserve_date__gt=receipt.start_date, reserve_date__lte=receipt.finish_date, state='A')
     for unit in block.unit_set.all():
         if unit.resident:
             size += unit.resident.member_count
-    # costs = (events.values_list('cost')/size)*receipt.resident.member_count
-    # costs += (bills.values_list('cost')/size)*receipt.resident.member_count
-    return render(request, 'resident/viewBill.html', {'receipt': receipt})
-    return render(request, 'resident/viewBill.html')
-
+    eventsCost = []
+    for event in events:
+        eventsCost.append(round(event.cost*receipt.resident.member_count/size, 4))
+    billsCost = []
+    for bill in bills:
+        billsCost.append(round(bill.cost*receipt.resident.member_count/size, 4))
+    return render(request, 'resident/viewBill.html', {'receipt': receipt, 'events': zip(events, eventsCost),'bills': zip(bills, billsCost), 'reserves':reserves, 'size':size})
 
 def increase_cash(request):
     resident = request.user.member.resident
@@ -183,7 +196,7 @@ def increase_cash(request):
         if form.is_valid():
             acc = form.save(commit=False)
             a.cash = a.cash + int(acc.cash)
-            a.save();
+            a.save()
         return render(request, 'resident/success.html', {'acount': a})
     form = AcountForm()
     return render(request, 'resident/increase.html', {'acount': a, 'form': form})
@@ -209,6 +222,7 @@ def select_pay_way(request, receipt_id):
                 p.save()
                 return render(request, 'resident/payAccountSuccess.html', {'acount': account})
     return render(request, 'resident/select_payWay.html', {'r': receipt})
+
 
 
 def pay_receipt(request, receipt_id):

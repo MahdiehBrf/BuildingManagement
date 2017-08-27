@@ -65,6 +65,9 @@ def view_board(request):
         if request.POST['choose'] == 'جدیدترین':
             news_set = news_set.order_by('-date')
             events = events.order_by('-date')
+        elif request.POST['choose'] == 'قدیمی ترین':
+            news_set = news_set.order_by('date')
+            events = events.order_by('date')
     else:
         news_set = News.objects.filter(board__block__complex=manager.complex)
         events = Event.objects.filter(board__block__complex=manager.complex)
@@ -154,6 +157,9 @@ def paying_reports(request):
             if request.POST['choose'] == 'جدیدترین':
                 bank_reports = bank_reports.order_by('-date')
                 account_reports = account_reports.order_by('-date')
+            elif request.POST['choose'] == 'قدیمی ترین':
+                bank_reports = bank_reports.order_by('date')
+                account_reports = account_reports.order_by('date')
             if request.POST['unit']:
                 unit_set = Unit.objects.filter(id=request.POST['unit'])
                 if unit_set:
@@ -181,6 +187,9 @@ def reserves_check(request):
             reserves = Reserve.objects.all()
         if request.POST['choose'] == 'جدیدترین':
             reserves = reserves.order_by('-reserve_date')
+        elif request.POST['choose'] == 'قدیمی ترین':
+            reserves = reserves.order_by('reserve_date')
+
     else:
         reserves = Reserve.objects.all()
     return render(request, 'manager/reservesCheck.html', {'reserves': reserves})
@@ -376,7 +385,11 @@ def calculate_receipts(request):
                 bills_cost = 0
             for unit in block.unit_set.all():
                 if unit.resident:
-                    receipt = Receipt(start_date=complex.last_calculation_date, finish_date=datetime.today().date(), cost=((events_cost+bills_cost)/size) * unit.resident.member_count, resident=unit.resident, paid_cost=0)
+                    reserves_cost = unit.resident.reserve_set.filter(reserve_date__gt=complex.last_calculation_date, state='A').aggregate(Sum('cost'))['cost__sum']
+                    c = ((events_cost+bills_cost)/size) * unit.resident.member_count
+                    if reserves_cost:
+                        c = c+ reserves_cost
+                    receipt = Receipt(start_date=complex.last_calculation_date, finish_date=datetime.today().date(), cost=c, resident=unit.resident, paid_cost=0)
                     receipt.save()
             complex.last_calculation_date = datetime.today().date()
             complex.save()
