@@ -7,7 +7,7 @@
   box-sizing: inherit; }
 
 * {
-  font-family: brandon !important; }
+  font-family: brandon; }
 
 html {
   box-sizing: border-box;
@@ -52,10 +52,19 @@ html {
           margin: 0 !important; }
     html body .hero, html body .content {
       z-index: 1;
+      margin-top: 20px;
       text-align: center;
       position: relative;
       width: 100%;
       height: auto; }
+      html body .hero .myHead, html body .content .myHead {
+        float: none;
+        margin: auto;
+        margin-top: 5%;
+        margin-bottom: 5%;
+        font-size: 150%; }
+      html body .hero .manual img, html body .content .manual img {
+        max-width: 60%; }
       @media screen and (max-height: 735px) {
         html body .hero, html body .content {
           top: 300px; } }
@@ -90,16 +99,19 @@ html {
           -moz-transition: all 0.35s ease-in-out;
           -ms-transition: all 0.35s ease-in-out;
           -o-transition: all 0.35s ease-in-out; }
-      html body .hero .manual, html body .content .manual {
-        padding: 100px;
-        position: relative;
-        min-height: 400px;
-        text-align: center;
-        margin: 3px;
-        background-color: #5BC8AC; }
-      @media screen and (min-width: 800px) {
-        html body .hero .contact .well, html body .content .contact .well {
-          margin: 5px 25%; } }
+      html body .hero .contact .well, html body .content .contact .well {
+        width: 100%; }
+        html body .hero .contact .well fieldset, html body .content .contact .well fieldset {
+          margin: auto;
+          float: none; }
+        @media screen and (min-width: 800px) {
+          html body .hero .contact .well, html body .content .contact .well {
+            margin: 5px 25%; } }
+    html body .glyphicon {
+      font-family: 'Glyphicons Halflings' !important; }
+    html body .input-group-addon:first-child {
+      border: 1px solid #ccc;
+      border-radius: 4px; }
   html .well {
     background-color: #F1F3CE;
     background-image: none; }
@@ -113,6 +125,8 @@ html {
           background-color: #F62A00;
           color: white;
           width: 50%; }
+        html .well fieldset .form-group .btn.send {
+          background-color: #1E656D; }
       html .well fieldset .inputGroupContainer input.form-control {
         text-align: right; }
       html .well fieldset .text-danger {
@@ -123,15 +137,17 @@ html {
       html .well fieldset .forgetButton {
         background-color: #F1F3CE;
         border: none; }
+        html .well fieldset .forgetButton:hover {
+          color: #F62A00; }
   html #footer {
     font-family: brandon;
     text-align: center;
     width: 100%;
-    position: absolute;
     height: 150px;
     background-color: #00293E;
     color: white;
     right: 0;
+    position: absolute;
     bottom: 0;
     left: 0;
     padding: 1rem;

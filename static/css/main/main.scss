@@ -22,7 +22,7 @@ $font_color: #white;
 }
 
 * {
-    font-family: brandon !important;
+    font-family: brandon;
 }
 
 html {
@@ -38,17 +38,17 @@ html {
         @include prefix(align-items, center);
         @include prefix(flex-align, center);
         @include prefix(display, flex);
-        .nav{
-                text-align: center;
+        .nav {
+            text-align: center;
         }
-        .navbar{
-            background-image: linear-gradient(to bottom,$main_color 0,$main_color 100%);
-            li:hover{
-                background-image: linear-gradient(to bottom,$forth_color 0,$forth_color 100%);
+        .navbar {
+            background-image: linear-gradient(to bottom, $main_color 0, $main_color 100%);
+            li:hover {
+                background-image: linear-gradient(to bottom, $forth_color 0, $forth_color 100%);
             }
         }
 
-        .container-fluid{
+        .container-fluid {
             width: 100%;
 
         }
@@ -69,12 +69,26 @@ html {
         }
         .hero, .content {
             z-index: 1;
+            margin-top: 20px;
             text-align: center;
             position: relative;
             width: 100%;
             height: auto;
-            @media screen and (max-height:735px ){
-                top:300px
+            .myHead{
+                float: none;
+                margin: auto;
+                margin-top: 5%;
+                margin-bottom: 5%;
+                font-size: 150%;
+            }
+            .manual{
+                img{
+                    max-width: 60%;
+
+                }
+            }
+            @media screen and (max-height: 735px) {
+                top: 300px
             }
             .inner {
                 position: relative;
@@ -110,24 +124,28 @@ html {
                 }
             }
 
-            .manual {
-                padding:100px;
-                position: relative;
-                min-height: 400px;
-                text-align: center;
-                margin: 3px;
-                background-color: #5BC8AC;
-            }
-            .contact{
-                .well{
 
+            .contact {
+                .well {
+
+                    width: 100%;
+                    fieldset{
+                        margin: auto;
+                        float: none;
+                    }
                     @media screen and (min-width: 800px) {
-                    margin: 5px 25%;
+                        margin: 5px 25%;
                     }
                 }
             }
         }
-
+        .glyphicon {
+            font-family: 'Glyphicons Halflings' !important;
+        }
+        .input-group-addon:first-child {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
     }
     .well {
         background-color: $third_color;
@@ -143,6 +161,9 @@ html {
                     color: white;
                     width: 50%;
                 }
+                .btn.send{
+                    background-color: $second_color ;
+                }
             }
             .inputGroupContainer input.form-control {
                 text-align: right;
@@ -155,6 +176,9 @@ html {
                 background-color: $third_color;
             }
             .forgetButton{
+                &:hover{
+                    color: $forth_color;
+                }
                background-color: $third_color;
                 border: none;
             }
@@ -164,11 +188,11 @@ html {
         font-family: brandon;
         text-align: center;
         width: 100%;
-        position: absolute;
         height: 150px;
-        background-color: #00293E;
+        background-color: $main_color;
         color: white;
         right: 0;
+        position: absolute;
         bottom: 0;
         left: 0;
         padding: 1rem;
