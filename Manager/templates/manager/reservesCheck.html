@@ -63,7 +63,16 @@ function f(){alert("درخواست رزرو با موفقیت تایید گرد�
 
         {% for reserve in reserves %}
             <tr>
-                <td><a href="{% url 'site:manager:accept_reserve' reserve.reserve_date %}" onclick="f()">تایید</a></td>
+                {% if reserve.state == 'R'%}
+                    <td><a href="{% url 'site:manager:accept_reserve' reserve.reserve_date %}" onclick="f()">تایید</a></td>
+                {% elif reserve.state == 'A' %}
+                    <td><a href="{% url 'site:manager:reject_reserve' reserve.reserve_date %}" onclick="g()">رد</a></td>
+                {% else %}
+                    <td>
+                        <a href="{% url 'site:manager:accept_reserve' reserve.reserve_date %}" onclick="f()">تایید</a>
+                        <a href="{% url 'site:manager:reject_reserve' reserve.reserve_date %}" onclick="g()">رد</a>
+                    </td>
+                {% endif %}
                 <td>{{ reserve.cost }}</td>
                 <td>{{ reserve.get_state_display }}</td>
                 <td>{{ reserve.reserve_date|date:"Y / m / d" }}</td>
