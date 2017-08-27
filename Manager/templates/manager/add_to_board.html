@@ -11,7 +11,7 @@
        var strUser = e.options[e.selectedIndex].value;
        var f = document.getElementById("cost_tag");
        if (strUser == "event")
-          f.style.display='block';
+          f.style.display='table-row';
        else
           f.style.display='none';
     }
@@ -20,7 +20,7 @@
 {% block content %}
 <div class="main">
     <h5>افزودن رویداد/خبر به برد</h5>
-    <form action="" method="post">
+    <form action="" method="post" style="direction: rtl;">
         {% csrf_token %}
         <table class="tbl" border="0" align="center">
             <tbody>
