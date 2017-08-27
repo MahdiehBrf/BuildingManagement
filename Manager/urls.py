@@ -26,4 +26,7 @@ urlpatterns = [
     url(r'^(?P<unit_id>[0-9]+)/delete_unit/$', views.delete_unit, name='deleteUnit'),
     url(r'^(?P<neighbour_id>[0-9]+)/delete_neighbour/$', views.delete_neighbour, name='deleteNeighbour'),
     url(r'^$', views.account, name='account'),
+    url(r'^add_facility/$', views.add_facility, name='addFacility'),
+    url(r'^edit_facility/$', views.edit_facility, name='editFacility'),
+    url(r'^(?P<facility_id>[0-9]+)/delete_facility/$', views.delete_facility, name='deleteFacility'),
     ]

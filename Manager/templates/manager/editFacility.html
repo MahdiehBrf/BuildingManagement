@@ -1,0 +1,39 @@
+{% extends 'manager/managerBase.html' %}
+
+{% block title %}ویرایش اطلاعات واحدها{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="../../../static/css/reqStyles.css"/>{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+{% block content %}
+    <div class="main" style="direction: ltr">
+        <h5>امکانات مجتمع</h5>
+
+        <table>
+            <tr>
+                <th>حذف</th>
+                <th>هزینه رزرو</th>
+                <th>شماره بلوک</th>
+                <th>نام</th>
+            </tr>
+            {% for facility in facilities %}
+                <tr>
+                    <td><a href="{% url 'site:manager:deleteFacility' facility.id %}"
+                           onclick="f({{ facility.id }})"><img
+                            src="../../../static/images/delete.png" class="linkImg"></a></td>
+                    <td>تومان{{ facility.cost }}</td>
+                    <td>{{ facility.block.id }}</td>
+                    <td>{{ facility.type }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <a type="button" class="btn" href="{% url 'site:manager:addFacility' %}">اضافه کردن امکانات جدید</a>
+        <a type="button" class="btn" href="{% url 'site:manager:edit_complex_information' %}">برگشت</a>
+
+    </div>
+{% endblock %}
+
