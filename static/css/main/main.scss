@@ -82,13 +82,18 @@ html {
                 font-size: 150%;
             }
             .manual{
+                padding: 3%;
                 img{
                     max-width: 60%;
-
+                }
+                .discreption{
+                    font-size: 150%;
+                    vertical-align: middle;
+                    margin: auto;
                 }
             }
             @media screen and (max-height: 735px) {
-                top: 600px
+                top: 1350px
             }
             .inner {
                 position: relative;
@@ -196,8 +201,8 @@ html {
         bottom: 0;
         left: 0;
         padding: 1rem;
-        top: 65%;
-        margin-top: 90%;
+        top: 100%;
+        margin-top: 200%;
     }
     .foot {
         font-size: 16px;

@@ -11,6 +11,14 @@ from MyUser.views import login, signup, complexRegister
 
 
 def index(request):
+    '''
+    This function can be used on the front page for each user to enter the system
+    or register or when they forget their password
+    :param request: The request required for passing to other function and also render
+    the front page of  site.
+    :return: Accorfing to the user's request, it can have diffrenet outputs like rendering the
+    front page of site.
+    '''
     if request.method == 'POST':
         if request.POST.get('submit') == 'ورود':
             return login(request)
@@ -23,6 +31,14 @@ def index(request):
     return render(request, 'index.html')
 
 def forget_password(request):
+    '''
+    If user forget its password to enter the system, this function can change his password and mail
+    it to the email already entered on the system. for this, user must enter his username, If his username was not in the database,
+     he would not let this happen.
+    :param request: For getting user request and also get username, we need this arguement.
+    :return: As result of this function new password save in database and mail to user and also,
+     a message saying that the password has been emailed is displayed.
+    '''
     username = request.POST['username']
     if username != '':
         try:
@@ -50,6 +66,13 @@ def forget_password(request):
 
 
 def send_feedback(request):
+    '''
+    This function is available to all users and they can tell theri comments to the adminstrators
+    and site buildrs.
+    :param request:This request, define user request and we can get form information from it.
+    :return:The result of this function is sending mail to site admins and reloading front page of
+    site
+    '''
     if request.method == 'POST':
         fname = request.POST.get('first_name')
         lname = request.POST.get('last_name')
@@ -64,5 +87,10 @@ def send_feedback(request):
 
 
 def logout(request):
+    '''
+    This function is to exit the system.
+    :param request:For geting user request and its id.
+    :return:The user is logged out and the site's first page loaded.
+    '''
     auth_logout(request)
     return HttpResponseRedirect('/')

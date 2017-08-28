@@ -11,6 +11,12 @@ from MyUser.models import Member
 
 
 def login(request):
+    '''
+    This function is for entering the system, this is done for both neighbor and manager
+    :param request: We can get form filled by user with this arquements and check user's request.
+    :return:If the user has account and his account is active now, user can enter the system and
+    this function render the home page of each section.
+    '''
     form = LoginForm(request.POST)
     username = request.POST['username']
     password = request.POST['password']
@@ -33,6 +39,13 @@ def login(request):
 
 
 def signup(request):
+    '''
+    This function is only for manager to enter their infomation and register themself in site.
+    :param request: Contains user request information and form data that user entered
+    :return: As result of this function, if entering data hasnot have any fault. open other form
+    for gettin complex information and register it.
+    of manager section. otherwise shows errors of entering data in front page of site.
+    '''
     form = SignupForm1(request.POST)
     phoneNumber = request.POST.get('phoneNumber')
     accountNumber = request.POST.get('accountNumber')
@@ -51,7 +64,6 @@ def signup(request):
             manager = Manager.objects.create(member=member, bank_account_num=accountNumber)
             manager.save()
             return render(request, 'index.html', {'type': 'complexRegister'})
-            ##return render(request, "manager/addNeighbour.html")
         else:
             phoneNumberError = "شماره تلفن باید 11 رقمی باشد و با 09 آغاز شود."
             context['phoneNumberError'] = phoneNumberError
@@ -62,6 +74,15 @@ def signup(request):
 
 
 def complexRegister(request):
+    '''
+    This function is available after the manager entered his information, and gives data such as
+    complex name, address, number of block of complex and number of units inside blocks.
+    :param request:We can get form information from this request.POST. and also pass it to output
+    to render next page.
+    :return:Result of this function is registering and saveing complex information in database and assign it
+    to manager. and if entering information for complex doesnt have any error after pressing save buttom,
+    the main page of manager seciton opened.
+    '''
     name = request.POST.get('name')
     address = request.POST.get('address')
     blockNum = request.POST.get('blockNumber')

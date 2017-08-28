@@ -95,6 +95,11 @@ def view_event(request):
 
 @login_required
 def edit_profile(request):
+    """
+    This function is for editting manager profile. With this section, manager can get his previeus profile and change them.
+    :param request: Contain manager id for getting its information and Updating them.
+    :return: After entering information, if there is not any fault in filling field, return to main page of manager site.
+    """
     user = request.user
     user_form = SignupForm1(instance = user)
     if request.user.is_authenticated:
@@ -106,13 +111,17 @@ def edit_profile(request):
                 member.user = request.user
                 member.phone_number = request.POST.get('phone_number')
                 member.save()
-
                 return HttpResponseRedirect(reverse('site:manager:account'))
     return render(request, 'manager/edit_profile.html', {'user': user, 'form': user_form})
 
 
 @login_required
 def edit_complex_information(request):
+    """
+    with this function manager can edit his complex information like name, address and number of blocks inside complex and also number of unit inside each block in complex.
+    :param request: This passed field contain manager id and also complex id for getting its previuos informatoin. and also contains data filled by manager for editing previeus complex information
+    :return: After filling required field, if there is no fault in entering data, opens main page of manager's site.
+    """
     if request.method == 'POST':
         form = ComplexForm(request.POST, instance=request.user.member.manager.complex)
         blockNum = int(request.POST.get('blockNum'))
@@ -142,6 +151,11 @@ def edit_complex_information(request):
 
 @login_required
 def edit_neighbours(request):
+    """
+    With this function, manager can see neighbours for his complex.
+    :param request: request contains manager id and complex id for getting resident that their complex is equal to this manager's complex.
+    :return:As a result of this function, manager can see a html page with his complex's neighbours and their information like number of car, number of family member and their block number.
+    """
     complex = request.user.member.manager.complex
     neighbours = Resident.objects.filter(unit__block__complex=complex)
     return render(request, 'manager/editNeighbours.html', {'neighbours': neighbours})
@@ -149,11 +163,22 @@ def edit_neighbours(request):
 
 @login_required
 def delete_neighbour(request,neighbour_id):
+    """
+    This function is for deleting special neighbour.
+    :param request:
+    :param neighbour_id: It is id of the neighbour, we want to delete it
+    :return:This function result is deleting selected neighbour and returning and opening a page that shows all neighbours to managers
+    """
     Resident.objects.get(id=neighbour_id).delete()
-    return HttpResponseRedirect(reverse('site:manager:edditNeighbours'))
+    return HttpResponseRedirect(reverse('site:manager:editNeighbours'))
 
 @login_required
 def edit_unit(request):
+    '''
+    This function is for getting all units belonging to this managers complex and thier data and showing them to the manager
+    :param request: We can get manager id  and also complex id
+    :return: As a result of this function, A page containing units and their informatoin is displayed.
+    '''
     complex = request.user.member.manager.complex
     units = Unit.objects.filter(block__complex=complex)
     return render(request, 'manager/editUnit.html', {'units': units})
@@ -241,6 +266,14 @@ def requests(request):
 
 @login_required
 def edit_n(request,neighbour_id):
+    '''
+    This function is for editing information of special neighbour that it's id passed in.
+    Manager just can edit information like number of family member, unit number and number of account belonged to this neighbor, other information of neighbor like name and email
+    are editable for neighbor's account.
+    :param request:
+    :param neighbour_id: for getting neighbor id for editing it.
+    :return:After filling fields, if every requirements and their rule resolved, opens the page that showes every neighbor of this complex
+    '''
     resident = Resident.objects.get(id=neighbour_id)
     complex = request.user.member.manager.complex
     units = Unit.objects.filter(block__complex=complex).filter(resident=None)
@@ -260,6 +293,13 @@ def edit_n(request,neighbour_id):
 
 @login_required
 def add_neighbour(request):
+    '''
+    Manager with this function can add all neighbour's of complex .For this, they must enter initial information of neighbours that
+    include information like their real name , email, phonenumber, and also number of car, number of family member and also their individual  unit id.
+    this function also generate username and password for neighbour added by manager and send it to enterd neighbor email.
+    :param request: we can get manager and complex id, to get this complex's unit and specific it to this neighbour and also get form information filled by manager.
+    :return: As a result of this function, if entered data doesnot have any fault, this neighbor is added to the neighbors and opened the page that shows all negibours of this complex.
+    '''
     complex = request.user.member.manager.complex
     units = Unit.objects.filter(block__complex=complex).filter(resident=None)
     if request.method == 'POST':
@@ -318,6 +358,14 @@ def add_request(request):
 
 @login_required
 def add_unit(request):
+    '''
+    This function is for adding Unit.
+    After the manager completed complex information, is obligated to enter units and their information like area and the blocks that belong to it.
+    :param request: This field need to get blocks belong to this complex and show them to manager, to choice betwen them. and also we can get
+    form information and save them in database.
+    :return: After filling information and press add button, if filled data doesnot have any fault, the unit and its information are added to the database
+    and the page opens to show all the units of the complex.
+    '''
     blocks = Block.objects.filter(complex=request.user.member.manager.complex)
     if request.method == 'POST':
         area = request.POST.get('area')
@@ -387,6 +435,12 @@ def enter_bill(request):
 
 
 def delete_unit(request, unit_id):
+    '''
+    This function is for deleting special unit with id equal to eneterd 'unit_id'
+    :param request:
+    :param unit_id: It is id of unit, we want to delete it.
+    :return: After deleting selected unit, opens the page that shows every unit of this complex.
+    '''
     Unit.objects.get(id=unit_id).delete()
     return HttpResponseRedirect(reverse('site:manager:editUser'))
 
@@ -421,6 +475,11 @@ def calculate_receipts(request):
 
 
 def edit_facility(request):
+    '''
+    This function is for showing all the facility of this complex.
+    :param request: For getting this complex id and pass it render to show result page we need this argument.
+    :return:The result of this funciton is rendering page that show every facility and their information belonged to this complex.
+    '''
     complex = request.user.member.manager.complex
     facility = Facility.objects.filter(block__complex=complex)
     return render(request, 'manager/editFacility.html', {'facilities': facility})
@@ -432,6 +491,14 @@ def delete_facility(request, facility_id):
 
 
 def add_facility(request):
+    '''
+    This function is for adding new facility and its information like name and its block number and its booking price.
+    Only the member has access to this function.
+    :param request: In addition to pass this input to the output to render html pages, we can get information like this
+    complex id and it's block, to choice facility block, and enterd form data from html fields.
+    :return: After adding facility and its information by manager, if entering data doesnot have any fault. This
+    facillity is added to other facility of this complex and renger a page that shows every facility of this complex.
+    '''
     blocks = Block.objects.filter(complex=request.user.member.manager.complex)
     if request.method == 'POST':
         name = request.POST.get('name')
