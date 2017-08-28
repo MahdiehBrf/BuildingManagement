@@ -63,11 +63,17 @@ html {
         margin-top: 5%;
         margin-bottom: 5%;
         font-size: 150%; }
-      html body .hero .manual img, html body .content .manual img {
-        max-width: 60%; }
+      html body .hero .manual, html body .content .manual {
+        padding: 3%; }
+        html body .hero .manual img, html body .content .manual img {
+          max-width: 60%; }
+        html body .hero .manual .discreption, html body .content .manual .discreption {
+          font-size: 150%;
+          vertical-align: middle;
+          margin: auto; }
       @media screen and (max-height: 735px) {
         html body .hero, html body .content {
-          top: 600px; } }
+          top: 1300px; } }
       html body .hero .inner, html body .content .inner {
         position: relative;
         min-height: 200px; }
@@ -151,8 +157,8 @@ html {
     bottom: 0;
     left: 0;
     padding: 1rem;
-    top: 65%;
-    margin-top: 90%; }
+    top: 100%;
+    margin-top: 200%; }
   html .foot {
     font-size: 16px; }
   html .address {
