@@ -16,6 +16,7 @@ STATE_CHOICES = (
     ('C', 'بررسی شده')
 )
 
+
 class Manager(models.Model):
     member = models.OneToOneField(Member)
     bank_account_num = models.IntegerField()
