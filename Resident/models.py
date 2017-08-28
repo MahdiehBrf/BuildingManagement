@@ -18,30 +18,19 @@ RECEIPT_STATE = {
     ('NP', 'پرداخت نشده')
 }
 
+
 class Resident(models.Model):
     member = models.OneToOneField(Member)
     member_count = models.IntegerField()
     car_count = models.IntegerField()
     unit = models.OneToOneField(Unit)
-    #email = models.EmailField()
 
     def __str__(self):
         return str(self.member)
 
-#     # don't forget to write save
-# @receiver(post_save, sender=User)
-# def create_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         Resident.objects.create(user=instance)
-#
-# @receiver(post_save, sender=User)
-# def save_user_profile(sender, instance, **kwargs):
-#     instance.resident.save()
-
 
 class Reserve(models.Model):
     reserve_date = models.DateTimeField(primary_key=True)
-    # duration = models.IntegerField()  # hours
     use_finishDate = models.DateTimeField()
     use_startDate = models.DateTimeField()
     cost = models.IntegerField()
@@ -50,7 +39,8 @@ class Reserve(models.Model):
     facility = models.ForeignKey(Facility)
 
     def __str__(self):
-        return 'resident: ' + str(self.resident) + ' facility: ' + str(self.facility) + ' reserve date:' + str(self.reserve_date)
+        return 'resident: ' + str(self.resident) + ' facility: ' + str(self.facility) + ' reserve date:' + \
+               str(self.reserve_date)
 
 
 class Receipt(models.Model):

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 from MyUser.models import Member
+
 SUBJECT_CHOICES = (
     ('E', 'خطا در سامانه'),
     ('S', 'پیشنهاد امکانات جدید یا تغییر'),
@@ -15,6 +16,7 @@ STATE_CHOICES = (
     ('W', 'در صف انتظار'),
     ('C', 'بررسی شده')
 )
+
 
 class Manager(models.Model):
     member = models.OneToOneField(Member)

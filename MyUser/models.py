@@ -13,12 +13,10 @@ class Member(models.Model):
     user = models.OneToOneField(User)
     phone_number = models.CharField(max_length=12)
     image = models.FileField(upload_to='static/images/profile_picture',
-                              default='../static/images/user_profile_female.jpg')
+                             default='../static/images/user_profile_female.jpg')
 
     def __str__(self):
-        return self.user.first_name +" "+ self.user.last_name
-
-    # don't forget to write save
+        return self.user.first_name + " " + self.user.last_name
 
 
 class Message(models.Model):

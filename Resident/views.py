@@ -2,7 +2,6 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-# Create your views here.
 from django.urls import reverse
 from django.utils.datetime_safe import datetime
 
@@ -14,11 +13,16 @@ from Resident.models import PayByAccount, Reserve, Receipt, Account, Resident
 from Resident.models import PayByBank
 
 
+@login_required
+# the first page that resident will see after login
 def account(request):
     return render(request, 'resident/bills.html')
 
 
 @login_required
+# when resident click on "news" in the menu, he can see a table include of news of that block with theirs attributes
+# can select a period to see news in that period
+# can select an order of seeing news
 def view_board(request):
     resident = request.user.member.resident
     events = None
@@ -26,8 +30,12 @@ def view_board(request):
     if request.method == 'POST':
         form = DisplayForm(request.POST)
         if form.is_valid():
-            news_set = resident.unit.block.board.news_set.filter(board__block=resident.unit.block, date__gte=form.cleaned_data['startDate'], date__lte=form.cleaned_data['finishDate'])
-            events = resident.unit.block.board.event_set.filter(board__block=resident.unit.block, date__gte=form.cleaned_data['startDate'], date__lte=form.cleaned_data['finishDate'])
+            news_set = resident.unit.block.board.news_set.filter(board__block=resident.unit.block,
+                                                                 date__range=[form.cleaned_data['startDate'],
+                                                                              form.cleaned_data['finishDate']])
+            events = resident.unit.block.board.event_set.filter(board__block=resident.unit.block,
+                                                                date__range=[form.cleaned_data['startDate'],
+                                                                             form.cleaned_data['finishDate']])
         else:
             news_set = resident.unit.block.board.news_set.all()
             events = resident.unit.block.board.event_set.all()
@@ -44,6 +52,9 @@ def view_board(request):
 
 
 @login_required
+# when resident click on "events" in the menu, he can see a table include of events of that block with theirs attributes
+# can select a period to see events in that period
+# can select an order of seeing news
 def view_event(request):
     resident = request.user.member.resident
     events = None
@@ -79,6 +90,11 @@ def edit_profile(request):
     return render(request,  'resident/edit_profile.html', {'user': user, 'form': user_form})
 
 
+@login_required
+# when manager click on "resident's paying reports" in the menu, he can see a table include of all his paying reports
+# with theirs attributes
+# can select a period to see reports in that period
+# can select an order of seeing reports
 def paying_reports(request):
     resident = request.user.member.resident
     bank_reports = None
@@ -108,6 +124,10 @@ def paying_reports(request):
                   {'account_reports': account_reports, 'bank_reports': bank_reports})
 
 
+@login_required
+# when resident click on "add reserves" in the reserver requests page, a form to create reserve will be shown,
+# after clicking on "record" a reserve will be created with reserve_date of today and state of not checked and
+# cost of chosen facility's cost, then page will be redirected to view reserves.
 def reserve(request):
     facility = request.user.member.resident.unit.block.facility_set.all()
     if request.method == 'POST':
@@ -116,8 +136,10 @@ def reserve(request):
         if form.is_valid() and dateForm.is_valid():
             resident_reserve = Reserve()
             resident_reserve.facility = form.cleaned_data['facility']
-            resident_reserve.use_startDate = datetime.combine(dateForm.cleaned_data['use_startDate_0'],dateForm.cleaned_data['use_startDate_1'])
-            resident_reserve.use_finishDate = datetime.combine(dateForm.cleaned_data['use_finishDate_0'],dateForm.cleaned_data['use_finishDate_1'])
+            resident_reserve.use_startDate = datetime.combine(dateForm.cleaned_data['use_startDate_0'],
+                                                              dateForm.cleaned_data['use_startDate_1'])
+            resident_reserve.use_finishDate = datetime.combine(dateForm.cleaned_data['use_finishDate_0'],
+                                                               dateForm.cleaned_data['use_finishDate_1'])
             resident_reserve.reserve_date = datetime.now()
             resident_reserve.state = 'NC'
             resident_reserve.resident = request.user.member.resident
@@ -153,6 +175,11 @@ def select_contact(request):
     return render(request, 'resident/select_contact.html', {'messages': ms})
 
 
+@login_required
+# when resident click on the "view receipts" in menu, he can see a table include of his not paid receipts
+# with theirs attributes
+# can select a period to see news in that period
+# can select an order of seeing news
 def view_bills(request):
     resident = request.user.member.resident
     receipts = None
@@ -173,6 +200,11 @@ def view_bills(request):
     return render(request, 'resident/bills.html', {'receipts': receipts})
 
 
+@login_required
+# when resident click on "reserves requests" in the menu, he can see a table include of all his reserve requests
+# with theirs attributes
+# can select a period to see reserves in that period
+# can select an order of seeing reserves
 def view_reserves(request):
     resident = request.user.member.resident
     reserves = None
@@ -192,6 +224,14 @@ def view_reserves(request):
     return render(request, 'resident/myReserves.html', {'reserves': reserves})
 
 
+@login_required
+# when manager click on the "show" icon of a request in view receipts page, he can see full details of that receipts
+# such as:
+# events of his block in receipt's period with theirs cost and the cost for him
+# bills of his block in receipt's period with theirs cost and the cost for him
+# his accepted reserves in receipt's period with theirs cost
+# the total cost
+# and a bottom to pay that receipts
 def view_bill(request, receipt_id):
     receipt = get_object_or_404(Receipt, pk=receipt_id)
     block = receipt.resident.unit.block

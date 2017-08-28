@@ -1,5 +1,4 @@
 import random
-
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
@@ -24,11 +23,15 @@ from Resident.models import Resident
 
 
 @login_required
+# the first page that manager see after login
 def account(request):
     return render(request, 'manager/payingReports.html')
 
 
 @login_required
+# when manager click on the "add to board" in board page, a form to create event will be shown and manager can choose to
+# create event or news, after clicking on "record" base on which manager chose an event or news will be created with
+# date of today. then page will be redirected to board page to view all the event and news he created
 def add_to_board(request):
     if request.method == 'POST':
         if request.POST['choose'] == 'event':
@@ -50,6 +53,10 @@ def add_to_board(request):
 
 
 @login_required
+# when manager click on "news" in the menu, he can see a table include of news of all block of that complex with theirs
+# attributes
+# can select a period to see news in that period
+# can select an order of seeing news
 def view_board(request):
     manager = request.user.member.manager
     events = None
@@ -57,8 +64,11 @@ def view_board(request):
     if request.method == 'POST':
         form = DisplayForm(request.POST)
         if form.is_valid():
-            news_set = News.objects.filter(board__block__complex=manager.complex, date__gte=form.cleaned_data['startDate'], date__lte=form.cleaned_data['finishDate'])
-            events = Event.objects.filter(board__block__complex=manager.complex, date__gte=form.cleaned_data['startDate'], date__lte=form.cleaned_data['finishDate'])
+            news_set = News.objects.filter(board__block__complex=manager.complex,
+                                           date__range=[form.cleaned_data['startDate'],
+                                                        form.cleaned_data['finishDate']])
+            events = Event.objects.filter(board__block__complex=manager.complex,
+                                          date__range=[form.cleaned_data['startDate'], form.cleaned_data['finishDate']])
         else:
             news_set = News.objects.filter(board__block__complex=manager.complex)
             events = Event.objects.filter(board__block__complex=manager.complex)
@@ -75,6 +85,10 @@ def view_board(request):
 
 
 @login_required
+# when manager click on "events" in the menu, he can see a table include of events of all block of that complex with
+#  theirs attributes
+# can select a period to see events in that period
+# can select an order of seeing news
 def view_event(request):
     manager = request.user.member.manager
     events = None
@@ -82,8 +96,7 @@ def view_event(request):
         form = DisplayForm(request.POST)
         if form.is_valid():
             events = Event.objects.filter(board__block__complex=manager.complex,
-                                          date__gte=form.cleaned_data['startDate'],
-                                          date__lte=form.cleaned_data['finishDate'])
+                                          date__range=[form.cleaned_data['startDate'], form.cleaned_data['finishDate']])
         else:
             events = Event.objects.filter(board__block__complex=manager.complex)
         if request.POST['choose'] == 'جدیدترین':
@@ -101,7 +114,7 @@ def edit_profile(request):
     :return: After entering information, if there is not any fault in filling field, return to main page of manager site.
     """
     user = request.user
-    user_form = SignupForm1(instance = user)
+    user_form = SignupForm1(instance=user)
     if request.user.is_authenticated:
         if request.method == 'POST':
             user_form = SignupForm1(request.POST, instance=request.user)
@@ -172,6 +185,7 @@ def delete_neighbour(request,neighbour_id):
     Resident.objects.get(id=neighbour_id).delete()
     return HttpResponseRedirect(reverse('site:manager:editNeighbours'))
 
+
 @login_required
 def edit_unit(request):
     '''
@@ -185,6 +199,11 @@ def edit_unit(request):
 
 
 @login_required
+# when manager click on "resident's paying reports" in the menu, he can see a table include of all paying reports of
+#  all residents in all block of that complex with theirs attributes
+# can select a period to see reports in that period
+# can select an order of seeing reports
+# can select a unit to see reports of that unit
 def paying_reports(request):
         manager = request.user.member.manager
         bank_reports = None
@@ -193,10 +212,12 @@ def paying_reports(request):
         if request.method == 'POST':
             form = DisplayForm(request.POST)
             if form.is_valid():
-                bank_reports = PayByBank.objects.filter(resident__unit__block__complex__manager=manager, date__gte=form.cleaned_data['startDate'],
-                                               date__lte=form.cleaned_data['finishDate'])
-                account_reports = PayByAccount.objects.filter(resident__unit__block__complex__manager=manager, date__gte=form.cleaned_data['startDate'],
-                                              date__lte=form.cleaned_data['finishDate'])
+                bank_reports = PayByBank.objects.filter(resident__unit__block__complex__manager=manager,
+                                                        date__range=[form.cleaned_data['startDate'],
+                                                                     form.cleaned_data['finishDate']])
+                account_reports = PayByAccount.objects.filter(resident__unit__block__complex__manager=manager,
+                                                              date__range=[form.cleaned_data['startDate'],
+                                                                           form.cleaned_data['finishDate']])
             else:
                 bank_reports = PayByBank.objects.filter(resident__unit__block__complex__manager=manager)
                 account_reports = PayByAccount.objects.filter(account__resident__unit__block__complex__manager=manager)
@@ -217,31 +238,39 @@ def paying_reports(request):
         else:
             bank_reports = PayByBank.objects.filter(resident__unit__block__complex__manager=manager)
             account_reports = PayByAccount.objects.filter(account__resident__unit__block__complex__manager=manager)
-        return render(request, 'manager/payingReports.html', {'account_reports': account_reports, 'bank_reports': bank_reports})
+        return render(request, 'manager/payingReports.html', {'account_reports': account_reports,
+                                                              'bank_reports': bank_reports})
 
 
 @login_required
+# when manager click on "reserves requests" in the menu, he can see a table include of all reserve requests of
+#  all residents in all block of that complex with theirs attributes
+# can select a period to see reserves in that period
+# can select an order of seeing reserves
+# can choose to accept or reject an unchecked request and trigger the state of others
 def reserves_check(request):
     manager = request.user.member.manager
     reserves = None
     if request.method == 'POST':
         form = DisplayForm(request.POST)
         if form.is_valid():
-            reserves = Reserve.objects.filter(resident__unit__block__complex__manager=manager, reserve_date__gte=form.cleaned_data['startDate'],
-                                              reserve_date__lte=form.cleaned_data['finishDate'])#  TODO
+            reserves = Reserve.objects.filter(resident__unit__block__complex__manager=manager,
+                                              reserve_daterange=[form.cleaned_data['startDate'],
+                                                                 form.cleaned_data['finishDate']])
         else:
             reserves = Reserve.objects.all()
         if request.POST['choose'] == 'جدیدترین':
             reserves = reserves.order_by('-reserve_date')
         elif request.POST['choose'] == 'قدیمی ترین':
             reserves = reserves.order_by('reserve_date')
-
     else:
         reserves = Reserve.objects.all()
     return render(request, 'manager/reservesCheck.html', {'reserves': reserves})
 
 
 @login_required
+# when manager click on "accept" of a request in reserve requests page, the state of that request will change
+# in this view
 def accept_reserve(request, reserve_id):
     reserve = get_object_or_404(Reserve, pk=reserve_id)
     reserve.state = 'A'
@@ -250,10 +279,14 @@ def accept_reserve(request, reserve_id):
 
 
 @login_required
+# when manager click on "support request" in the menu, he can see a table include of all of his support request with
+# theirs state
+# can select a request to watch
+# can select a request to delete
+# can select a state to see all requests with that state
 def requests(request):
     manager_requests = None
     if request.method == 'POST':
-        # manager_requests = Request.objects.all()
         manager_requests = request.user.member.manager.request_set.all()
         if request.POST['choose'] == 'W':
             manager_requests = manager_requests.filter(state='W')
@@ -287,8 +320,7 @@ def edit_n(request,neighbour_id):
     else:
         form = ResidentForm(instance=resident)
 
-    return render(request, 'manager/editN.html', {'units': units, 'form':form,'unit':resident.unit_id})
-
+    return render(request, 'manager/editN.html', {'units': units, 'form': form, 'unit': resident.unit_id})
 
 
 @login_required
@@ -338,16 +370,20 @@ def add_neighbour(request):
                        {'form1': form1, 'form2': form2, 'units': units, 'phoneNumber': phoneNumber, 'error': error})
     else:
         return render(request, 'manager/addNeighbour.html', {'units': units})
-    return render(request, 'manager/addNeighbour.html', {'form1': form1, 'form2': form2, 'units': units,'phoneNumber':phoneNumber})
+    return render(request, 'manager/addNeighbour.html',
+                  {'form1': form1, 'form2': form2, 'units': units, 'phoneNumber': phoneNumber})
 
 
 @login_required
+# when manager click on the "add request" in support page, a form to create request will be shown,
+# after clicking on "record" a request will be created with state of "in waiting queue".
+# then page will be redirected to "supporting requests" to view all the requests he created
 def add_request(request):
     if request.method == 'POST':
         form = RequestForm(request.POST)
         if form.is_valid():
             manager_request = form.save(commit=False)
-            manager_request.manager = Member.objects.filter(user= request.user)[0].manager
+            manager_request.manager = Member.objects.filter(user=request.user)[0].manager
             manager_request.state = 'W'
             manager_request.save()
         return HttpResponseRedirect(reverse('site:manager:requests'))
@@ -410,17 +446,23 @@ def message(request):
 
 
 @login_required
+# when manager click on the "show" icon of a request in support page, he can see full details of that requests
 def view_request(request, request_id):
     manager_request = get_object_or_404(Request, pk=request_id)
     return render(request, 'manager/viewRequest.html', {'request': manager_request})
 
+
 @login_required
+# when manager click on the "delete" icon of a request in support page, he can delete that requests
 def delete_request(request, request_id):
     manager_request = get_object_or_404(Request, pk=request_id)
     manager_request.delete()
     return HttpResponseRedirect(reverse('site:manager:requests'))
 
 
+@login_required
+# when manager click on the "add bill" in menu, a form to create new bill will be shown,
+# after clicking on "record" a bill will be created with date of that day.
 def enter_bill(request):
     block_set = request.user.member.manager.complex.block_set.all()
     if request.method == 'POST':
@@ -433,7 +475,7 @@ def enter_bill(request):
     return render(request, 'manager/enterBill.html', {'form': form, 'blocks': block_set})
 
 
-
+@login_required
 def delete_unit(request, unit_id):
     '''
     This function is for deleting special unit with id equal to eneterd 'unit_id'
@@ -445,6 +487,17 @@ def delete_unit(request, unit_id):
     return HttpResponseRedirect(reverse('site:manager:editUser'))
 
 
+@login_required()
+# when manager click on the "calculate charge" in calculate charge page, the charge will be calculated for all residents
+# of all blocks of that complex from complex's last calculation charge date till today, like:
+# for each block:
+# cost of all events in this period will be summed as events_cost
+# cost of all bills in this period will be summed as bills_cost
+# then for each resident:
+# cost of all accepted reserves in this period will be summed as reserves_cost
+# an object of Receipt will be created with cost of:
+# (events_cost + bills_cost)* number of members in that unit / number of members in that block + reserves_cost
+# then complex's last calculation charge date will be updated to today
 def calculate_receipts(request):
     complex = request.user.member.manager.complex
     for block in Block.objects.filter(complex=complex):
@@ -515,6 +568,9 @@ def add_facility(request):
     return render(request, 'manager/addFacility.html', {'blocks': blocks})
 
 
+@login_required
+# when manager click on "accept" of a request in reserve requests page, the state of that request will change
+# in this view
 def reject_reserve(request, reserve_id):
     reserve = get_object_or_404(Reserve, pk=reserve_id)
     reserve.state = 'R'
@@ -522,6 +578,11 @@ def reject_reserve(request, reserve_id):
     return HttpResponseRedirect(reverse('site:manager:reservesCheck'))
 
 
+@login_required
+# when manager click on the "calculate charge" in menu, he can see a table include of not paid receipts of all residents
+# of all block of that complex with theirs attributes
+# can select a period to see news in that period
+# can select an order of seeing news
 def view_bills(request):
     complex = request.user.member.manager.complex
     receipts = None

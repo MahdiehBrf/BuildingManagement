@@ -19,7 +19,7 @@ function f(){alert("درخواست رزرو با موفقیت ثیت گردید"
 
             <tr>
 
-               <td><select id="facility" required name="facility">
+                <td><select id="facility" required name="facility" style="width:150px;">
                    <option disabled selected style="color: black;">---------</option>
                    {% for facility in facilities %}
                        <option value="{{ facility.id }}">{{ facility.type }}

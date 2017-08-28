@@ -19,7 +19,6 @@ BILL_TYPE = (
 )
 
 
-
 class Unit(models.Model):
     area = models.IntegerField()
     block = models.ForeignKey('Block')
@@ -28,14 +27,12 @@ class Unit(models.Model):
         return str(self.block) + 'Unit : ' + str(self.id)
 
 
-
-
 class Block(models.Model):
     complex = models.ForeignKey('Complex')
 
-
     def __str__(self):
         return 'complex: ' + str(self.complex.name) + ' block: ' + str(self.id)
+
 
 class Bill(models.Model):
     type = models.CharField(max_length=1, choices=BILL_TYPE)
@@ -63,7 +60,6 @@ class Facility(models.Model):
     type = models.CharField(max_length=20)
     block = models.ForeignKey('Block')
     cost = models.IntegerField()
-
 
     def __str__(self):
         return self.type
